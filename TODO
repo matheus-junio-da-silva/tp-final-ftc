@@ -1,4 +1,10 @@
 [] Temos que trocar os arquivos de áudio. 
 por arquivos diferentes, mas que representam o mesmo som, mas que sejam um pouco diferentes.
 
-[] 
+[] Alterar nome dos ingredientes(alfabeto);
+
+[] Fazer autômato de pilha, lembrar de ler ele na especificação pois ele tem algumas especificações próprias;
+
+[] Alterar estado visual da poção ao adicionar um novo ingrediente;
+
+[] Fazer a parte do bolo nos extras
