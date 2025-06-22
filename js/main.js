@@ -104,6 +104,11 @@ biz: bizarrésima`;
             this.showScreen('mealy-machine');
         });
 
+        document.getElementById('turing-btn')?.addEventListener('click', () => {
+        this.showScreen('turing-machine');
+        });
+
+
         document.getElementById('exit-btn')?.addEventListener('click', () => {
             this.exit();
         });
