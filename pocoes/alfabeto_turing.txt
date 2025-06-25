@@ -1,0 +1,6 @@
+f : farinha
+o : ovos
+a : açúcar
+l : leite
+e : fermento
+c : chocolate (⚠️ não pode ser usado junto com fermento)

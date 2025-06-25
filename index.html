@@ -130,20 +130,26 @@
         </div>
 
         <!-- Tela de Máquina de Turing -->
-<div id="turing-machine" class="screen">
-    <div class="mealy-container">
-        <h2>Máquina de Turing - Receita de Bolo</h2>
+    <div id="turing-machine" class="screen">
+        <div class="mealy-container">
+            <h2>Máquina de Turing - Receita de Bolo</h2>
 
-        <div class="ingredient-input">
-            <label for="turing-ingredient-input">Insira o símbolo do ingrediente:</label>
-            <input type="text" id="turing-ingredient-input" maxlength="2" placeholder="Ex: f, o, a">
-            <button id="turing-add-btn" class="magic-button">Adicionar Ingrediente</button>
-            <button id="turing-finish-btn" class="magic-button secondary" style="display: none;">Finalizar Receita</button>
-        </div>
-
-        <div id="turing-log" class="potion-log"></div>
+            <div class="options-bar">
+        <button id="view-turing-file-btn" class="info-button">Ver Máquina</button>
+        <button id="view-alfabeto-btn" class="info-button">Ver Alfabeto</button>
     </div>
-</div>
+
+
+            <div class="ingredient-input">
+                <label for="turing-ingredient-input">Insira o símbolo do ingrediente:</label>
+                <input type="text" id="turing-ingredient-input" maxlength="2" placeholder="Ex: f, o, a">
+                <button id="turing-add-btn" class="magic-button">Adicionar Ingrediente</button>
+                <button id="turing-finish-btn" class="magic-button secondary" style="display: none;">Finalizar Receita</button>
+            </div>
+
+            <div id="turing-log" class="potion-log"></div>
+        </div>
+    </div>
 
 
         <!-- Modal para mostrar informações -->

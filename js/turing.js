@@ -96,3 +96,27 @@ if (turingFinishBtn) {
         turingFinishBtn.style.display = 'none';
     });
 }
+
+function fetchAndShowFile(url, title) {
+    fetch(url)
+        .then(res => res.text())
+        .then(text => {
+            const modal = document.getElementById('info-modal');
+            const body = document.getElementById('modal-body');
+            body.innerHTML = `<h3>${title}</h3><pre class="recipe-display">${text}</pre>`;
+            modal.style.display = 'block';
+        })
+        .catch(err => {
+            alert("Erro ao carregar o arquivo: " + err.message);
+        });
+}
+
+// Botões
+document.getElementById('view-turing-file-btn')?.addEventListener('click', () => {
+    fetchAndShowFile('alfabeto_turing.txt', 'Máquina de Turing - Receita de Bolo');
+});
+
+document.getElementById('view-alfabeto-btn')?.addEventListener('click', () => {
+    fetchAndShowFile('turing_receita.txt', 'Alfabeto dos Ingredientes');
+});
+
