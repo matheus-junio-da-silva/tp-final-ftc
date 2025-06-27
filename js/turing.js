@@ -44,6 +44,69 @@ const turingScreen = document.getElementById('turing-machine');
 
 let turingIngredients = [];
 
+// Função para atualizar a fita visual
+function updateTuringTape() {
+    const tape = document.getElementById('turing-tape');
+    if (!tape) return;
+
+    // Limpar fita atual
+    tape.innerHTML = '';
+
+    // Adicionar células da fita baseadas nos ingredientes
+    const inputString = turingIngredients.join('');
+    const cells = inputString.split('');
+    
+    // Adicionar células vazias no início
+    for (let i = 0; i < 3; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'tape-cell';
+        cell.textContent = '_';
+        tape.appendChild(cell);
+    }
+
+    // Adicionar células com ingredientes
+    cells.forEach((symbol, index) => {
+        const cell = document.createElement('div');
+        cell.className = 'tape-cell';
+        if (index === cells.length - 1) {
+            cell.classList.add('active');
+        }
+        cell.textContent = symbol;
+        tape.appendChild(cell);
+    });
+
+    // Adicionar células vazias no final
+    for (let i = 0; i < 5; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'tape-cell';
+        cell.textContent = '_';
+        tape.appendChild(cell);
+    }
+
+    // Scroll para mostrar a célula ativa
+    const activeCell = tape.querySelector('.active');
+    if (activeCell) {
+        activeCell.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }
+}
+
+// Função para animar adição de ingrediente
+function animateIngredientAdded() {
+    const tape = document.getElementById('turing-tape');
+    if (!tape) return;
+
+    const lastCell = [...tape.children].find(cell => 
+        cell.textContent !== '_' && !cell.classList.contains('active')
+    );
+    
+    if (lastCell) {
+        lastCell.classList.add('ingredient-added');
+        setTimeout(() => {
+            lastCell.classList.remove('ingredient-added');
+        }, 1000);
+    }
+}
+
 if (turingAddBtn) {
     turingAddBtn.addEventListener('click', () => {
         const symbol = turingInput.value.trim().toLowerCase();
@@ -51,6 +114,15 @@ if (turingAddBtn) {
             turingIngredients.push(symbol);
             turingLog.innerHTML += `<div class="log-entry info">Ingrediente adicionado: <strong>${symbol}</strong></div>`;
             turingInput.value = '';
+            
+            // Atualizar fita visual
+            updateTuringTape();
+            
+            // Animar adição de ingrediente
+            setTimeout(() => {
+                animateIngredientAdded();
+            }, 100);
+            
             if (turingIngredients.length >= 3) {
                 turingFinishBtn.style.display = 'inline-block';
             }
@@ -94,6 +166,33 @@ if (turingFinishBtn) {
 
         turingIngredients = [];
         turingFinishBtn.style.display = 'none';
+        
+        // Resetar fita visual
+        setTimeout(() => {
+            updateTuringTape();
+        }, 2000);
+    });
+}
+
+// Inicializar fita quando a tela é mostrada
+if (turingScreen) {
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.classList.contains('active')) {
+                    // Tela foi ativada
+                    setTimeout(() => {
+                        updateTuringTape();
+                    }, 100);
+                }
+            }
+        });
+    });
+
+    observer.observe(turingScreen, {
+        attributes: true,
+        attributeFilter: ['class']
     });
 }
 

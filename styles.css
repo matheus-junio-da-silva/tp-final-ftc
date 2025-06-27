@@ -596,6 +596,567 @@ body::before {
     color: #e74c3c;
 }
 
+/* Estados visuais da poção quando ingredientes são adicionados */
+.cauldron-content.ingredient-added {
+    animation: potionBubble 1s ease-in-out, colorShift 2s ease-in-out;
+}
+
+.cauldron-content.ingredient-1 {
+    background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+}
+
+.cauldron-content.ingredient-2 {
+    background: linear-gradient(135deg, #f39c12, #f1c40f) !important;
+}
+
+.cauldron-content.ingredient-3 {
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+}
+
+.cauldron-content.ingredient-4 {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+}
+
+.cauldron-content.ingredient-5 {
+    background: linear-gradient(135deg, #3498db, #2980b9) !important;
+}
+
+.cauldron-content.ingredient-many {
+    background: linear-gradient(135deg, #34495e, #2c3e50, #e74c3c, #f39c12) !important;
+    background-size: 400% 400%;
+    animation: multiColorShift 3s ease-in-out infinite;
+}
+
+@keyframes potionBubble {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.05); }
+    60% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+@keyframes colorShift {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3) saturate(1.5); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes multiColorShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Efeito de brilho quando ingrediente é adicionado */
+.cauldron.ingredient-glow {
+    box-shadow: 
+        inset 0 -20px 40px rgba(0, 0, 0, 0.5),
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(102, 126, 234, 0.6),
+        0 0 60px rgba(102, 126, 234, 0.4);
+    animation: glowPulse 1.5s ease-in-out;
+}
+
+@keyframes glowPulse {
+    0%, 100% { 
+        box-shadow: 
+            inset 0 -20px 40px rgba(0, 0, 0, 0.5),
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            0 0 30px rgba(102, 126, 234, 0.6),
+            0 0 60px rgba(102, 126, 234, 0.4);
+    }
+    50% { 
+        box-shadow: 
+            inset 0 -20px 40px rgba(0, 0, 0, 0.5),
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            0 0 50px rgba(102, 126, 234, 1),
+            0 0 100px rgba(102, 126, 234, 0.8);
+    }
+}
+
+/* Bolhas mais intensas quando ingrediente é adicionado */
+.bubbles.active {
+    opacity: 1;
+    animation: bubbleIntensity 2s ease-in-out;
+}
+
+@keyframes bubbleIntensity {
+    0% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0.7; transform: scale(1); }
+}
+
+.cauldron-content {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    border-radius: 0 0 80px 80px;
+    overflow: hidden;
+    animation: bubble 2s ease-in-out infinite;
+}
+
+/* Animações do oráculo quando ingrediente é adicionado */
+.oraculo.ingredient-added {
+    animation: oraculoExcite 1.5s ease-in-out, mystic-glow 2s ease-in-out infinite;
+}
+
+.oraculo.happy {
+    filter: hue-rotate(120deg) brightness(1.2);
+}
+
+.oraculo.angry {
+    filter: hue-rotate(0deg) brightness(1.5) contrast(1.3);
+}
+
+.oraculo.neutral {
+    filter: hue-rotate(60deg) brightness(1.1);
+}
+
+@keyframes oraculoExcite {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-10deg); }
+    50% { transform: scale(0.9) rotate(10deg); }
+    75% { transform: scale(1.1) rotate(-5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Bolha de fala animada */
+.speech-bubble.ingredient-reaction {
+    animation: bubblePop 0.8s ease-out;
+}
+
+@keyframes bubblePop {
+    0% { transform: translateX(-50%) scale(0); opacity: 0; }
+    50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Stats com destaque quando atualizadas */
+.stat.updated {
+    animation: statHighlight 1s ease-out;
+}
+
+@keyframes statHighlight {
+    0% { background: transparent; }
+    50% { background: rgba(102, 126, 234, 0.3); border-radius: 10px; }
+    100% { background: transparent; }
+}
+
+.oraculo {
+    font-size: 4rem;
+    animation: mystic-glow 2s ease-in-out infinite;
+}
+
+@keyframes mystic-glow {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    50% { transform: scale(1.1) rotate(5deg); filter: brightness(1.3); }
+}
+
+.speech-bubble {
+    position: absolute;
+    background: white;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: 3px solid #667eea;
+    max-width: 300px;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+}
+
+.mealy-stats {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.stat {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.stat span:first-child {
+    display: block;
+    color: #b19cd9;
+    margin-bottom: 5px;
+}
+
+.stat span:last-child {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4ecdc4;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a0033, #330066);
+    margin: 5% auto;
+    padding: 30px;
+    border: 2px solid rgba(102, 126, 234, 0.5);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+/* Tela de Resultado */
+.result-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+#result-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Creepster', cursive;
+}
+
+#result-title.success {
+    color: #2ecc71;
+    text-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+#result-title.failure {
+    color: #e74c3c;
+    text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+}
+
+#result-message {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+#result-art {
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    margin: 2rem 0;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    color: #b19cd9;
+}
+
+/* Tabela de ingredientes */
+.ingredients-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.ingredients-table th,
+.ingredients-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.ingredients-table th {
+    background: rgba(102, 126, 234, 0.2);
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.ingredients-table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Receita display */
+.recipe-display {
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.recipe-display .state {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 5px;
+}
+
+.recipe-display .state-name {
+    color: #4ecdc4;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.recipe-display .transition {
+    margin: 5px 0 5px 20px;
+    color: #e6ccff;
+}
+
+.recipe-display .transition .input {
+    color: #2ecc71;
+}
+
+.recipe-display .transition .output {
+    color: #f39c12;
+}
+
+.recipe-display .transition .stack {
+    color: #e74c3c;
+}
+
+/* Estados visuais da poção quando ingredientes são adicionados */
+.cauldron-content.ingredient-added {
+    animation: potionBubble 1s ease-in-out, colorShift 2s ease-in-out;
+}
+
+.cauldron-content.ingredient-1 {
+    background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+}
+
+.cauldron-content.ingredient-2 {
+    background: linear-gradient(135deg, #f39c12, #f1c40f) !important;
+}
+
+.cauldron-content.ingredient-3 {
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+}
+
+.cauldron-content.ingredient-4 {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+}
+
+.cauldron-content.ingredient-5 {
+    background: linear-gradient(135deg, #3498db, #2980b9) !important;
+}
+
+.cauldron-content.ingredient-many {
+    background: linear-gradient(135deg, #34495e, #2c3e50, #e74c3c, #f39c12) !important;
+    background-size: 400% 400%;
+    animation: multiColorShift 3s ease-in-out infinite;
+}
+
+@keyframes potionBubble {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.05); }
+    60% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+@keyframes colorShift {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3) saturate(1.5); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes multiColorShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Efeito de brilho quando ingrediente é adicionado */
+.cauldron.ingredient-glow {
+    box-shadow: 
+        inset 0 -20px 40px rgba(0, 0, 0, 0.5),
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(102, 126, 234, 0.6),
+        0 0 60px rgba(102, 126, 234, 0.4);
+    animation: glowPulse 1.5s ease-in-out;
+}
+
+@keyframes glowPulse {
+    0%, 100% { 
+        box-shadow: 
+            inset 0 -20px 40px rgba(0, 0, 0, 0.5),
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            0 0 30px rgba(102, 126, 234, 0.6),
+            0 0 60px rgba(102, 126, 234, 0.4);
+    }
+    50% { 
+        box-shadow: 
+            inset 0 -20px 40px rgba(0, 0, 0, 0.5),
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            0 0 50px rgba(102, 126, 234, 1),
+            0 0 100px rgba(102, 126, 234, 0.8);
+    }
+}
+
+/* Bolhas mais intensas quando ingrediente é adicionado */
+.bubbles.active {
+    opacity: 1;
+    animation: bubbleIntensity 2s ease-in-out;
+}
+
+@keyframes bubbleIntensity {
+    0% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0.7; transform: scale(1); }
+}
+
+.cauldron-content {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    border-radius: 0 0 80px 80px;
+    overflow: hidden;
+    animation: bubble 2s ease-in-out infinite;
+}
+
+/* Animações do oráculo quando ingrediente é adicionado */
+.oraculo.ingredient-added {
+    animation: oraculoExcite 1.5s ease-in-out, mystic-glow 2s ease-in-out infinite;
+}
+
+.oraculo.happy {
+    filter: hue-rotate(120deg) brightness(1.2);
+}
+
+.oraculo.angry {
+    filter: hue-rotate(0deg) brightness(1.5) contrast(1.3);
+}
+
+.oraculo.neutral {
+    filter: hue-rotate(60deg) brightness(1.1);
+}
+
+@keyframes oraculoExcite {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-10deg); }
+    50% { transform: scale(0.9) rotate(10deg); }
+    75% { transform: scale(1.1) rotate(-5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Bolha de fala animada */
+.speech-bubble.ingredient-reaction {
+    animation: bubblePop 0.8s ease-out;
+}
+
+@keyframes bubblePop {
+    0% { transform: translateX(-50%) scale(0); opacity: 0; }
+    50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Stats com destaque quando atualizadas */
+.stat.updated {
+    animation: statHighlight 1s ease-out;
+}
+
+@keyframes statHighlight {
+    0% { background: transparent; }
+    50% { background: rgba(102, 126, 234, 0.3); border-radius: 10px; }
+    100% { background: transparent; }
+}
+
+/* Fita da Máquina de Turing */
+.turing-tape-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.turing-tape {
+    display: flex;
+    overflow-x: auto;
+    max-width: 600px;
+    gap: 2px;
+    padding: 10px;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tape-cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ecf0f1;
+    color: #2c3e50;
+    font-weight: bold;
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
+.tape-cell.active {
+    background: linear-gradient(135deg, #f39c12, #f1c40f);
+    color: white;
+    border-color: #e67e22;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.5);
+}
+
+.tape-cell.ingredient-added {
+    animation: tapeHighlight 1s ease-out;
+}
+
+@keyframes tapeHighlight {
+    0% { background: #ecf0f1; transform: scale(1); }
+    50% { background: linear-gradient(135deg, #27ae60, #2ecc71); transform: scale(1.2); }
+    100% { background: #ecf0f1; transform: scale(1); }
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .main-title {

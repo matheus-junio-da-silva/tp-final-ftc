@@ -244,6 +244,9 @@ biz: bizarrésima`;
             // Resetar estado
             this.ingredientesAdicionados = [];
             this.primeiroIngrediente = true;
+            
+            // Reset visual da poção
+            this.resetPotionVisual();
               // Limpar log
             const log = document.getElementById('potion-log');
             if (log) {
@@ -281,6 +284,100 @@ biz: bizarrésima`;
         }
     }
 
+    // Atualizar visual do oráculo quando ingrediente é adicionado no Mealy
+    updateOraculoVisual(reacao) {
+        const oraculo = document.getElementById('oraculo');
+        const speechBubble = document.getElementById('speech-bubble');
+        const speechText = document.getElementById('speech-text');
+        
+        if (!oraculo) return;
+
+        // Remover classes antigas
+        oraculo.classList.remove('ingredient-added', 'happy', 'angry', 'neutral');
+        speechBubble?.classList.remove('ingredient-reaction');
+
+        // Adicionar animação
+        oraculo.classList.add('ingredient-added');
+
+        // Definir humor baseado na reação
+        if (reacao && reacao.sabor > 0 && reacao.poder > 0) {
+            oraculo.classList.add('happy');
+            if (speechText) speechText.textContent = '✨ Excelente ingrediente!';
+        } else if (reacao && (reacao.sabor < 0 || reacao.poder < 0)) {
+            oraculo.classList.add('angry');
+            if (speechText) speechText.textContent = '💀 Ingrediente perigoso...';
+        } else {
+            oraculo.classList.add('neutral');
+            if (speechText) speechText.textContent = '🤔 Interessante escolha...';
+        }
+
+        // Mostrar bolha de fala
+        if (speechBubble) {
+            speechBubble.style.display = 'block';
+            speechBubble.classList.add('ingredient-reaction');
+        }
+
+        // Esconder bolha após um tempo
+        setTimeout(() => {
+            if (speechBubble) {
+                speechBubble.style.display = 'none';
+            }
+            oraculo.classList.remove('ingredient-added', 'happy', 'angry', 'neutral');
+        }, 3000);
+    }
+
+    // Resetar visual da poção para o estado inicial
+    resetPotionVisual() {
+        const cauldronContent = document.getElementById('cauldron-content');
+        const cauldron = document.querySelector('.cauldron');
+        const bubbles = document.querySelector('.bubbles');
+        
+        if (cauldronContent) {
+            cauldronContent.className = 'cauldron-content';
+        }
+        if (cauldron) {
+            cauldron.classList.remove('ingredient-glow');
+        }
+        if (bubbles) {
+            bubbles.classList.remove('active');
+        }
+    }
+
+    // Atualizar visual da poção quando ingrediente é adicionado
+    updatePotionVisual() {
+        const cauldronContent = document.getElementById('cauldron-content');
+        const cauldron = document.querySelector('.cauldron');
+        const bubbles = document.querySelector('.bubbles');
+        
+        if (!cauldronContent) return;
+
+        // Remover classes antigas
+        cauldronContent.className = 'cauldron-content';
+        cauldron.classList.remove('ingredient-glow');
+        bubbles.classList.remove('active');
+
+        // Adicionar animação de ingrediente adicionado
+        cauldronContent.classList.add('ingredient-added');
+        cauldron.classList.add('ingredient-glow');
+        bubbles.classList.add('active');
+
+        // Definir cor baseada no número de ingredientes
+        const numIngredientes = this.ingredientesAdicionados.length;
+        
+        if (numIngredientes <= 5) {
+            cauldronContent.classList.add(`ingredient-${numIngredientes}`);
+        } else {
+            cauldronContent.classList.add('ingredient-many');
+        }
+
+        // Remover classe de animação após completar
+        setTimeout(() => {
+            cauldronContent.classList.remove('ingredient-added');
+            cauldron.classList.remove('ingredient-glow');
+            bubbles.classList.remove('active');
+        }, 2000);
+    }
+
     addIngredient() {
         const input = document.getElementById('ingredient-input');
         const ingredient = input.value.trim().toLowerCase();
@@ -305,6 +402,9 @@ biz: bizarrésima`;
                 simbolo: ingredient,
                 nome: this.alfabeto.descreveIngrediente(ingredient)
             });
+            
+            // Atualizar visual da poção
+            this.updatePotionVisual();
         } else {
             soundGameOver();
         }
@@ -321,6 +421,9 @@ biz: bizarrésima`;
             this.updateIngredientLabel();
             document.getElementById('finish-potion-btn').style.display = 'inline-block';
         }
+
+        // Atualizar visual da poção
+        this.updatePotionVisual();
 
         // Verificar se há erro
         if (this.automato.temErro()) {
@@ -359,8 +462,18 @@ biz: bizarrésima`;
         if (sucesso) {
             soundAddIngrediente();
             
+            // Obter a última reação para o oráculo
+            const estado = this.mealy.obterEstado();
+            const ultimaReacao = this.mealy.obterUltimaReacao ? this.mealy.obterUltimaReacao() : null;
+            
+            // Atualizar visual do oráculo
+            this.updateOraculoVisual(ultimaReacao);
+            
             // Atualizar estatísticas
             this.updateMealyStats();
+            
+            // Animar stats que mudaram
+            this.animateUpdatedStats();
             
             // Atualizar log
             this.updateMealyLog();
@@ -473,6 +586,24 @@ biz: bizarrésima`;
         historico.forEach(entrada => {
             Terminal.log(log, entrada.mensagem, entrada.tipo);
         });
+    }
+
+    // Animar stats que foram atualizadas
+    animateUpdatedStats() {
+        const stats = document.querySelectorAll('.stat');
+        stats.forEach(stat => {
+            stat.classList.remove('updated');
+            setTimeout(() => {
+                stat.classList.add('updated');
+            }, 100);
+        });
+        
+        // Remover animação após completar
+        setTimeout(() => {
+            stats.forEach(stat => {
+                stat.classList.remove('updated');
+            });
+        }, 1000);
     }
 
     updateMealyStats() {
@@ -613,6 +744,9 @@ biz: bizarrésima`;
         this.mealy = null;
         this.ingredientesAdicionados = [];
         this.primeiroIngrediente = true;
+
+        // Reset visual da poção
+        this.resetPotionVisual();
 
         // Limpar inputs
         document.getElementById('recipe-input').value = '';
