@@ -19,7 +19,7 @@ class Mealy {
         this.historico = [];
         
         this.adicionarHistorico("🧙‍♂️ Iniciando avaliação com a Máquina de Mealy...", 'info');
-        this.adicionarHistorico("🐦‍⬛ O corvo provador está pronto para avaliar sua poção!", 'info');
+        this.adicionarHistorico("� O oráculo místico está pronto para avaliar sua poção!", 'info');
     }
 
     adicionarIngrediente(ingrediente, sigma) {
@@ -59,11 +59,11 @@ class Mealy {
 
     avaliarPocao() {
         this.adicionarHistorico("\n" + "=".repeat(50), 'info');
-        this.adicionarHistorico("🐦‍⬛ O corvo provador vai avaliar sua poção...", 'info');
+        this.adicionarHistorico("� O oráculo místico vai avaliar sua poção...", 'info');
         
         // Verificações especiais primeiro
         if (this.sabor < 0) {
-            this.adicionarHistorico("💀 O corvo desmaiou devido ao gosto terrível da poção!", 'error');
+            this.adicionarHistorico("💀 O oráculo rejeitou a poção devido ao gosto terrível!", 'error');
             return {
                 sucesso: false,
                 motivo: 'sabor_negativo',
@@ -74,7 +74,7 @@ class Mealy {
         }
 
         if (this.cont > 10) {
-            this.adicionarHistorico("🗣️ O corvo gralhou, disse que a poção ficou muito misturada e não conseguiu provar direito", 'error');
+            this.adicionarHistorico("🗣️ O oráculo sussurrou que a poção ficou muito misturada e não conseguiu analisar direito", 'error');
             return {
                 sucesso: false,
                 motivo: 'muitos_ingredientes',
@@ -85,8 +85,8 @@ class Mealy {
         }
 
         if (this.poder >= 400) {
-            this.adicionarHistorico("🌟 A poção é muito poderosa! O poder do corvo provador ultrapassa seu próprio poder!", 'success');
-            this.adicionarHistorico("🦅 Ele pega o caldeirão com as próprias garras e sai voando com ele pela janela!!!", 'success');
+            this.adicionarHistorico("🌟 A poção é muito poderosa! O poder supera a própria essência do oráculo!", 'success');
+            this.adicionarHistorico("✨ O oráculo absorve a poção em sua essência mística e desaparece em uma luz dourada!", 'success');
             return {
                 sucesso: true,
                 motivo: 'poder_supremo',

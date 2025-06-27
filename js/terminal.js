@@ -84,21 +84,19 @@ Você perdeu!`;
 Máquina Ativa`;
     }
 
-    static getCorvoArt() {
-        return `      .---.        .-----------
-     /     \\  __  /    ------
-    / /     \\(  )/    -----
-   //////   ' \\/     ---
-  //// / // :    : ---
- // /   /  /     '--
-//          //..\\\\
-       ====UU====UU====
-           '//||\\\\
-             ''''                   `;
+    static getOraculoArt() {
+        return `        ✦･ﾟ: *✦･ﾟ:*
+      ╭─────────────╮
+     │  ◉       ◉  │
+     │      ◕      │
+     ╰─────────────╯
+    ✧･ﾟ: *✧･ﾟ:* ✧･ﾟ: *
+        🔮 ORÁCULO 🔮
+    ･ﾟ✧*:･ﾟ✧ ･ﾟ✧*:･ﾟ✧                   `;
     }
 
-    static getCorvoPoderoso() {
-        return `Corvo Poderoso ASCII Art`;
+    static getOraculoPoderoso() {
+        return `Oráculo Místico Poderoso ASCII Art`;
     }
 
     // Função para exibir arte ASCII colorida

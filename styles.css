@@ -377,7 +377,7 @@ body::before {
     max-width: 900px;
 }
 
-.corvo-area {
+.oraculo-area {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -386,14 +386,14 @@ body::before {
     height: 150px;
 }
 
-.corvo {
+.oraculo {
     font-size: 4rem;
-    animation: hop 2s ease-in-out infinite;
+    animation: mystic-glow 2s ease-in-out infinite;
 }
 
-@keyframes hop {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-10px) rotate(5deg); }
+@keyframes mystic-glow {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    50% { transform: scale(1.1) rotate(5deg); filter: brightness(1.3); }
 }
 
 .speech-bubble {

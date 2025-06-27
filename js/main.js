@@ -385,8 +385,8 @@ biz: bizarrésima`;
         // Atualizar log final
         this.updateMealyLog();
         
-        // Mostrar animação do corvo
-        await this.showCorvoAnimation(resultado);
+        // Mostrar animação do oráculo
+        await this.showOraculoAnimation(resultado);
         
         // Mostrar resultado
         setTimeout(() => {
@@ -394,24 +394,24 @@ biz: bizarrésima`;
         }, 2000);
     }
 
-    async showCorvoAnimation(resultado) {
-        const corvo = document.getElementById('corvo');
+    async showOraculoAnimation(resultado) {
+        const oraculo = document.getElementById('oraculo');
         const speechBubble = document.getElementById('speech-bubble');
         const speechText = document.getElementById('speech-text');
 
-        if (!corvo || !speechBubble || !speechText) return;
+        if (!oraculo || !speechBubble || !speechText) return;
 
         // Animação de avaliação
         for (let i = 0; i < 4; i++) {
-            speechText.textContent = `O corvo provador está avaliando${'...'.substring(0, i + 1)}`;
+            speechText.textContent = `O oráculo místico está avaliando${'...'.substring(0, i + 1)}`;
             speechBubble.style.display = 'block';
             await new Promise(resolve => setTimeout(resolve, 500));
         }
 
-        // Som do corvo
-        let corvoSound = null;
+        // Som do oráculo
+        let oraculoSound = null;
         if (resultado.motivo !== 'sabor_negativo') {
-            corvoSound = soundCorvo();
+            oraculoSound = soundOraculo();
         }
 
         // Resultado da avaliação
@@ -419,22 +419,22 @@ biz: bizarrésima`;
         
         if (resultado.sucesso) {
             if (resultado.motivo === 'poder_supremo') {
-                speechText.innerHTML = '🌟 Esta poção é LENDÁRIA! Vou levá-la comigo!';
-                soundCorvoWin();
-                if (corvoSound) stopCorvoSound(corvoSound);
+                speechText.innerHTML = '🌟 Esta poção é LENDÁRIA! O oráculo a absorverá em sua essência!';
+                soundOraculoWin();
+                if (oraculoSound) stopOraculoSound(oraculoSound);
             } else {
-                speechText.innerHTML = '✨ Poção avaliada! Veja os resultados abaixo.';
+                speechText.innerHTML = '✨ Poção avaliada pela sabedoria ancestral! Veja os resultados abaixo.';
             }
         } else {
-            speechText.innerHTML = '💀 Esta poção não passou no teste...';
+            speechText.innerHTML = '💀 O oráculo rejeita esta poção...';
         }
 
         await new Promise(resolve => setTimeout(resolve, 2000));
         
         speechBubble.style.display = 'none';
         
-        if (corvoSound && resultado.motivo !== 'poder_supremo') {
-            stopCorvoSound(corvoSound);
+        if (oraculoSound && resultado.motivo !== 'poder_supremo') {
+            stopOraculoSound(oraculoSound);
         }
     }
 
@@ -562,22 +562,22 @@ biz: bizarrésima`;
                 resultTitle.textContent = '🌟 Poção Lendária!';
                 resultTitle.className = 'success';
                 resultMessage.innerHTML = `
-                    <div>O corvo provador ficou tão impressionado que levou sua poção!</div>
+                    <div>O oráculo místico absorveu sua poção em sua essência ancestral!</div>
                     <div><strong>Estatísticas:</strong></div>
                     <div>Sabor: ${resultado.sabor} | Poder: ${resultado.poder} | Ingredientes: ${resultado.ingredientes}</div>
                 `;
-                resultArt.textContent = Terminal.getCorvoPoderoso();
+                resultArt.textContent = Terminal.getOraculoPoderoso();
             } else {
                 resultTitle.textContent = '✅ Poção Avaliada!';
                 resultTitle.className = 'success';
                 resultMessage.innerHTML = `
-                    <div><strong>Avaliação do Corvo Provador:</strong></div>
+                    <div><strong>Avaliação do Oráculo Místico:</strong></div>
                     <div>🍯 ${resultado.avaliacaoSabor.titulo}</div>
                     <div>⚡ ${resultado.avaliacaoPoder.titulo}</div>
                     <div><strong>Estatísticas:</strong></div>
                     <div>Sabor: ${resultado.sabor} | Poder: ${resultado.poder} | Ingredientes: ${resultado.ingredientes}</div>
                 `;
-                resultArt.textContent = Terminal.getCorvoArt();
+                resultArt.textContent = Terminal.getOraculoArt();
             }
         } else {
             resultTitle.textContent = '💀 Poção Falhou!';

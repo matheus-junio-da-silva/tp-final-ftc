@@ -7,7 +7,7 @@ Esta é a versão web do simulador de criação de poções usando autômatos fi
 O **Alquimia Automática** é um simulador interativo que permite:
 
 1. **Autômatos Determinísticos (AFD/APD)**: Criar poções seguindo receitas baseadas em autômatos finitos ou de pilha
-2. **Máquina de Mealy**: Avaliação de poções pelo "Corvo Provador" com sistema de pontuação
+2. **Máquina de Mealy**: Avaliação de poções pelo "Oráculo Místico" com sistema de pontuação
 
 ## 🚀 Como Executar
 
@@ -47,7 +47,7 @@ Se estiver usando VS Code, instale a extensão "Live Server" e clique com o bot�
 ### 2. Máquina de Mealy
 1. Clique em "Máquina de Mealy" no menu principal
 2. Adicione ingredientes para criar uma poção
-3. O corvo provador avaliará sabor e poder
+3. O oráculo místico avaliará sabor e poder
 4. Veja a avaliação final!
 
 ## 📋 Receitas Disponíveis
@@ -104,7 +104,7 @@ Se estiver usando VS Code, instale a extensão "Live Server" e clique com o bot�
 
 - **Tema Mágico**: Cores roxas e douradas com efeitos de partículas
 - **Responsiva**: Funciona em desktop, tablet e mobile
-- **Animações**: Caldeirão borbulhante, corvo animado
+- **Animações**: Caldeirão borbulhante, oráculo místico animado
 - **Som**: Efeitos sonoros e música de fundo
 - **Modal**: Visualização de receitas e ingredientes
 
@@ -136,7 +136,7 @@ Se estiver usando VS Code, instale a extensão "Live Server" e clique com o bot�
 O sistema de áudio inclui:
 - **Música de fundo**: Ambiente mágico
 - **Efeitos sonoros**: Adicionar ingredientes, criar poções, falhas
-- **Sons do corvo**: Avaliação da máquina de Mealy
+- **Sons do oráculo**: Avaliação da máquina de Mealy
 - **Controle de volume**: Botão para ligar/desligar
 
 ## 📱 Compatibilidade

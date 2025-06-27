@@ -10,8 +10,8 @@ class SoundManager {
             ingredient: null,
             potionCreated: null,
             gameOver: null,
-            corvo: null,
-            corvoWin: null,
+            oraculo: null,
+            oraculoWin: null,
             end: null
         };
         
@@ -28,8 +28,8 @@ class SoundManager {
         this.sounds.ingredient = document.getElementById('ingredient-sound');
         this.sounds.potionCreated = document.getElementById('potion-created-sound');
         this.sounds.gameOver = document.getElementById('game-over-sound');
-        this.sounds.corvo = document.getElementById('corvo-sound');
-        this.sounds.corvoWin = document.getElementById('corvo-win-sound');
+        this.sounds.oraculo = document.getElementById('oraculo-sound');
+        this.sounds.oraculoWin = document.getElementById('oraculo-win-sound');
         this.sounds.end = document.getElementById('end-sound');
 
         // Configurar volumes
@@ -96,12 +96,12 @@ class SoundManager {
         this.playSound('ingredient');
     }
 
-    playCorvo() {
-        return this.playSound('corvo', true); // Retorna referência para poder parar depois
+    playOraculo() {
+        return this.playSound('oraculo', true); // Retorna referência para poder parar depois
     }
 
-    playCorvoWin() {
-        this.playSound('corvoWin');
+    playOraculoWin() {
+        this.playSound('oraculoWin');
     }
 
     playEnd() {
@@ -136,7 +136,7 @@ class SoundManager {
         }
     }
 
-    // Parar som usando referência (para o corvo)
+    // Parar som usando referência (para o oráculo)
     stopSoundByReference(soundElement) {
         if (soundElement) {
             soundElement.pause();
@@ -293,17 +293,17 @@ function soundAddIngrediente() {
     manager.playAddIngredient();
 }
 
-function soundCorvoWin() {
+function soundOraculoWin() {
     const manager = initSoundManager();
-    manager.playCorvoWin();
+    manager.playOraculoWin();
 }
 
-function soundCorvo() {
+function soundOraculo() {
     const manager = initSoundManager();
-    return manager.playCorvo();
+    return manager.playOraculo();
 }
 
-function stopCorvoSound(soundRef) {
+function stopOraculoSound(soundRef) {
     const manager = initSoundManager();
     manager.stopSoundByReference(soundRef);
 }
@@ -330,9 +330,9 @@ window.initSoundManager = initSoundManager;
 window.soundGameOver = soundGameOver;
 window.soundPocaoCriada = soundPocaoCriada;
 window.soundAddIngrediente = soundAddIngrediente;
-window.soundCorvoWin = soundCorvoWin;
-window.soundCorvo = soundCorvo;
-window.stopCorvoSound = stopCorvoSound;
+window.soundOraculoWin = soundOraculoWin;
+window.soundOraculo = soundOraculo;
+window.stopOraculoSound = stopOraculoSound;
 window.soundBackground = soundBackground;
 window.stopBackgroundSound = stopBackgroundSound;
 window.soundEnd = soundEnd;
