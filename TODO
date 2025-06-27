@@ -1,26 +1,7 @@
-[x] Temos que trocar os arquivos de áudio. 
-por arquivos diferentes, mas que representam o 
-mesmo som, mas que sejam um pouco diferentes.
+[] Temos que trocar os arquivos de áudio. 
+por arquivos diferentes, mas que representam o mesmo som, mas que sejam um pouco diferentes.
 
-[x] Bem, nós devemos alterar o nome dos ingredientes, 
-do alfabeto, da parte do automato determinista, 
-porque a gente deve alterar todos os nomes,
-principalmente nomes de preferência mais ou menos do mesmo tamanho, 
-mas que sejam, criativos, pode ser engraçado também, 
-acho que engraçado seria bom, porque o daniel
-vai achar legal isso. E, bem, em todo lugar no código 
-a gente vê quando que for dependente dos ingredientes 
-a gente deve alterar, então depois de alterar 
-a gente tem que verificar no código pra trocar as 
-ocorrências de todos os ingredientes,
-porque senão não vai funcionar. 
-Então a gente tem que fazer essa alteração e testar 
-pra ver se tudo tá funcionando certinho. 
-Então é trocar o nome dos ingredientes por outros.
-Aí, no caso, também nós devemos alterar as receitas também, 
-pra ter o nome dos ingredientes atuais, depois que a gente trocar
-e também devemos testar tudo para ver se está tudo funcionando
-corretamente;
+[] Alterar nome dos ingredientes(alfabeto);
 
 [] Alterar estado visual da poção ao adicionar um novo ingrediente;
 
