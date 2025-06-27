@@ -1,9 +1,9 @@
 Q: I ing1 ing2 ing3 erro F
 I: I
 F: F
-I -> ing1       | a, _ / a
-ing1 -> ing2    | p, _ / s
-ing1 -> erro    | o, _ / mor
-ing2 -> F       | p, _ / biz
-ing2 -> erro    | p, _ / _
-F -> erro       | o, _ / _
+I -> ing1       | o, _ / o
+ing1 -> ing2    | a, _ / s
+ing1 -> erro    | p, _ / mor
+ing2 -> F       | a, _ / biz
+ing2 -> erro    | a, _ / _
+F -> erro       | p, _ / _

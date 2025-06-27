@@ -2,11 +2,11 @@ class MoorePotionMachine {
     constructor() {
         this.state = 'S0';
         this.output = '⚗️ Caldeirão vazio';
-        this.expectedIngredient = 'dan';
+        this.expectedIngredient = 'biz';
         this.sequence = [
-            'dan', 'sap', 'olh', 'jub', 'gam',
-            'alh', 'sal', 'cas', 'cob', 'ftc',
-            'o', 'p', 'a', 'lst'
+            'biz', 'bab', 'nho', 'pip', 'pum',
+            'bur', 'pix', 'zap', 'sos', 'lol',
+            'p', 'a', 'o', 'omg'
         ];
         this.log = [];
     }
@@ -86,7 +86,7 @@ function createMooreScreen() {
             <h2>Máquina de Moore - Criação de Poção</h2>
             <div class="ingredient-input">
                 <label>Digite o próximo ingrediente:</label>
-                <input type="text" id="moore-ingredient-input" maxlength="3" placeholder="Ex: dan">
+                <input type="text" id="moore-ingredient-input" maxlength="3" placeholder="Ex: biz">
                 <button id="moore-add-btn" class="magic-button">Adicionar Ingrediente</button>
                 <button id="moore-finish-btn" class="magic-button secondary">Finalizar Poção</button>
             </div>

@@ -198,97 +198,97 @@ class GerenciadorReceitas {
             'pocao_da_sabedoria': `Q: I ing1 ing2 ing3 ing4 ing5 erro F
 I: I
 F: F
-I -> ing1    | ftc
-ing1 -> ing2 | dan
-ing1 -> erro | o
-ing2 -> ing3 | sal
-ing2 -> erro | p
-ing3 -> ing4 | gam
-ing3 -> erro | cob
-ing4 -> ing5 | cas
-ing4 -> erro | alh
-ing5 -> F    | lst
-ing5 -> erro | sap
-F -> erro    | o`,
+I -> ing1    | lol
+ing1 -> ing2 | biz
+ing1 -> erro | p
+ing2 -> ing3 | pix
+ing2 -> erro | a
+ing3 -> ing4 | pum
+ing3 -> erro | sos
+ing4 -> ing5 | zap
+ing4 -> erro | bur
+ing5 -> F    | omg
+ing5 -> erro | bab
+F -> erro    | p`,
             
             'receita_da_morte': `Q: I ing1 ing2 ing3 ing4 erro F
 I: I
 F: F
-I -> ing1    | gam
-ing1 -> ing2 | cob
-ing1 -> erro | jub
-ing2 -> ing3 | sap
-ing2 -> erro | dan
-ing3 -> ing4 | olh
-ing3 -> erro | ftc
-ing4 -> F    | o
-ing4 -> erro | p
-F -> erro    | a`,
+I -> ing1    | pum
+ing1 -> ing2 | sos
+ing1 -> erro | pip
+ing2 -> ing3 | bab
+ing2 -> erro | biz
+ing3 -> ing4 | nho
+ing3 -> erro | lol
+ing4 -> F    | p
+ing4 -> erro | a
+F -> erro    | o`,
             
             'pocao_de_restauracao_comum': `Q: I ing1 ing2 ing3 erro F
 I: I
 F: F
-I -> ing1    | a
-ing1 -> ing2 | p
-ing1 -> erro | o
-ing2 -> F    | p
-ing2 -> erro | o
-F -> erro    | o`,
+I -> ing1    | o
+ing1 -> ing2 | a
+ing1 -> erro | p
+ing2 -> F    | a
+ing2 -> erro | p
+F -> erro    | p`,
             
             'pocao_ciclica': `Q: I ing1 ing2 ing3 ing4 erro F
 I: I
 F: F
-I -> ing1       | alh, _ / _
-ing1 -> ing2    | sal, _ / _
-ing2 -> ing3    | gam, _ / _
-ing3 -> ing4    | sal, _ / _
-ing4 -> F       | alh, _ / _
-ing4 -> erro    | gam, _ / biz
-F -> erro       | o, _ / s`,
+I -> ing1       | bur, _ / _
+ing1 -> ing2    | pix, _ / _
+ing2 -> ing3    | pum, _ / _
+ing3 -> ing4    | pix, _ / _
+ing4 -> F       | bur, _ / _
+ing4 -> erro    | pum, _ / biz
+F -> erro       | p, _ / s`,
             
             'receita1': `Q: I ing1 ing2 ing3 erro F
 I: I
 F: F
-I -> ing1       | a, _ / a
-ing1 -> ing2    | p, _ / _
-ing1 -> erro    | o, _ / mor
-ing2 -> F       | p, a / _
-ing2 -> erro    | o, _ / _
-F -> erro       | o, _ / _`,
+I -> ing1       | o, _ / o
+ing1 -> ing2    | a, _ / _
+ing1 -> erro    | p, _ / mor
+ing2 -> F       | a, o / _
+ing2 -> erro    | p, _ / _
+F -> erro       | p, _ / _`,
             
             'receitaAPD': `Q: I ing1 ing2 ing3 ing4 erro F
 I: I
 F: F
-I -> ing1       | alh, _ / _
-ing1 -> ing2    | p, _ / _
-ing1 -> erro    | o, _ / biz
-ing2 -> ing3    | lst, _ / _
-ing2 -> erro    | sal, _ / s
-ing3 -> ing4    | a, _ / _
-ing3 -> erro    | gam, _ / mor
-ing4 -> F       | ftc, _ / _
-ing4 -> erro    | dan, _ / biz
-F -> erro       | o, _ / s`,
+I -> ing1       | bur, _ / _
+ing1 -> ing2    | a, _ / _
+ing1 -> erro    | p, _ / biz
+ing2 -> ing3    | omg, _ / _
+ing2 -> erro    | pix, _ / s
+ing3 -> ing4    | o, _ / _
+ing3 -> erro    | pum, _ / mor
+ing4 -> F       | lol, _ / _
+ing4 -> erro    | biz, _ / biz
+F -> erro       | p, _ / s`,
             
             'receitand': `Q: I ing1 ing2 ing3 erro F
 I: I
 F: F
-I -> ing1       | a, _ / a
-ing1 -> ing2    | p, _ / s
-ing1 -> erro    | o, _ / mor
-ing2 -> F       | p, _ / biz
-ing2 -> erro    | p, _ / _
-F -> erro       | o, _ / _`,
+I -> ing1       | o, _ / o
+ing1 -> ing2    | a, _ / s
+ing1 -> erro    | p, _ / mor
+ing2 -> F       | a, _ / biz
+ing2 -> erro    | a, _ / _
+F -> erro       | p, _ / _`,
             
             'receitand2': `Q: I ing1 ing2 ing3 erro F
 I: I
 F: F
-I -> ing1       | a
-ing1 -> ing2    | p
-ing1 -> erro    | o
-ing2 -> F       | p
-ing2 -> erro    | p
-F -> erro       | o`
+I -> ing1       | o
+ing1 -> ing2    | a
+ing1 -> erro    | p
+ing2 -> F       | a
+ing2 -> erro    | a
+F -> erro       | p`
         };
     }
 

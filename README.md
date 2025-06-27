@@ -62,20 +62,20 @@ Se estiver usando VS Code, instale a extensão "Live Server" e clique com o bot�
 
 | Símbolo | Ingrediente |
 |---------|-------------|
-| dan | fio de cabelo do Daniel |
-| sap | pele seca de sapo cururu |
-| olh | olho de marmota africana |
-| jub | uma jujubinha |
-| gam | extrato defumado de chule de gamba |
-| alh | alho |
-| sal | sal |
-| cas | casca de carvalho envelhecido |
-| cob | veneno de cobra |
-| ftc | uma pagina do livro de FTC |
-| o | ovo |
-| p | petala |
+| biz | biscoito de bruxa malvada |
+| bab | baba de camelo fedida |
+| nho | nhonho de gato persa |
+| pip | pipoca magica explosiva |
+| pum | pum de dragao fedorento |
+| bur | buraco negro comestivel |
+| pix | pixie dust colorido |
+| zap | zapzap eletrico infinito |
+| sos | sossega leao instantaneo |
+| lol | lolzinho magico hilario |
+| p | petalas |
 | a | agua |
-| lst | lagrima de estudante |
+| o | oleo |
+| omg | oh my god concentrado |
 
 ## 🔧 Estrutura Técnica
 
