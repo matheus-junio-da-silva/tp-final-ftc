@@ -35,7 +35,6 @@ class TuringMachine {
     }
 }
 
-// Integração com a interface da Máquina de Turing
 const turingInput = document.getElementById('turing-ingredient-input');
 const turingAddBtn = document.getElementById('turing-add-btn');
 const turingFinishBtn = document.getElementById('turing-finish-btn');
@@ -44,66 +43,37 @@ const turingScreen = document.getElementById('turing-machine');
 
 let turingIngredients = [];
 
-// Função para atualizar a fita visual
 function updateTuringTape() {
     const tape = document.getElementById('turing-tape');
     if (!tape) return;
-
-    // Limpar fita atual
     tape.innerHTML = '';
-
-    // Adicionar células da fita baseadas nos ingredientes
     const inputString = turingIngredients.join('');
     const cells = inputString.split('');
-    
-    // Adicionar células vazias no início
-    for (let i = 0; i < 3; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'tape-cell';
-        cell.textContent = '_';
-        tape.appendChild(cell);
-    }
-
-    // Adicionar células com ingredientes
+    for (let i = 0; i < 3; i++) tape.appendChild(createCell('_'));
     cells.forEach((symbol, index) => {
-        const cell = document.createElement('div');
-        cell.className = 'tape-cell';
-        if (index === cells.length - 1) {
-            cell.classList.add('active');
-        }
-        cell.textContent = symbol;
+        const cell = createCell(symbol);
+        if (index === cells.length - 1) cell.classList.add('active');
         tape.appendChild(cell);
     });
-
-    // Adicionar células vazias no final
-    for (let i = 0; i < 5; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'tape-cell';
-        cell.textContent = '_';
-        tape.appendChild(cell);
-    }
-
-    // Scroll para mostrar a célula ativa
+    for (let i = 0; i < 5; i++) tape.appendChild(createCell('_'));
     const activeCell = tape.querySelector('.active');
-    if (activeCell) {
-        activeCell.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-    }
+    if (activeCell) activeCell.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
 }
 
-// Função para animar adição de ingrediente
+function createCell(content) {
+    const cell = document.createElement('div');
+    cell.className = 'tape-cell';
+    cell.textContent = content;
+    return cell;
+}
+
 function animateIngredientAdded() {
     const tape = document.getElementById('turing-tape');
     if (!tape) return;
-
-    const lastCell = [...tape.children].find(cell => 
-        cell.textContent !== '_' && !cell.classList.contains('active')
-    );
-    
+    const lastCell = [...tape.children].find(cell => cell.textContent !== '_' && !cell.classList.contains('active'));
     if (lastCell) {
         lastCell.classList.add('ingredient-added');
-        setTimeout(() => {
-            lastCell.classList.remove('ingredient-added');
-        }, 1000);
+        setTimeout(() => lastCell.classList.remove('ingredient-added'), 1000);
     }
 }
 
@@ -114,18 +84,9 @@ if (turingAddBtn) {
             turingIngredients.push(symbol);
             turingLog.innerHTML += `<div class="log-entry info">Ingrediente adicionado: <strong>${symbol}</strong></div>`;
             turingInput.value = '';
-            
-            // Atualizar fita visual
             updateTuringTape();
-            
-            // Animar adição de ingrediente
-            setTimeout(() => {
-                animateIngredientAdded();
-            }, 100);
-            
-            if (turingIngredients.length >= 3) {
-                turingFinishBtn.style.display = 'inline-block';
-            }
+            setTimeout(() => animateIngredientAdded(), 100);
+            if (turingIngredients.length >= 3) turingFinishBtn.style.display = 'inline-block';
         }
     });
 }
@@ -154,68 +115,79 @@ if (turingFinishBtn) {
             "CE,a": ["CE", "a", "R"],
             "CE,l": ["CE", "l", "R"]
         };
-
         const tm = new TuringMachine(inputString, transitions, "I", ["ACCEPT"]);
         const result = tm.run();
-
-        if (result === 'ACCEPT') {
-            turingLog.innerHTML += `<div class='log-entry success'>✅ Bolo criado com sucesso!</div>`;
-        } else {
-            turingLog.innerHTML += `<div class='log-entry error'>❌ Erro: ingredientes inválidos.</div>`;
-        }
-
+        turingLog.innerHTML += result === 'ACCEPT'
+            ? `<div class='log-entry success'>✅ Bolo criado com sucesso!</div>`
+            : `<div class='log-entry error'>❌ Erro: ingredientes inválidos.</div>`;
         turingIngredients = [];
         turingFinishBtn.style.display = 'none';
-        
-        // Resetar fita visual
-        setTimeout(() => {
-            updateTuringTape();
-        }, 2000);
+        setTimeout(() => updateTuringTape(), 2000);
     });
 }
 
-// Inicializar fita quando a tela é mostrada
 if (turingScreen) {
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                const target = mutation.target;
-                if (target.classList.contains('active')) {
-                    // Tela foi ativada
-                    setTimeout(() => {
-                        updateTuringTape();
-                    }, 100);
-                }
+    new MutationObserver((mutations) => {
+        for (const m of mutations) {
+            if (m.type === 'attributes' && m.attributeName === 'class') {
+                if (m.target.classList.contains('active')) setTimeout(() => updateTuringTape(), 100);
             }
-        });
-    });
-
-    observer.observe(turingScreen, {
-        attributes: true,
-        attributeFilter: ['class']
-    });
+        }
+    }).observe(turingScreen, { attributes: true, attributeFilter: ['class'] });
 }
 
-function fetchAndShowFile(url, title) {
-    fetch(url)
-        .then(res => res.text())
-        .then(text => {
-            const modal = document.getElementById('info-modal');
-            const body = document.getElementById('modal-body');
-            body.innerHTML = `<h3>${title}</h3><pre class="recipe-display">${text}</pre>`;
-            modal.style.display = 'block';
-        })
-        .catch(err => {
-            alert("Erro ao carregar o arquivo: " + err.message);
-        });
+function showTuringRecipe() {
+    const modal = document.getElementById('info-modal');
+    const body = document.getElementById('modal-body');
+    body.innerHTML = `
+        <h3>Máquina de Turing - Receita da Poção</h3>
+        <div class="recipe-display">
+            <div class="state"><div class="state-name">Estado: I</div>
+                <div class="transition">Entrada: <span class="symbol">f</span> --&gt; <span class="next">S1</span></div>
+            </div>
+            <div class="state"><div class="state-name">Estado: S1</div>
+                <div class="transition">Entrada: <span class="symbol">o</span> --&gt; <span class="next">S2</span></div>
+                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">S1</span></div>
+                <div class="transition">Entrada: <span class="symbol">e</span> --&gt; <span class="next">CE</span></div>
+                <div class="transition">Entrada: <span class="symbol">c</span> --&gt; <span class="next">C</span></div>
+            </div>
+            <div class="state"><div class="state-name">Estado: S2</div>
+                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">S2</span></div>
+                <div class="transition">Entrada: <span class="symbol">e</span> --&gt; <span class="next">CE</span></div>
+                <div class="transition">Entrada: <span class="symbol">c</span> --&gt; <span class="next">C</span></div>
+                <div class="transition">Entrada: <span class="symbol">_</span> --&gt; <span class="next">ACCEPT</span></div>
+            </div>
+            <div class="state"><div class="state-name">Estado: CE</div>
+                <div class="transition">Entrada: <span class="symbol">c</span> --&gt; <span class="next">REJECT</span></div>
+                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">CE</span></div>
+            </div>
+            <div class="state"><div class="state-name">Estado: C</div>
+                <div class="transition">Entrada: <span class="symbol">e</span> --&gt; <span class="next">REJECT</span></div>
+                <div class="transition">Entrada: <span class="symbol">_</span> --&gt; <span class="next">ACCEPT</span></div>
+                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">C</span></div>
+            </div>
+        </div>`;
+    modal.style.display = 'block';
 }
 
-// Botões
-document.getElementById('view-turing-file-btn')?.addEventListener('click', () => {
-    fetchAndShowFile('alfabeto_turing.txt', 'Máquina de Turing - Receita de Bolo');
-});
+function showAlfabeto() {
+    const modal = document.getElementById('info-modal');
+    const body = document.getElementById('modal-body');
+    body.innerHTML = `
+        <h3>Alfabeto dos Ingredientes</h3>
+        <table class="ingredient-table">
+            <thead><tr><th>Símbolo</th><th>Ingrediente</th></tr></thead>
+            <tbody>
+                <tr><td>f</td><td>farinha</td></tr>
+                <tr><td>o</td><td>ovos</td></tr>
+                <tr><td>a</td><td>açúcar</td></tr>
+                <tr><td>l</td><td>leite</td></tr>
+                <tr><td>e</td><td>fermento</td></tr>
+                <tr><td>c</td><td>chocolate</td></tr>
+            </tbody>
+        </table>`;
+    modal.style.display = 'block';
+}
 
-document.getElementById('view-alfabeto-btn')?.addEventListener('click', () => {
-    fetchAndShowFile('turing_receita.txt', 'Alfabeto dos Ingredientes');
-});
-
+document.getElementById('view-turing-file-btn')?.addEventListener('click', showTuringRecipe);
+document.getElementById('view-alfabeto-btn')?.addEventListener('click', showAlfabeto);
