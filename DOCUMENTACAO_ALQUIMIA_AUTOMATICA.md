@@ -63,9 +63,8 @@ O principal objetivo deste trabalho é implementar um simulador completo que dem
 5. **Implementar uma máquina de Turing** para demonstrar computação mais complexa
 6. **Proporcionar uma experiência de usuário rica** com elementos visuais, sonoros e narrativos que tornam o aprendizado mais engajante
 
-![Diagrama do Autômato](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura1.jpg?raw=true)
-
-![**Figura 1:** Tela inicial do Alquimia Automática - Uma interface mágica que convida o usuário a explorar o mundo dos autômatos]
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura1.jpg?raw=true)
+**Figura 1:** Tela inicial do Alquimia Automática - Uma interface mágica que convida o usuário a explorar o mundo dos autômatos
 
 ### Contexto Narrativo
 
