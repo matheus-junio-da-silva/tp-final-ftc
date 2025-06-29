@@ -1,8 +1,3 @@
-/**
- * Main functions - JavaScript equivalent of main.py
- * Main application controller for the potion creation simulator
- */
-
 class AlquimiaApp {
     constructor() {
         this.currentScreen = 'title-screen';
