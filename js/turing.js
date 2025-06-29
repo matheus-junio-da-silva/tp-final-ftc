@@ -1,13 +1,11 @@
-// js/turing.js
-
 class TuringMachine {
-    constructor(tape, transitionFunction, initialState, finalStates) {
+    constructor(tape, transitionFunction, initialState, finalStates, onStep) {
         this.tape = tape.split('');
         this.head = 0;
         this.state = initialState;
         this.finalStates = finalStates;
         this.transitionFunction = transitionFunction;
-        this.log = [];
+        this.onStep = onStep || (() => {});
     }
 
     step() {
@@ -20,17 +18,17 @@ class TuringMachine {
         }
 
         const [newState, writeSymbol, direction] = this.transitionFunction[key];
-
         this.tape[this.head] = writeSymbol;
         this.state = newState;
         this.head += (direction === 'R' ? 1 : -1);
+
+        this.onStep([...this.tape], this.head, this.state);
     }
 
     run() {
         while (!this.finalStates.includes(this.state) && this.state !== 'REJECT') {
             this.step();
         }
-
         return this.state === 'REJECT' ? 'REJECT' : 'ACCEPT';
     }
 }
@@ -39,38 +37,25 @@ const turingInput = document.getElementById('turing-ingredient-input');
 const turingAddBtn = document.getElementById('turing-add-btn');
 const turingFinishBtn = document.getElementById('turing-finish-btn');
 const turingLog = document.getElementById('turing-log');
-const turingScreen = document.getElementById('turing-machine');
+const tapeDiv = document.getElementById('turing-tape');
 
 let turingIngredients = [];
 
-function updateTuringTape() {
-    const tape = document.getElementById('turing-tape');
-    if (!tape) return;
-    tape.innerHTML = '';
-    const inputString = turingIngredients.join('');
-    const cells = inputString.split('');
-    for (let i = 0; i < 3; i++) tape.appendChild(createCell('_'));
-    cells.forEach((symbol, index) => {
-        const cell = createCell(symbol);
-        if (index === cells.length - 1) cell.classList.add('active');
-        tape.appendChild(cell);
-    });
-    for (let i = 0; i < 5; i++) tape.appendChild(createCell('_'));
-    const activeCell = tape.querySelector('.active');
-    if (activeCell) activeCell.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-}
-
-function createCell(content) {
-    const cell = document.createElement('div');
-    cell.className = 'tape-cell';
-    cell.textContent = content;
-    return cell;
+function updateTuringTapeView(tapeArr = [], head = 0) {
+    if (!tapeDiv) return;
+    tapeDiv.innerHTML = '';
+    for (let i = 0; i < tapeArr.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'tape-cell';
+        cell.textContent = tapeArr[i] || '_';
+        if (i === head) cell.classList.add('active');
+        tapeDiv.appendChild(cell);
+    }
 }
 
 function animateIngredientAdded() {
-    const tape = document.getElementById('turing-tape');
-    if (!tape) return;
-    const lastCell = [...tape.children].find(cell => cell.textContent !== '_' && !cell.classList.contains('active'));
+    if (!tapeDiv) return;
+    const lastCell = [...tapeDiv.children].find(cell => cell.textContent !== '_' && !cell.classList.contains('active'));
     if (lastCell) {
         lastCell.classList.add('ingredient-added');
         setTimeout(() => lastCell.classList.remove('ingredient-added'), 1000);
@@ -84,93 +69,167 @@ if (turingAddBtn) {
             turingIngredients.push(symbol);
             turingLog.innerHTML += `<div class="log-entry info">Ingrediente adicionado: <strong>${symbol}</strong></div>`;
             turingInput.value = '';
-            updateTuringTape();
+            updateTuringTapeView(turingIngredients, -1);
             setTimeout(() => animateIngredientAdded(), 100);
             if (turingIngredients.length >= 3) turingFinishBtn.style.display = 'inline-block';
         }
     });
 }
 
+
+
 if (turingFinishBtn) {
     turingFinishBtn.addEventListener('click', () => {
         const inputString = turingIngredients.join('');
         const transitions = {
-            "I,f": ["S1", "f", "R"],
-            "S1,o": ["S2", "o", "R"],
-            "S1,a": ["S1", "a", "R"],
-            "S1,l": ["S1", "l", "R"],
-            "S1,e": ["CE", "e", "R"],
-            "S1,c": ["C", "c", "R"],
-            "S2,a": ["S2", "a", "R"],
-            "S2,l": ["S2", "l", "R"],
-            "S2,e": ["CE", "e", "R"],
-            "S2,c": ["C", "c", "R"],
-            "S2,_": ["ACCEPT", "_", "R"],
-            "CE,c": ["REJECT", "c", "R"],
-            "C,e": ["REJECT", "e", "R"],
-            "C,_": ["ACCEPT", "_", "R"],
-            "S1,_": ["REJECT", "_", "R"],
-            "C,a": ["C", "a", "R"],
-            "C,l": ["C", "l", "R"],
-            "CE,a": ["CE", "a", "R"],
-            "CE,l": ["CE", "l", "R"]
+            // Início
+            "I,p": ["BUSCA_A", "X", "R"],
+            "I,X": ["I", "X", "R"],
+            "I,Y": ["I", "Y", "R"],
+            "I,Z": ["I", "Z", "R"],
+            "I,_": ["CHECA_FIM", "_", "R"],
+            "I,a": ["REJECT", "a", "R"],
+            "I,o": ["REJECT", "o", "R"],
+
+            // Busca 'a'
+            "BUSCA_A,X": ["BUSCA_A", "X", "R"],
+            "BUSCA_A,Y": ["BUSCA_A", "Y", "R"],
+            "BUSCA_A,Z": ["BUSCA_A", "Z", "R"],
+            "BUSCA_A,p": ["BUSCA_A", "p", "R"],
+            "BUSCA_A,a": ["BUSCA_O", "Y", "R"],
+            "BUSCA_A,o": ["REJECT", "o", "R"],
+            "BUSCA_A,_": ["REJECT", "_", "R"],
+
+            // Busca 'o'
+            "BUSCA_O,X": ["BUSCA_O", "X", "R"],
+            "BUSCA_O,Y": ["BUSCA_O", "Y", "R"],
+            "BUSCA_O,Z": ["BUSCA_O", "Z", "R"],
+            "BUSCA_O,a": ["BUSCA_O", "a", "R"],
+            "BUSCA_O,o": ["VOLTA", "Z", "L"],
+            "BUSCA_O,p": ["REJECT", "p", "R"],
+            "BUSCA_O,_": ["REJECT", "_", "R"],
+
+            // Volta ao início
+            "VOLTA,X": ["VOLTA", "X", "L"],
+            "VOLTA,Y": ["VOLTA", "Y", "L"],
+            "VOLTA,Z": ["VOLTA", "Z", "L"],
+            "VOLTA,a": ["VOLTA", "a", "L"],
+            "VOLTA,o": ["VOLTA", "o", "L"],
+            "VOLTA,p": ["VOLTA", "p", "L"],
+            "VOLTA,_": ["PROC_P", "_", "R"],
+
+            // Procura próximo p
+            "PROC_P,X": ["PROC_P", "X", "R"],
+            "PROC_P,Y": ["PROC_P", "Y", "R"],
+            "PROC_P,Z": ["PROC_P", "Z", "R"],
+            "PROC_P,a": ["PROC_P", "a", "R"],
+            "PROC_P,o": ["PROC_P", "o", "R"],
+            "PROC_P,p": ["BUSCA_A", "X", "R"],
+            "PROC_P,_": ["VOLTA_VERIFICA", "_", "L"],
+
+            // Volta para o início da fita
+            "VOLTA_VERIFICA,X": ["VOLTA_VERIFICA", "X", "L"],
+            "VOLTA_VERIFICA,Y": ["VOLTA_VERIFICA", "Y", "L"],
+            "VOLTA_VERIFICA,Z": ["VOLTA_VERIFICA", "Z", "L"],
+            "VOLTA_VERIFICA,_": ["VERIFICA_TUDO", "_", "R"],
+
+            // Verifica se há p, a ou o não marcados
+            "VERIFICA_TUDO,X": ["VERIFICA_TUDO", "X", "R"],
+            "VERIFICA_TUDO,Y": ["VERIFICA_TUDO", "Y", "R"],
+            "VERIFICA_TUDO,Z": ["VERIFICA_TUDO", "Z", "R"],
+            "VERIFICA_TUDO,_": ["ACCEPT", "_", "R"],
+            "VERIFICA_TUDO,p": ["REJECT", "p", "R"],
+            "VERIFICA_TUDO,a": ["REJECT", "a", "R"],
+            "VERIFICA_TUDO,o": ["REJECT", "o", "R"]
         };
-        const tm = new TuringMachine(inputString, transitions, "I", ["ACCEPT"]);
+
+        const tm = new TuringMachine(inputString, transitions, "I", ["ACCEPT"], updateTuringTapeView);
         const result = tm.run();
+
         turingLog.innerHTML += result === 'ACCEPT'
-            ? `<div class='log-entry success'>✅ Bolo criado com sucesso!</div>`
-            : `<div class='log-entry error'>❌ Erro: ingredientes inválidos.</div>`;
+            ? `<div class='log-entry success'>✅ Receita aceita: padrão pⁿaⁿoⁿ correto!</div>`
+            : `<div class='log-entry error'>❌ Receita rejeitada: verifique a ordem e quantidade de p, a, o.</div>`;
+
         turingIngredients = [];
         turingFinishBtn.style.display = 'none';
-        setTimeout(() => updateTuringTape(), 2000);
     });
 }
 
-if (turingScreen) {
-    new MutationObserver((mutations) => {
-        for (const m of mutations) {
-            if (m.type === 'attributes' && m.attributeName === 'class') {
-                if (m.target.classList.contains('active')) setTimeout(() => updateTuringTape(), 100);
-            }
-        }
-    }).observe(turingScreen, { attributes: true, attributeFilter: ['class'] });
-}
+document.getElementById('view-turing-file-btn')?.addEventListener('click', showTuringRecipe);
 
 function showTuringRecipe() {
     const modal = document.getElementById('info-modal');
     const body = document.getElementById('modal-body');
     body.innerHTML = `
-        <h3>Máquina de Turing - Receita da Poção</h3>
-        <div class="recipe-display">
-            <div class="state"><div class="state-name">Estado: I</div>
-                <div class="transition">Entrada: <span class="symbol">f</span> --&gt; <span class="next">S1</span></div>
-            </div>
-            <div class="state"><div class="state-name">Estado: S1</div>
-                <div class="transition">Entrada: <span class="symbol">o</span> --&gt; <span class="next">S2</span></div>
-                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">S1</span></div>
-                <div class="transition">Entrada: <span class="symbol">e</span> --&gt; <span class="next">CE</span></div>
-                <div class="transition">Entrada: <span class="symbol">c</span> --&gt; <span class="next">C</span></div>
-            </div>
-            <div class="state"><div class="state-name">Estado: S2</div>
-                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">S2</span></div>
-                <div class="transition">Entrada: <span class="symbol">e</span> --&gt; <span class="next">CE</span></div>
-                <div class="transition">Entrada: <span class="symbol">c</span> --&gt; <span class="next">C</span></div>
-                <div class="transition">Entrada: <span class="symbol">_</span> --&gt; <span class="next">ACCEPT</span></div>
-            </div>
-            <div class="state"><div class="state-name">Estado: CE</div>
-                <div class="transition">Entrada: <span class="symbol">c</span> --&gt; <span class="next">REJECT</span></div>
-                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">CE</span></div>
-            </div>
-            <div class="state"><div class="state-name">Estado: C</div>
-                <div class="transition">Entrada: <span class="symbol">e</span> --&gt; <span class="next">REJECT</span></div>
-                <div class="transition">Entrada: <span class="symbol">_</span> --&gt; <span class="next">ACCEPT</span></div>
-                <div class="transition">Entrada: <span class="symbol">a</span>, <span class="symbol">l</span> --&gt; <span class="next">C</span></div>
-            </div>
-        </div>`;
+        <h3>Máquina de Turing - Reconhecendo pⁿaⁿoⁿ</h3>
+        <pre style="white-space: pre-wrap; font-family: monospace; font-size: 14px;">
+Estado I:
+Transições:
+  Entrada: p → BUSCA_A
+  Entrada: X → I
+  Entrada: Y → I
+  Entrada: Z → I
+  Entrada: _ → CHECA_FIM
+  Entrada: a → REJECT
+  Entrada: o → REJECT
+
+Estado BUSCA_A:
+Transições:
+  Entrada: a → BUSCA_O
+  Entrada: X → BUSCA_A
+  Entrada: Y → BUSCA_A
+  Entrada: Z → BUSCA_A
+  Entrada: p → BUSCA_A
+  Entrada: _ → REJECT
+  Entrada: o → REJECT
+
+Estado BUSCA_O:
+Transições:
+  Entrada: o → VOLTA
+  Entrada: X → BUSCA_O
+  Entrada: Y → BUSCA_O
+  Entrada: Z → BUSCA_O
+  Entrada: a → BUSCA_O
+  Entrada: _ → REJECT
+  Entrada: p → REJECT
+
+Estado VOLTA:
+Transições:
+  Entrada: qualquer símbolo → VOLTA
+  Entrada: _ → PROC_P
+
+Estado PROC_P:
+Transições:
+  Entrada: p → BUSCA_A
+  Entrada: X → PROC_P
+  Entrada: Y → PROC_P
+  Entrada: Z → PROC_P
+  Entrada: a → PROC_P
+  Entrada: o → PROC_P
+  Entrada: _ → VOLTA_VERIFICA
+
+Estado VOLTA_VERIFICA:
+Transições:
+  Entrada: qualquer símbolo → VOLTA_VERIFICA
+  Entrada: _ → VERIFICA_TUDO
+
+Estado VERIFICA_TUDO:
+Transições:
+  Entrada: X → VERIFICA_TUDO
+  Entrada: Y → VERIFICA_TUDO
+  Entrada: Z → VERIFICA_TUDO
+  Entrada: _ → ACCEPT
+  Entrada: p → REJECT
+  Entrada: a → REJECT
+  Entrada: o → REJECT
+        </pre>
+    `;
     modal.style.display = 'block';
 }
 
-function showAlfabeto() {
+
+
+document.getElementById('view-alfabeto-btn')?.addEventListener('click', () => {
     const modal = document.getElementById('info-modal');
     const body = document.getElementById('modal-body');
     body.innerHTML = `
@@ -178,16 +237,10 @@ function showAlfabeto() {
         <table class="ingredient-table">
             <thead><tr><th>Símbolo</th><th>Ingrediente</th></tr></thead>
             <tbody>
-                <tr><td>f</td><td>farinha</td></tr>
-                <tr><td>o</td><td>ovos</td></tr>
-                <tr><td>a</td><td>açúcar</td></tr>
-                <tr><td>l</td><td>leite</td></tr>
-                <tr><td>e</td><td>fermento</td></tr>
-                <tr><td>c</td><td>chocolate</td></tr>
+                <tr><td>p</td><td>pétala</td></tr>
+                <tr><td>a</td><td>água</td></tr>
+                <tr><td>o</td><td>óleo</td></tr>
             </tbody>
         </table>`;
     modal.style.display = 'block';
-}
-
-document.getElementById('view-turing-file-btn')?.addEventListener('click', showTuringRecipe);
-document.getElementById('view-alfabeto-btn')?.addEventListener('click', showAlfabeto);
+});

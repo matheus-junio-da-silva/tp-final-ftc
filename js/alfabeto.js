@@ -1,8 +1,3 @@
-/**
- * Alfabeto functions - JavaScript equivalent of alfabeto.py
- * Handles ingredient and reaction alphabets loading and validation
- */
-
 // Função para carregar alfabeto de uma string de arquivo
 function carregaAlfabeto(conteudoArq, natureza, nomeArq) {
     let numLinha = 0;
@@ -13,8 +8,6 @@ function carregaAlfabeto(conteudoArq, natureza, nomeArq) {
         numLinha++;
         if (linha.trim() === '') continue;
         
-        // Cada linha do arquivo com a lista de ingredientes deve estar
-        // estruturada no formato <nome>:<descrição>
         const partes = linha.split(':');
         if (partes.length !== 2) {
             throw new Error(`Na linha ${numLinha}, lista de ${natureza} '${nomeArq}': formato inválido. Use 'símbolo:descrição'`);

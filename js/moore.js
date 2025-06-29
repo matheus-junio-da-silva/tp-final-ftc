@@ -1,8 +1,3 @@
-/**
- * Moore functions - JavaScript equivalent of moore.py
- * Handles Moore machine functionality with sequential potion creation
- */
-
 // Realização dinâmica de uma máquina de Moore
 class Moore {
     constructor() {

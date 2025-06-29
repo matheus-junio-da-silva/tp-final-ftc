@@ -1,8 +1,3 @@
-/**
- * Receita functions - JavaScript equivalent of receita.py
- * Handles automaton rules and transitions
- */
-
 // Exceção personalizada para erros de transição
 class ErroTransicao extends Error {
     constructor(message) {

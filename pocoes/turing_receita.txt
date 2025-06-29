@@ -1,17 +1,30 @@
-Q: I ing1 ing2 ing3 ing4 erro F
+Q: I busca_p marca_a marca_o volta verifica erro F
 I: I
 F: F
 
-I -> ing1       | f, _ / _
-ing1 -> ing2    | o, _ / _
-ing1 -> erro    | e, _ / erro
-ing2 -> ing3    | a, _ / _
-ing2 -> ing3    | l, _ / _
-ing2 -> ing3    | c, _ / _
-ing3 -> ing4    | a, _ / _
-ing3 -> ing4    | l, _ / _
-ing3 -> ing4    | e, _ / _
-ing3 -> erro    | c, _ / ERRO
-ing4 -> F       | a, _ / _
-ing4 -> erro    | c, _ / ERRO
-F -> erro       | c, _ / ERRO
+I -> busca_p        | p, P / R
+busca_p -> busca_p  | P, P / R
+busca_p -> marca_a  | a, a / R
+busca_p -> marca_a  | o, o / R
+busca_p -> verifica | _, _ / R
+
+marca_a -> marca_a  | A, A / R
+marca_a -> marca_o  | a, A / R
+marca_a -> erro     | _, _ / R
+
+marca_o -> marca_o  | O, O / R
+marca_o -> volta    | o, O / L
+marca_o -> erro     | _, _ / R
+
+volta -> volta      | P, P / L
+volta -> volta      | A, A / L
+volta -> volta      | O, O / L
+volta -> I          | _, _ / R
+
+verifica -> verifica | P, P / R
+verifica -> verifica | A, A / R
+verifica -> verifica | O, O / R
+verifica -> F        | _, _ / R
+verifica -> erro     | p, p / R
+verifica -> erro     | a, a / R
+verifica -> erro     | o, o / R

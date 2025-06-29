@@ -1,8 +1,3 @@
-/**
- * Automato functions - JavaScript equivalent of automato.py
- * Handles dynamic execution of finite automata and pushdown automata
- */
-
 // Realização dinâmica de um diagrama de estados
 class Automato {
     constructor(receita) {
@@ -112,7 +107,7 @@ class Automato {
         
         if (aceito) {
             this.adicionarHistorico(
-                `✅ Poção aceita! Estado final: "${this.estadoAtual}", Pilha vazia: ${this.pilha.length === 0}`,
+                ` Poção aceita! Estado final: "${this.estadoAtual}", Pilha vazia: ${this.pilha.length === 0}`,
                 'success'
             );
         } else {
@@ -128,7 +123,7 @@ class Automato {
             }
             
             this.adicionarHistorico(
-                `❌ Poção rejeitada! Motivos: ${motivoRejeicao.join(', ')}`,
+                ` Poção rejeitada! Motivos: ${motivoRejeicao.join(', ')}`,
                 'error'
             );
         }
