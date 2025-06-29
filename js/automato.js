@@ -1,8 +1,3 @@
-/**
- * Automato functions - JavaScript equivalent of automato.py
- * Handles dynamic execution of finite automata and pushdown automata
- */
-
 // Realização dinâmica de um diagrama de estados
 class Automato {
     constructor(receita) {
