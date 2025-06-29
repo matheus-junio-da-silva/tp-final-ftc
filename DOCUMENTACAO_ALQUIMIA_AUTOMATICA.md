@@ -141,7 +141,7 @@ O projeto foi desenvolvido como uma aplicação web completa, utilizando tecnolo
     ├── 📄 ingrediente.mp3
     └── 📄 [outros sons].mp3
 ```
-```
+
 **Figura 3:** Diagrama da arquitetura do sistema - Mostra como os diferentes módulos interagem entre si para criar a experiência alquímica completa
 
 ### Componentes Principais
@@ -318,7 +318,7 @@ q_poderoso - Ingredientes mágicos (biz, lol, omg) aumentam poder drasticamente
 q_saboroso - Ingredientes gastronômicos (pip, bur, pix) melhoram sabor
 q_ruim - Ingredientes prejudiciais (pum) degradam a qualidade
 #### Estados Formais da Máquina:
-
+```
 ```
 Q = {q0, q_poderoso, q_saboroso, q_ruim, q_mortal, q_neutro}
 
