@@ -101,6 +101,7 @@ biz: bizarrésima`;
 
         document.getElementById('mealy-btn')?.addEventListener('click', () => {
             this.mealy = new Mealy();
+            this.resetMealyScreen();
             this.showScreen('mealy-machine');
         });
 
@@ -151,6 +152,19 @@ biz: bizarrésima`;
 
         document.getElementById('mealy-finish-btn')?.addEventListener('click', () => {
             this.finishMealyPotion();
+        });
+
+        // Botões de informação da Máquina de Mealy
+        document.getElementById('view-mealy-machine-btn')?.addEventListener('click', () => {
+            this.showMealyMachineInfo();
+        });
+
+        document.getElementById('view-mealy-effects-btn')?.addEventListener('click', () => {
+            this.showMealyEffects();
+        });
+
+        document.getElementById('view-mealy-alphabet-btn')?.addEventListener('click', () => {
+            this.showMealyAlphabet();
         });
 
         // Modal
@@ -612,6 +626,7 @@ biz: bizarrésima`;
         document.getElementById('sabor-value').textContent = estado.sabor;
         document.getElementById('poder-value').textContent = estado.poder;
         document.getElementById('ingredient-count').textContent = estado.ingredientes;
+        document.getElementById('estado-value').textContent = estado.estadoAtual;
         
         // Atualizar cores baseadas nos valores
         const saborElement = document.getElementById('sabor-value');
@@ -796,9 +811,105 @@ biz: bizarrésima`;
         // Esconder botões
         document.getElementById('new-potion-btn').style.display = 'none';
         document.getElementById('back-menu-btn').style.display = 'none';
-
-        this.showScreen('result-screen');
     }
+
+    // Funções para mostrar informações da Máquina de Mealy
+    showMealyMachineInfo() {
+        if (!this.mealy) {
+            this.showError('Máquina de Mealy não inicializada.');
+            return;
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>🔮 Informações da Máquina de Mealy</h3>
+            ${this.mealy.criarTabelaMaquina()}
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    showMealyEffects() {
+        if (!this.mealy) {
+            this.showError('Máquina de Mealy não inicializada.');
+            return;
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>⚗️ Efeitos dos Ingredientes</h3>
+            <p>Cada ingrediente produz efeitos específicos na poção:</p>
+            ${this.mealy.criarTabelaEfeitos()}
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    showMealyAlphabet() {
+        if (!this.mealy) {
+            this.showError('Máquina de Mealy não inicializada.');
+            return;
+        }
+
+        const alfabeto = this.mealy.obterAlfabeto();
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>🔤 Alfabeto da Máquina de Mealy</h3>
+            <p>Símbolos aceitos pela máquina:</p>
+            <div class="alphabet-grid">
+                ${alfabeto.map(simbolo => `<span class="alphabet-symbol">${simbolo}</span>`).join('')}
+            </div>
+            <div style="margin-top: 20px;">
+                <h4>📋 Ingredientes Correspondentes:</h4>
+                ${this.alfabeto ? this.alfabeto.criarTabelaIngredientes() : '<p>Alfabeto de ingredientes não carregado.</p>'}
+            </div>
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    // Resetar interface da máquina de Mealy
+    resetMealyScreen() {
+        // Resetar valores visuais
+        document.getElementById('sabor-value').textContent = '0';
+        document.getElementById('poder-value').textContent = '0';
+        document.getElementById('ingredient-count').textContent = '0';
+        document.getElementById('estado-value').textContent = 'q0';
+        
+        // Resetar input e label
+        document.getElementById('mealy-ingredient-input').value = '';
+        document.getElementById('mealy-ingredient-label').textContent = 'Insira o símbolo do primeiro ingrediente:';
+        
+        // Esconder botão de finalizar
+        document.getElementById('mealy-finish-btn').style.display = 'none';
+        
+        // Limpar log
+        const log = document.getElementById('mealy-log');
+        if (log) {
+            if (typeof Terminal !== 'undefined') {
+                Terminal.clear(log);
+            } else {
+                log.innerHTML = '';
+            }
+        }
+        
+        // Resetar oráculo
+        const oraculo = document.getElementById('oraculo');
+        const speechBubble = document.getElementById('speech-bubble');
+        
+        if (oraculo) {
+            oraculo.className = 'oraculo';
+        }
+        
+        if (speechBubble) {
+            speechBubble.style.display = 'none';
+        }
+        
+        // Resetar cores das estatísticas
+        document.getElementById('sabor-value').className = 'color-cyan';
+        document.getElementById('poder-value').className = 'color-cyan';
+    }
+
 }
 
 // Inicializar aplicação quando o DOM estiver carregado

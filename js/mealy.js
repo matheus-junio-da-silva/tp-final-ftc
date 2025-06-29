@@ -7,7 +7,13 @@
 class Mealy {
     constructor() {
         this.descricoes = {};
+        this.estados = {};
+        this.estadoAtual = 'q0'; // Estado inicial
+        this.ultimaReacao = null;
+        this.alfabeto = [];
         this.leMealy();
+        this.definirEstados();
+        this.definirAlfabeto();
     }
 
     async run(sigma) {
@@ -17,9 +23,12 @@ class Mealy {
         this.sabor = 0;
         this.ingredientesUsados = [];
         this.historico = [];
+        this.estadoAtual = 'q0'; // Reiniciar para estado inicial
+        this.ultimaReacao = null;
         
         this.adicionarHistorico("🧙‍♂️ Iniciando avaliação com a Máquina de Mealy...", 'info');
-        this.adicionarHistorico("� O oráculo místico está pronto para avaliar sua poção!", 'info');
+        this.adicionarHistorico("🔮 O oráculo místico está pronto para avaliar sua poção!", 'info');
+        this.adicionarHistorico(`📍 Estado inicial: ${this.estadoAtual}`, 'info');
     }
 
     adicionarIngrediente(ingrediente, sigma) {
@@ -37,14 +46,31 @@ class Mealy {
         const efeitos = this.descricoes[ingrediente];
         const [descricao, sabor, poder] = efeitos;
 
+        // Calcular novo estado baseado no ingrediente (função de transição)
+        const estadoAnterior = this.estadoAtual;
+        this.estadoAtual = this.calcularNovoEstado(this.estadoAtual, ingrediente);
+
         this.sabor += parseInt(sabor);
         this.poder += parseInt(poder);
+        
+        // Salvar última reação para animações
+        this.ultimaReacao = {
+            ingrediente: ingrediente,
+            sabor: parseInt(sabor),
+            poder: parseInt(poder),
+            descricao: descricao,
+            estadoAnterior: estadoAnterior,
+            estadoNovo: this.estadoAtual
+        };
+
         this.ingredientesUsados.push({
             simbolo: ingrediente,
             nome: sigma.descreveIngrediente(ingrediente),
             descricao: descricao,
             sabor: parseInt(sabor),
-            poder: parseInt(poder)
+            poder: parseInt(poder),
+            estadoAnterior: estadoAnterior,
+            estadoNovo: this.estadoAtual
         });
 
         this.adicionarHistorico(
@@ -53,6 +79,7 @@ class Mealy {
         );
         this.adicionarHistorico(`   💫 ${descricao}`, 'success');
         this.adicionarHistorico(`   📊 Sabor: ${sabor > 0 ? '+' : ''}${sabor}, Poder: ${poder > 0 ? '+' : ''}${poder}`, 'info');
+        this.adicionarHistorico(`   🔄 Transição: ${estadoAnterior} → ${this.estadoAtual}`, 'info');
 
         return true;
     }
@@ -282,6 +309,8 @@ omg : um pouco de sal, desespero, tristeza e cansaco foram adicionados. O poder 
         this.sabor = 0;
         this.ingredientesUsados = [];
         this.historico = [];
+        this.estadoAtual = 'q0'; // Voltar ao estado inicial
+        this.ultimaReacao = null;
     }
 
     obterEstado() {
@@ -290,8 +319,62 @@ omg : um pouco de sal, desespero, tristeza e cansaco foram adicionados. O poder 
             poder: this.poder,
             ingredientes: this.cont,
             ingredientesUsados: [...this.ingredientesUsados],
-            primeiro: this.primeiro
+            primeiro: this.primeiro,
+            estadoAtual: this.estadoAtual
         };
+    }
+
+    // Nova função para obter a última reação
+    obterUltimaReacao() {
+        return this.ultimaReacao;
+    }
+
+    // Função de transição de estados da Máquina de Mealy
+    calcularNovoEstado(estadoAtual, ingrediente) {
+        // Implementação simples baseada no tipo de ingrediente
+        if (['biz', 'lol', 'omg'].includes(ingrediente)) {
+            return 'q_poderoso'; // Estado para ingredientes poderosos
+        } else if (['pip', 'bur', 'pix', 'zap', 'p'].includes(ingrediente)) {
+            return 'q_saboroso'; // Estado para ingredientes saborosos
+        } else if (['pum'].includes(ingrediente)) {
+            return 'q_ruim'; // Estado para ingredientes ruins
+        } else if (['sos'].includes(ingrediente)) {
+            return 'q_mortal'; // Estado para ingredientes mortais
+        } else {
+            return 'q_neutro'; // Estado neutro
+        }
+    }
+
+    // Definir estados da máquina de Mealy
+    definirEstados() {
+        this.estados = {
+            'q0': 'Estado Inicial - Poção vazia',
+            'q_poderoso': 'Estado Poderoso - Ingredientes mágicos foram adicionados',
+            'q_saboroso': 'Estado Saboroso - Ingredientes que melhoram o gosto',
+            'q_ruim': 'Estado Ruim - Ingredientes prejudiciais foram adicionados',
+            'q_mortal': 'Estado Mortal - Ingredientes perigosos na poção',
+            'q_neutro': 'Estado Neutro - Ingredientes básicos'
+        };
+    }
+
+    // Definir alfabeto da máquina de Mealy
+    definirAlfabeto() {
+        this.alfabeto = Object.keys(this.descricoes);
+    }
+
+    // Obter alfabeto disponível
+    obterAlfabeto() {
+        return [...this.alfabeto];
+    }
+
+    // Obter estados disponíveis
+    obterEstados() {
+        return { ...this.estados };
+    }
+
+    // Obter descrição do estado atual
+    obterDescricaoEstadoAtual() {
+        return this.estados[this.estadoAtual] || 'Estado desconhecido';
     }
 
     obterEstatisticas() {
@@ -328,6 +411,50 @@ omg : um pouco de sal, desespero, tristeza e cansaco foram adicionados. O poder 
         }
         
         html += '</tbody></table>';
+        return html;
+    }
+
+    // Método para criar tabela HTML da definição formal da máquina de Mealy
+    criarTabelaMaquina() {
+        let html = '<div class="mealy-definition">';
+        html += '<h4>🔮 Definição Formal da Máquina de Mealy</h4>';
+        
+        html += '<div class="definition-section">';
+        html += '<h5>📍 Estados (Q):</h5>';
+        html += '<ul>';
+        for (const [estado, descricao] of Object.entries(this.estados)) {
+            const atual = estado === this.estadoAtual ? ' (atual)' : '';
+            html += `<li><strong>${estado}</strong>${atual}: ${descricao}</li>`;
+        }
+        html += '</ul>';
+        html += '</div>';
+
+        html += '<div class="definition-section">';
+        html += '<h5>🔤 Alfabeto de Entrada (Σ):</h5>';
+        html += '<div class="alphabet-grid">';
+        this.alfabeto.forEach(simbolo => {
+            html += `<span class="alphabet-symbol">${simbolo}</span>`;
+        });
+        html += '</div>';
+        html += '</div>';
+
+        html += '<div class="definition-section">';
+        html += '<h5>⚡ Função de Saída (λ):</h5>';
+        html += '<p>A cada ingrediente adicionado, a máquina produz:</p>';
+        html += '<ul>';
+        html += '<li>📝 Descrição narrativa do efeito</li>';
+        html += '<li>🍯 Modificação no sabor</li>';
+        html += '<li>⚡ Modificação no poder</li>';
+        html += '<li>🔄 Transição de estado</li>';
+        html += '</ul>';
+        html += '</div>';
+
+        html += '<div class="definition-section">';
+        html += '<h5>🎯 Estado Atual:</h5>';
+        html += `<p><strong>${this.estadoAtual}</strong>: ${this.obterDescricaoEstadoAtual()}</p>`;
+        html += '</div>';
+
+        html += '</div>';
         return html;
     }
 }
