@@ -142,35 +142,35 @@ class Mealy {
             avaliacao = {
                 emoji: "💧",
                 titulo: "Poção Aguada",
-                descricao: "O corvo provador disse que sua poção ficou aguada. A poção carece de sabor.",
+                descricao: "O oraculo disse que sua poção ficou aguada. A poção carece de sabor.",
                 classe: 'azul'
             };
         } else if (sabor < 10) {
             avaliacao = {
                 emoji: "😐",
                 titulo: "Poção Sem Graça",
-                descricao: "O corvo provador disse que sua poção ficou meio sem graça. Está faltando um pouco mais de tempero.",
+                descricao: "O oraculo disse que sua poção ficou meio sem graça. Está faltando um pouco mais de tempero.",
                 classe: 'branco'
             };
         } else if (sabor < 20) {
             avaliacao = {
                 emoji: "👍",
                 titulo: "Poção Boa",
-                descricao: "O corvo provador disse que sua poção ficou muito boa. O sabor está agradável.",
+                descricao: "O oraculo disse que sua poção ficou muito boa. O sabor está agradável.",
                 classe: 'verde'
             };
         } else if (sabor < 40) {
             avaliacao = {
                 emoji: "🌟",
                 titulo: "Poção Espetacular",
-                descricao: "O corvo provador disse que sua poção ficou espetacular. Um verdadeiro deleite!",
+                descricao: "O oraculo disse que sua poção ficou espetacular. Um verdadeiro deleite!",
                 classe: 'azul'
             };
         } else {
             avaliacao = {
                 emoji: "👨‍🍳",
                 titulo: "Obra Prima Culinária",
-                descricao: "O corvo provador disse que você deveria largar a bruxaria e virar chefe de cozinha. A poção está fantástica!",
+                descricao: "O oraculo disse que você deveria largar a bruxaria e virar chefe de cozinha. A poção está fantástica!",
                 classe: 'vermelho'
             };
         }
@@ -188,42 +188,42 @@ class Mealy {
             avaliacao = {
                 emoji: "😵",
                 titulo: "Poção Enfraquecedora",
-                descricao: "O corvo provador desmaiou de fraqueza. A poção é extremamente fraca.",
+                descricao: "O oraculo desmaiou de fraqueza. A poção é extremamente fraca.",
                 classe: 'vermelho'
             };
         } else if (poder === 0) {
             avaliacao = {
                 emoji: "🌀",
                 titulo: "Poção Inerte",
-                descricao: "O corvo provador disse que sua poção não tem poder algum.",
+                descricao: "O oraculo disse que sua poção não tem poder algum.",
                 classe: 'amarelo'
             };
         } else if (poder < 50) {
             avaliacao = {
                 emoji: "🔮",
                 titulo: "Poção Mediana",
-                descricao: "O corvo provador disse que sua poção tem um poder mediano.",
+                descricao: "O oraculo disse que sua poção tem um poder mediano.",
                 classe: 'laranja'
             };
         } else if (poder < 100) {
             avaliacao = {
                 emoji: "⚡",
                 titulo: "Poção Poderosa",
-                descricao: "O corvo provador disse que sua poção é bastante poderosa.",
+                descricao: "O oraculo disse que sua poção é bastante poderosa.",
                 classe: 'verde'
             };
         } else if (poder < 200) {
             avaliacao = {
                 emoji: "💪",
                 titulo: "Poção Extremamente Poderosa",
-                descricao: "O corvo provador disse que sua poção é extremamente poderosa!!!",
+                descricao: "O oraculo disse que sua poção é extremamente poderosa!!!",
                 classe: 'verde'
             };
         } else {
             avaliacao = {
                 emoji: "🌟",
                 titulo: "Poção Lendária",
-                descricao: "O corvo provador está maravilhado com o poder da poção e a considera lendária!",
+                descricao: "O oraculo está maravilhado com o poder da poção e a considera lendária!",
                 classe: 'verde'
             };
         }
