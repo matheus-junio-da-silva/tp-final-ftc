@@ -16,18 +16,17 @@
 
 
 **Trabalho Prático Final**  
-**Disciplina:** Fundamentos Teóricos da Computação  
+**Disciplina:** Fundamentos da Teoria da Computação  
 
 
 
 ### 👥 INTEGRANTES DO GRUPO:
 
 **Matheus Júnio da Silva** - Matrícula: 5382  
-**Ramon Eloi** - Matrícula: [A ser preenchida]  
-**Marcos Tapiere** - Matrícula: [A ser preenchida]  
-**Lucas** - Nome Completo e Matrícula: [A ser preenchidos]  
-**Armindo** - Nome Completo e Matrícula: [A ser preenchidos]  
-
+**Ramon Elói Magalhães de Jesus** - Matrícula: 5789
+**Marcos Tampieri Amarante** - Matrícula: 5788  
+**Lucas Borges Moura e Silva** - Matrícula: 4689
+**Armindo Pereira Neto** - Matrícula: 5370  
 
 
 **Florestal**  
