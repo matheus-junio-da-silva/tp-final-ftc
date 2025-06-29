@@ -1,8 +1,3 @@
-/**
- * Terminal functions - JavaScript equivalent of terminal.py
- * Handles text coloring and ASCII art display for web version
- */
-
 class Terminal {
     // Função para colorir texto usando CSS classes
     static colorize(text, colorClass) {
