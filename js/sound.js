@@ -1,8 +1,3 @@
-/**
- * Sound functions - JavaScript equivalent of sound.py
- * Handles audio playback for the web version
- */
-
 class SoundManager {
     constructor() {
         this.sounds = {
