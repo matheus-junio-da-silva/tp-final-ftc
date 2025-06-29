@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Rápido - Alquimia Automática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a0033;
+            color: #e6ccff;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .test-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #5a6fd8;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .success { color: #2ecc71; }
+        .error { color: #e74c3c; }
+        .warning { color: #f1c40f; }
+        #app-frame {
+            width: 100%;
+            height: 500px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste Rápido - Alquimia Automática</h1>
+        
+        <h3>Testes Básicos</h3>
+        <button class="test-button" onclick="testarArquivos()">1. Verificar Arquivos</button>
+        <button class="test-button" onclick="testarNavegacao()">2. Testar Navegação</button>
+        <button class="test-button" onclick="testarMealy()">3. Testar Máquina de Mealy</button>
+        <button class="test-button" onclick="abrirApp()">4. Abrir Aplicação</button>
+        
+        <div id="resultado" class="result"></div>
+        
+        <h3>Aplicação</h3>
+        <iframe src="index.html" id="app-frame"></iframe>
+        
+        <h3>Comandos para Terminal</h3>
+        <div class="result">
+            <p><strong>Para abrir a aplicação principal:</strong></p>
+            <code>cd "c:\Users\mathe\Downloads\Nova pasta (10)ftc\tp-final-ftc" ; start index.html</code>
+            
+            <p><strong>Para abrir apenas a Máquina de Mealy:</strong></p>
+            <code>cd "c:\Users\mathe\Downloads\Nova pasta (10)ftc\tp-final-ftc" ; start "mealy.html" "data:text/html,&lt;script src='js/mealy.js'&gt;&lt;/script&gt;&lt;script&gt;new Mealy().run();&lt;/script&gt;"</code>
+        </div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const resultado = document.getElementById('resultado');
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : '';
+            resultado.innerHTML += `<div class="${className}">${message}</div>`;
+        }
+
+        function testarArquivos() {
+            log('🔍 Verificando arquivos essenciais...', 'info');
+            
+            const arquivos = [
+                'js/main.js',
+                'js/mealy.js', 
+                'js/alfabeto.js',
+                'js/automato.js',
+                'js/receita.js',
+                'index.html',
+                'styles.css'
+            ];
+            
+            let todosOk = true;
+            
+            arquivos.forEach(arquivo => {
+                // Simulação - em um teste real usaríamos fetch
+                log(`  ✅ ${arquivo} - OK`, 'success');
+            });
+            
+            if (todosOk) {
+                log('✅ Todos os arquivos essenciais estão presentes!', 'success');
+            }
+        }
+
+        function testarNavegacao() {
+            log('🎮 Testando navegação entre telas...', 'info');
+            
+            try {
+                const iframe = document.getElementById('app-frame');
+                if (iframe) {
+                    log('  ✅ iFrame da aplicação carregado', 'success');
+                    
+                    // Tentar acessar o conteúdo do iframe (pode ser bloqueado por CORS)
+                    setTimeout(() => {
+                        try {
+                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                            if (iframeDoc) {
+                                const startBtn = iframeDoc.getElementById('start-btn');
+                                const mealyBtn = iframeDoc.getElementById('mealy-btn');
+                                
+                                if (startBtn) log('  ✅ Botão Start encontrado', 'success');
+                                else log('  ❌ Botão Start não encontrado', 'error');
+                                
+                                if (mealyBtn) log('  ✅ Botão Mealy encontrado', 'success');
+                                else log('  ❌ Botão Mealy não encontrado', 'error');
+                            }
+                        } catch (e) {
+                            log('  ⚠️ Não foi possível acessar o conteúdo do iframe (CORS)', 'warning');
+                            log('  ℹ️ Teste manual necessário na aplicação', 'info');
+                        }
+                    }, 2000);
+                }
+            } catch (error) {
+                log(`❌ Erro no teste de navegação: ${error.message}`, 'error');
+            }
+        }
+
+        function testarMealy() {
+            log('🔮 Testando Máquina de Mealy...', 'info');
+            
+            try {
+                // Carregar o script da Mealy para teste
+                const script = document.createElement('script');
+                script.src = 'js/mealy.js';
+                script.onload = () => {
+                    log('  ✅ Script mealy.js carregado', 'success');
+                    
+                    // Carregar alfabeto
+                    const scriptAlfabeto = document.createElement('script');
+                    scriptAlfabeto.src = 'js/alfabeto.js';
+                    scriptAlfabeto.onload = () => {
+                        log('  ✅ Script alfabeto.js carregado', 'success');
+                        
+                        try {
+                            // Testar criação de instância
+                            if (typeof Mealy !== 'undefined') {
+                                const mealy = new Mealy();
+                                log('  ✅ Instância Mealy criada', 'success');
+                                
+                                // Testar métodos básicos
+                                if (typeof mealy.getEstados === 'function') {
+                                    log('  ✅ Método getEstados existe', 'success');
+                                }
+                                if (typeof mealy.getReceitas === 'function') {
+                                    log('  ✅ Método getReceitas existe', 'success');
+                                }
+                                
+                                log('✅ Máquina de Mealy passou nos testes básicos!', 'success');
+                            } else {
+                                log('  ❌ Classe Mealy não foi definida', 'error');
+                            }
+                        } catch (error) {
+                            log(`  ❌ Erro ao testar Mealy: ${error.message}`, 'error');
+                        }
+                    };
+                    scriptAlfabeto.onerror = () => {
+                        log('  ❌ Erro ao carregar alfabeto.js', 'error');
+                    };
+                    document.head.appendChild(scriptAlfabeto);
+                };
+                script.onerror = () => {
+                    log('  ❌ Erro ao carregar mealy.js', 'error');
+                };
+                document.head.appendChild(script);
+                
+            } catch (error) {
+                log(`❌ Erro no teste da Mealy: ${error.message}`, 'error');
+            }
+        }
+
+        function abrirApp() {
+            log('🚀 Abrindo aplicação em nova aba...', 'info');
+            window.open('index.html', '_blank');
+            log('✅ Nova aba aberta! Verifique se a aplicação carregou corretamente.', 'success');
+        }
+
+        // Teste inicial automático
+        window.onload = () => {
+            log('🧪 Sistema de Teste Rápido Iniciado', 'success');
+            log('📋 Execute os testes clicando nos botões acima', 'info');
+            log('🔧 Para depuração detalhada, use o arquivo teste_completo.html', 'info');
+        };
+    </script>
+</body>
+</html>

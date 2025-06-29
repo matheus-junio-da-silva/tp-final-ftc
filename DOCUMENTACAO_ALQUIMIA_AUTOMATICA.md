@@ -58,7 +58,7 @@ O principal objetivo deste trabalho é implementar um simulador completo que dem
 
 1. **Demonstrar autômatos finitos determinísticos (AFD)** através de receitas de poções que seguem sequências específicas de ingredientes
 2. **Implementar autômatos de pilha determinísticos (APD)** para receitas mais complexas que requerem controle de estados aninhados
-3. **Criar uma máquina de Mealy funcional** representada por um oráculo místico que avalia poções e fornece feedback baseado nos ingredientes adicionados
+3. **Criar uma máquina de Mealy funcional e academicamente correta** representada por um oráculo místico que avalia poções e fornece feedback baseado em estados formais, demonstrando como saídas dependem tanto do estado atual quanto da entrada, com interface completa para visualização da definição formal
 4. **Desenvolver uma máquina de Moore** para processamento com saídas baseadas em estados
 5. **Implementar uma máquina de Turing** para demonstrar computação mais complexa
 6. **Proporcionar uma experiência de usuário rica** com elementos visuais, sonoros e narrativos que tornam o aprendizado mais engajante
@@ -115,7 +115,7 @@ O coração da aplicação, responsável por coordenar todas as interações ent
 Implementa tanto autômatos finitos determinísticos quanto autômatos de pilha determinísticos, com capacidade de processamento dinâmico de receitas.
 
 #### 3. **Máquina de Mealy (mealy.js)**
-Um oráculo místico que avalia poções em tempo real, fornecendo feedback baseado nos ingredientes e calculando pontuações de sabor e poder.
+Um oráculo místico que implementa uma máquina de Mealy academicamente correta com 6 estados formais, alfabeto de 14 símbolos, função de transição baseada em tipos de ingredientes, e interface completa para visualização da definição formal. Fornece feedback baseado em estado + entrada, calculando pontuações de sabor e poder com histórico detalhado de transições.
 
 #### 4. **Sistema de Alfabetos (alfabeto.js)**
 Gerencia o vocabulário mágico do sistema, mapeando símbolos para ingredientes e reações químicas.
@@ -179,36 +179,105 @@ Esta receita demonstra um AFD simples onde cada ingrediente deve ser adicionado 
 ![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura5.png?raw=true)
 **Figura 5:** Oráculo Místico - A interface da Máquina de Mealy com o personagem mágico que avalia poções
 
-A Máquina de Mealy é implementada através do "Oráculo Místico", uma entidade mágica que avalia poções com base nos ingredientes adicionados. Esta implementação demonstra como as saídas de uma máquina de Mealy dependem tanto do estado atual quanto da entrada.
+A Máquina de Mealy é implementada através do "Oráculo Místico", uma entidade mágica ancestral que avalia poções com base nos ingredientes adicionados. Esta implementação demonstra perfeitamente como as saídas de uma máquina de Mealy dependem tanto do estado atual quanto da entrada recebida, seguindo a definição formal **M = (Q, Σ, Δ, λ, q₀)**.
 
-#### Características da Implementação:
+#### Definição Formal da Magia:
+
+🔮 **Conjunto de Estados (Q):** O oráculo possui 6 estados místicos distintos:
+- **q0:** Estado Inicial - A poção está vazia, o oráculo aguarda o primeiro ingrediente
+- **q_poderoso:** Estado dos Artefatos Mágicos - Ingredientes de grande poder foram adicionados
+- **q_saboroso:** Estado da Harmonia Gastronômica - A poção está desenvolvendo sabores agradáveis
+- **q_ruim:** Estado da Degradação - Ingredientes prejudiciais corromperam a mistura
+- **q_mortal:** Estado do Perigo - Elementos perigosos ameaçam a estabilidade da poção
+- **q_neutro:** Estado da Neutralidade - Ingredientes básicos mantêm o equilíbrio
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura22.png?raw=true)
+**Figura 22:** Botões informativos da Máquina de Mealy - Interface aprimorada com acesso às informações técnicas
+
+🔤 **Alfabeto Místico (Σ):** O oráculo reconhece 14 símbolos mágicos:
+```
+biz, bab, nho, pip, pum, bur, pix, zap, sos, lol, p, a, o, omg
+```
+
+Cada símbolo representa um ingrediente único com propriedades alquímicas específicas, desde artefatos lendários como `biz` até elementos básicos como `a` (água).
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura23.png?raw=true)
+**Figura 23:** Visualização do alfabeto mágico - Grid interativo mostrando todos os símbolos aceitos
+
+#### Características da Implementação Aprimorada:
+
+**Sistema de Estados Inteligente:**
+A função de transição (Δ) do oráculo categoriza ingredientes por suas propriedades:
+- **Ingredientes Poderosos:** `biz`, `lol`, `omg` → levam ao estado `q_poderoso`
+- **Ingredientes Saborosos:** `pip`, `bur`, `pix`, `zap`, `p` → levam ao estado `q_saboroso`
+- **Ingredientes Prejudiciais:** `pum` → leva ao estado `q_ruim`
+- **Ingredientes Mortais:** `sos` → leva ao estado `q_mortal`
+- **Ingredientes Neutros:** `nho`, `bab`, `a`, `o` → levam ao estado `q_neutro`
 
 **Sistema de Pontuação Dual:**
-- **Sabor:** Representa o quão saborosa a poção está
-- **Poder:** Indica a potência mágica da poção
+- **Sabor:** Representa o quão saborosa a poção está (-100 a +40)
+- **Poder:** Indica a potência mágica da poção (0 a +400)
+- **Estado Atual:** Visualização em tempo real do estado da máquina
 
-**Avaliação Dinâmica:**
-Cada ingrediente produz uma reação específica com efeitos únicos:
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura24.png?raw=true)
+**Figura 24:** Interface de estatísticas expandida - Mostra sabor, poder, ingredientes e estado atual
 
+**Função de Saída Mágica (λ):**
+Cada combinação de estado + entrada produz uma saída única contendo:
+1. **Descrição Narrativa:** Texto imersivo descrevendo o efeito do ingrediente
+2. **Modificação de Sabor:** Valor numérico (-100 a +12)
+3. **Modificação de Poder:** Valor numérico (0 a +100)
+4. **Transição de Estado:** Mudança visual do estado da máquina
+
+**Exemplo de Reação Alquímica:**
 ```
-biz : "um dos artefatos mais poderosos do seu inventario foi colocado na pocao. 
-       O nivel de poder da pocao cresceu muito!!!" |0|100|
-
-pip : "a pocao ficou levemente mais doce. 
-       O sabor da pocao aumentou significativamente" |12|0|
-
-pum : "a pocao fica intragavel e terrivelmente mal cheirosa" |-100|0|
+Entrada: biz (no estado q0)
+Saída: "um dos artefatos mais poderosos do seu inventario foi colocado na pocao. 
+        O nivel de poder da pocao cresceu muito!!!" |Sabor: +0|Poder: +100|
+Transição: q0 → q_poderoso
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura6.png?raw=true)
-**Figura 6:** Sistema de pontuação - Mostra como sabor e poder mudam conforme ingredientes são adicionados
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura25.png?raw=true)
+**Figura 25:** Log detalhado de transições - Histórico completo mostrando estados, ingredientes e efeitos
 
-#### Funcionalidades Especiais:
+#### Funcionalidades Especiais Implementadas:
 
-1. **Feedback Narrativo:** Cada ingrediente gera uma descrição única e divertida
-2. **Efeitos Sonoros:** O oráculo emite sons diferentes para ingredientes bons e ruins
-3. **Animações Visuais:** Bolhas de fala aparecem com as avaliações
-4. **Sistema de Ranking:** Pontuação final determina a qualidade da poção
+1. **Visualização da Definição Formal:** Botão "Ver Máquina" exibe a estrutura completa da máquina de Mealy
+2. **Tabela de Efeitos Completa:** Botão "Ver Efeitos" mostra todos os ingredientes e seus efeitos
+3. **Alfabeto Interativo:** Botão "Ver Alfabeto" apresenta todos os símbolos aceitos
+4. **Feedback Narrativo:** Cada ingrediente gera uma descrição única e divertida
+5. **Efeitos Sonoros:** O oráculo emite sons diferentes para ingredientes bons e ruins
+6. **Animações Visuais:** Bolhas de fala aparecem com as avaliações
+7. **Histórico de Transições:** Log completo com todas as mudanças de estado
+8. **Sistema de Ranking:** Pontuação final determina a qualidade da poção
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura26.png?raw=true)
+**Figura 26:** Definição formal visualizada - Tela mostrando estados, alfabeto e função de saída
+
+#### Conceito de Aceitação na Máquina de Mealy:
+
+**❓ Questão Importante:** *"Qualquer estado é um estado final? A máquina sempre aceita?"*
+
+**🔮 Resposta do Oráculo:** Em uma Máquina de Mealy tradicional, **NÃO existe o conceito de estados finais ou de aceitação/rejeição**. Isso é uma diferença fundamental entre Máquinas de Mealy e Autômatos Finitos:
+
+- **Autômatos Finitos (AFD/AFN):** Têm estados finais e decidem se uma palavra é aceita ou rejeitada
+- **Máquinas de Mealy:** São **transdutores** - transformam sequências de entrada em sequências de saída
+
+**Em nossa implementação alquímica:**
+- O oráculo **sempre produz uma saída** para cada ingrediente válido
+- **Não há rejeição** - apenas diferentes tipos de reações mágicas
+- A "qualidade" da poção é determinada pela **avaliação final** do oráculo, não por aceitação/rejeição
+- Todos os estados são "válidos" - representam diferentes aspectos da criação alquímica
+
+**Critérios de Avaliação Final:**
+```
+✅ Sucesso: Sabor ≥ 0 AND Ingredientes ≤ 10 AND (Poder < 400 OR Poder ≥ 400)
+❌ Falha: Sabor < 0 OR Ingredientes > 10
+🌟 Lendária: Poder ≥ 400 (o oráculo absorve a poção!)
+```
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura27.png?raw=true)
+**Figura 27:** Avaliação final do oráculo - Diferentes tipos de resultado baseados nas estatísticas finais
 
 ### 4.3. Máquina de Moore
 
@@ -409,7 +478,7 @@ Ao acessar o sistema, você é recebido pela majestosa tela de título com o log
 O menu oferece cinco opções claramente delineadas:
 
 1. **Autômato Determinístico:** Para receitas com AFD e APD
-2. **Máquina de Mealy:** Avaliação pelo Oráculo Místico
+2. **Máquina de Mealy:** Avaliação avançada pelo Oráculo Místico com estados formais e interface informativa
 3. **Máquina de Moore:** Processamento baseado em estados
 4. **Máquina de Turing:** Receitas especiais de bolo
 5. **Sair:** Retorna à tela inicial
@@ -454,26 +523,96 @@ O sistema avalia o resultado baseado no estado final do autômato:
 
 ### Usando a Máquina de Mealy
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura21.png?raw=true)
-**Figura 21:** Oráculo Místico ativo - Máquina de Mealy pronta para avaliação
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura28.png?raw=true)
+**Figura 28:** Oráculo Místico ativo - Interface renovada da Máquina de Mealy pronta para avaliação
 
-#### Interface do Oráculo
+#### Interface Aprimorada do Oráculo
 
-**Elementos Visuais:**
-- **Oráculo Animado:** Personagem central que reage aos ingredientes
-- **Bolha de Fala:** Aparece com comentários sobre cada ingrediente
-- **Medidores:** Sabor e Poder atualizados em tempo real
-- **Contador:** Número de ingredientes utilizados
+**Elementos Visuais Modernizados:**
+- **Oráculo Animado:** Personagem central (🔮) que reage aos ingredientes com diferentes estados visuais
+- **Bolha de Fala Inteligente:** Aparece com comentários contextuais sobre cada ingrediente
+- **Painel de Estatísticas Expandido:** Sabor, Poder, Ingredientes e **Estado Atual** atualizados em tempo real
+- **Barra de Ferramentas:** Três botões informativos para explorar a máquina
+- **Log Detalhado:** Histórico completo com transições de estado e efeitos
 
-#### Processo de Avaliação
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura29.png?raw=true)
+**Figura 29:** Botões informativos em ação - "Ver Máquina" exibindo a definição formal completa
 
-1. **Adição de Ingredientes:** Similar ao processo de criação de poções
-2. **Feedback Imediato:** O oráculo comenta cada ingrediente adicionado
-3. **Atualização de Estatísticas:** Sabor e poder mudam conforme a fórmula
-4. **Avaliação Final:** Clique em "Avaliar Poção" para obter o resultado final
+#### Funcionalidades Informativas Novas
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura22.png?raw=true)
-**Figura 22:** Resultado da avaliação - Oráculo fornecendo o veredito final
+**1. Ver Máquina (🔮):**
+- Exibe a definição formal completa: Q, Σ, Δ, λ, q₀
+- Lista todos os 6 estados com suas descrições
+- Mostra o alfabeto de 14 símbolos aceitos
+- Destaca o estado atual da máquina
+- Explica a função de saída (descrição + sabor + poder)
+
+**2. Ver Efeitos (⚗️):**
+- Tabela completa com todos os 14 ingredientes
+- Efeitos detalhados de cada símbolo mágico
+- Valores precisos de sabor e poder
+- Formatação visual clara (+/- valores)
+
+**3. Ver Alfabeto (🔤):**
+- Grid interativo dos símbolos aceitos
+- Correspondência com ingredientes reais do laboratório
+- Visual organizado e responsivo
+- Hover effects para melhor experiência
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura30.png?raw=true)
+**Figura 30:** Tabela de efeitos completa - Todos os ingredientes e suas propriedades alquímicas
+
+#### Processo de Avaliação Melhorado
+
+**1. Exploração Inicial:**
+- Use os botões informativos para entender a máquina
+- Estude o alfabeto disponível e os efeitos dos ingredientes
+- Observe como os estados influenciam o comportamento
+
+**2. Adição Estratégica de Ingredientes:**
+- Digite símbolos baseados na estratégia desejada
+- Observe as **transições de estado** em tempo real
+- Acompanhe como estado + entrada = saída específica
+- Veja o histórico detalhado no log
+
+**3. Monitoramento de Estados:**
+- **q0 (Inicial):** Poção vazia, primeiro ingrediente define direção
+- **q_poderoso:** Ingredientes mágicos (`biz`, `lol`, `omg`) aumentam poder drasticamente
+- **q_saboroso:** Ingredientes gastronômicos (`pip`, `bur`, `pix`) melhoram sabor
+- **q_ruim:** Ingredientes prejudiciais (`pum`) degradam a qualidade
+- **q_mortal:** Ingredientes perigosos (`sos`) criam poções mortais
+- **q_neutro:** Ingredientes básicos (`a`, `o`) mantêm equilíbrio
+
+**4. Avaliação Final Inteligente:**
+- Clique em "Avaliar Poção" para o veredito do oráculo
+- Sistema considera: sabor (≥0), quantidade (≤10), poder (especial ≥400)
+- Resultados: Sucesso, Falha ou **Lendária** (absorvida pelo oráculo!)
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura31.png?raw=true)
+**Figura 31:** Resultado da avaliação com transições - Log mostrando toda a jornada alquímica
+
+#### Exemplos Práticos de Uso
+
+**Exemplo 1 - Poção Poderosa:**
+```
+Ingredientes: biz → lol → omg
+Estados: q0 → q_poderoso → q_poderoso → q_poderoso
+Resultado: Sabor: 0, Poder: 160, Status: Lendária (se ≥400 poder)
+```
+
+**Exemplo 2 - Poção Saborosa:**
+```
+Ingredientes: pip → bur → p
+Estados: q0 → q_saboroso → q_saboroso → q_saboroso
+Resultado: Sabor: 27, Poder: 5, Status: Deliciosa
+```
+
+**Exemplo 3 - Poção Corrompida:**
+```
+Ingredientes: biz → pum
+Estados: q0 → q_poderoso → q_ruim
+Resultado: Sabor: -100, Poder: 100, Status: Falha (sabor negativo)
+```
 
 ### Máquina de Turing - Receita de Bolo
 
@@ -634,36 +773,58 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 ![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura28.png?raw=true)
 **Figura 28:** Resultado bem-sucedido - Tela de sucesso com animações
 
-### Exemplo 2: Avaliação com o Oráculo Místico
+### Exemplo 2: Avaliação Avançada com o Oráculo Místico
 
-**Cenário:** Testando diferentes combinações de ingredientes
+**Cenário:** Explorando a máquina de Mealy com interface informativa
 
 1. **Preparação:**
    - Selecione "Máquina de Mealy"
-   - O oráculo aparece com pontuação inicial (Sabor: 0, Poder: 0)
+   - O oráculo aparece com estatísticas iniciais (Sabor: 0, Poder: 0, Estado: q0)
+   - **NOVO:** Explore os botões informativos antes de começar
 
-2. **Sequência de Teste:**
+2. **Exploração da Interface:**
    ```
-   Ingrediente 1: "biz"
+   Botão "Ver Máquina": Mostra definição formal completa
+   - Estados: q0, q_poderoso, q_saboroso, q_ruim, q_mortal, q_neutro
+   - Alfabeto: biz, bab, nho, pip, pum, bur, pix, zap, sos, lol, p, a, o, omg
+   - Função de transição e saída detalhadas
+   
+   Botão "Ver Efeitos": Tabela completa de ingredientes
+   - Lista todos os 14 ingredientes com efeitos
+   - Valores precisos de sabor e poder
+   
+   Botão "Ver Alfabeto": Grid visual dos símbolos
+   - Símbolos organizados visualmente
+   - Correspondência com ingredientes reais
+   ```
+
+3. **Sequência de Teste com Estados:**
+   ```
+   Ingrediente 1: "biz" (Estado: q0 → q_poderoso)
    Reação: "um dos artefatos mais poderosos foi colocado na poção!"
    Efeito: Sabor +0, Poder +100
+   Estado: q_poderoso
    
-   Ingrediente 2: "pip"
+   Ingrediente 2: "pip" (Estado: q_poderoso → q_saboroso)
    Reação: "a poção ficou levemente mais doce"
    Efeito: Sabor +12, Poder +0
+   Estado: q_saboroso
    
-   Ingrediente 3: "pum"
+   Ingrediente 3: "pum" (Estado: q_saboroso → q_ruim)
    Reação: "a poção fica intragável e terrivelmente mal cheirosa"
    Efeito: Sabor -100, Poder +0
+   Estado: q_ruim
    ```
 
-3. **Resultado Final:**
+4. **Resultado Final com Estados:**
    - **Sabor Total:** -88 (Terrível!)
    - **Poder Total:** 100 (Muito Poderoso!)
-   - **Avaliação:** "Poção poderosa mas intragável"
+   - **Estado Final:** q_ruim
+   - **Avaliação:** "Poção rejeitada devido ao sabor terrível"
+   - **Log Completo:** Histórico detalhado com todas as transições
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura29.png?raw=true)
-**Figura 29:** Avaliação do oráculo - Resultado final com estatísticas
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura32.png?raw=true)
+**Figura 32:** Avaliação completa do oráculo - Interface renovada com estado e histórico de transições
 
 ### Exemplo 3: Receita de Bolo com Máquina de Turing
 
@@ -686,33 +847,6 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
    - Cada símbolo aparece na fita
    - Cabeçote se move para a próxima posição
    - Estados são atualizados em tempo real
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura30.png?raw=true)
-**Figura 30:** Máquina de Turing em ação - Fita sendo processada
-
-### Exemplo 4: Tratamento de Erro
-
-**Cenário:** Tentativa de criar poção com sequência incorreta
-
-1. **Erro Induzido:**
-   - Receita: Poção da Sabedoria
-   - Sequência incorreta: "lol" → "pip" (deveria ser "biz")
-
-2. **Resultado:**
-   ```
-   Passo 1: "lol" ✅ (I → ing1)
-   Passo 2: "pip" ❌ 
-   Erro: Não há transição para "pip" no estado "ing1"
-   Estado Final: ERRO
-   ```
-
-3. **Interface:**
-   - Mensagem de erro clara e explicativa
-   - Opção para reiniciar a receita
-   - Log detalhado do que aconteceu
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura31.png?raw=true)
-**Figura 31:** Tratamento de erro - Tela explicativa de falha na receita
 
 ---
 
@@ -748,7 +882,13 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 1. **Parsing de Receitas:** Conversão de formato texto para estrutura de dados
 2. **Simulação de Autômatos:** Execução passo a passo com validação
 3. **Gerenciamento de Pilha:** Para autômatos de pilha determinísticos
-4. **Cálculo de Pontuação:** Para a Máquina de Mealy
+4. **Máquina de Mealy Avançada:** Implementação completa com:
+   - Função de transição baseada em categorias de ingredientes
+   - Estados formais (6 estados distintos)
+   - Função de saída que combina estado + entrada
+   - Histórico de transições para auditoria completa
+5. **Geração de Interface Informativa:** Criação dinâmica de tabelas e visualizações
+6. **Sistema de Validação:** Verificação de alfabetos e estados válidos
 
 ### Performance e Otimização
 
@@ -775,9 +915,14 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 **Funcionalidades Testadas:**
 - ✅ Carregamento de todas as receitas
 - ✅ Funcionamento de todos os tipos de autômato
+- ✅ Máquina de Mealy com estados formais e transições corretas
+- ✅ Interface informativa com botões "Ver Máquina", "Ver Efeitos", "Ver Alfabeto"
+- ✅ Sistema de histórico e log de transições
+- ✅ Visualização em tempo real do estado atual
 - ✅ Sistema de áudio em diferentes navegadores
 - ✅ Responsividade em diferentes resoluções
 - ✅ Validação de entrada e tratamento de erros
+- ✅ Conformidade com definição formal de Máquina de Mealy
 
 ### Limitações e Melhorias Futuras
 
@@ -853,20 +998,55 @@ Gostaríamos de expressar nossa gratidão pela oportunidade de trabalhar neste p
 
 O desenvolvimento deste simulador não apenas nos ensinou sobre autômatos e máquinas formais, mas também sobre design de software, experiência do usuário, e a importância de tornar conhecimento complexo acessível e envolvente.
 
-### Considerações Finais
+## Melhorias Implementadas na Máquina de Mealy
 
-"Alquimia Automática" prova que é possível combinar rigor acadêmico com criatividade e diversão. Ao envolver conceitos fundamentais da ciência da computação em uma narrativa mágica e uma interface envolvente, criamos não apenas uma ferramenta educacional, mas uma experiência memorável que esperamos inspire outros estudantes a explorar as maravilhas da teoria da computação.
+Durante o desenvolvimento, a Máquina de Mealy recebeu melhorias significativas que a tornaram academicamente correta e pedagogicamente superior:
 
-O projeto representa nossa compreensão de que a melhor educação acontece quando teoria e prática se encontram, quando conceitos abstratos ganham vida através de implementação criativa, e quando o aprendizado se torna uma aventura prazerosa em vez de uma obrigação árdua.
+### ✅ Conformidade Acadêmica Alcançada
 
-Que este trabalho sirva como ponte entre o mundo formal dos autômatos e a imaginação criativa, demonstrando que mesmo os conceitos mais abstratos podem ser tornados tangíveis e acessíveis através de implementação cuidadosa e design thoughtful.
+**Definição Formal Implementada:**
+A máquina agora segue rigorosamente a definição **M = (Q, Σ, Δ, λ, q₀)** com:
 
----
+- **Q = {q0, q_poderoso, q_saboroso, q_ruim, q_mortal, q_neutro}**: 6 estados distintos e bem definidos
+- **Σ = {biz, bab, nho, pip, pum, bur, pix, zap, sos, lol, p, a, o, omg}**: Alfabeto de 14 símbolos claramente documentado
+- **Δ**: Função de transição baseada em categorização lógica de ingredientes
+- **λ**: Função de saída que combina estado atual + entrada para produzir descrição + efeitos
+- **q₀ = q0**: Estado inicial bem definido
 
-**🧙‍♂️ Fim da Documentação - Que a magia dos autômatos continue a inspirar novos alquimistas da computação!**
+### 🔍 Interface Educacional Avançada
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura32.png?raw=true)
-**Figura 32:** Tela final - Mensagem de conclusão da experiência alquímica
+**Funcionalidades Informativas:**
+1. **"Ver Máquina"**: Visualização completa da definição formal com estado atual destacado
+2. **"Ver Efeitos"**: Tabela detalhada de todos os ingredientes e seus efeitos precisos
+3. **"Ver Alfabeto"**: Grid interativo dos símbolos aceitos com correspondências
+4. **Histórico de Transições**: Log completo de todas as mudanças de estado
+5. **Estado em Tempo Real**: Visualização contínua do estado atual da máquina
+
+### 📚 Valor Pedagógico Aprimorado
+
+**Conceitos Demonstrados:**
+- **Diferença entre Máquinas de Mealy e Autômatos Finitos**: Explicação clara sobre ausência de estados finais
+- **Função de Saída Dependente**: Como saídas dependem tanto do estado quanto da entrada
+- **Transições de Estado**: Visualização em tempo real das mudanças de estado
+- **Transdutor vs. Reconhecedor**: Demonstração prática de como máquinas de Mealy transformam sequências
+
+### 🎯 Questão dos Estados Finais Esclarecida
+
+**Resposta Definitiva:**
+Em Máquinas de Mealy **não existem estados finais** - elas são **transdutores**, não reconhecedores. Nossa implementação:
+- **Sempre produz saída** para entradas válidas do alfabeto
+- **Não aceita nem rejeita** sequências - apenas as transforma
+- **Avalia qualidade** da poção baseada em critérios (sabor ≥ 0, ingredientes ≤ 10)
+- **Todos os estados são válidos** para continuar o processamento
+
+### 🚀 Impacto no Aprendizado
+
+Essas melhorias transformaram a Máquina de Mealy de uma simples calculadora de pontos em uma **ferramenta educacional completa** que:
+- Ensina a definição formal através da prática
+- Permite exploração interativa dos conceitos
+- Fornece feedback visual e educativo
+- Demonstra diferenças entre tipos de máquinas
+- Oferece experiência hands-on com teoria dos autômatos
 
 ---
 

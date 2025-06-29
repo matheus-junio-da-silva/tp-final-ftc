@@ -33,8 +33,7 @@ omg : oh my god concentrado`;
 
         this.dadosReacoes = `a  : apimentada
 s  : salgada demais
-mor: mortífera
-biz: bizarrésima`;
+mor: mortífera`;
 
         // Aguardar que todas as dependências estejam carregadas
         this.waitForDependencies().then(() => {
@@ -101,7 +100,10 @@ biz: bizarrésima`;
 
         document.getElementById('mealy-btn')?.addEventListener('click', () => {
             this.mealy = new Mealy();
+            this.mealy.run(this.alfabeto); // Inicializar a máquina
             this.resetMealyScreen();
+            this.updateMealyLog(); // Atualizar log com histórico inicial
+            this.updateMealyStats(); // Atualizar estatísticas iniciais
             this.showScreen('mealy-machine');
         });
 
@@ -165,6 +167,10 @@ biz: bizarrésima`;
 
         document.getElementById('view-mealy-alphabet-btn')?.addEventListener('click', () => {
             this.showMealyAlphabet();
+        });
+
+        document.getElementById('view-mealy-recipes-btn')?.addEventListener('click', () => {
+            this.showMealyRecipes();
         });
 
         // Modal
@@ -471,38 +477,59 @@ biz: bizarrésima`;
             return;
         }
 
-        const sucesso = this.mealy.adicionarIngrediente(ingredient, this.alfabeto);
-        
-        if (sucesso) {
-            soundAddIngrediente();
+        if (!this.mealy) {
+            this.showError('Máquina de Mealy não inicializada.');
+            return;
+        }
+
+        if (!this.alfabeto) {
+            this.showError('Alfabeto não carregado.');
+            return;
+        }
+
+        try {
+            const sucesso = this.mealy.adicionarIngrediente(ingredient, this.alfabeto);
             
-            // Obter a última reação para o oráculo
-            const estado = this.mealy.obterEstado();
-            const ultimaReacao = this.mealy.obterUltimaReacao ? this.mealy.obterUltimaReacao() : null;
-            
-            // Atualizar visual do oráculo
-            this.updateOraculoVisual(ultimaReacao);
-            
-            // Atualizar estatísticas
-            this.updateMealyStats();
-            
-            // Animar stats que mudaram
-            this.animateUpdatedStats();
-            
-            // Atualizar log
-            this.updateMealyLog();
-            
-            // Limpar input
-            input.value = '';
-            
-            // Atualizar interface
-            if (this.mealy.primeiro) {
-                this.mealy.primeiro = false;
-                document.getElementById('mealy-ingredient-label').textContent = 'Símbolo do ingrediente:';
-                document.getElementById('mealy-finish-btn').style.display = 'inline-block';
+            if (sucesso) {
+                // Tocar som de ingrediente (se disponível)
+                if (typeof soundAddIngrediente === 'function') {
+                    soundAddIngrediente();
+                }
+                
+                // Obter a última reação para o oráculo
+                const estado = this.mealy.obterEstado();
+                const ultimaReacao = this.mealy.obterUltimaReacao ? this.mealy.obterUltimaReacao() : null;
+                
+                // Atualizar visual do oráculo
+                this.updateOraculoVisual(ultimaReacao);
+                
+                // Atualizar estatísticas
+                this.updateMealyStats();
+                
+                // Animar stats que mudaram
+                this.animateUpdatedStats();
+                
+                // Atualizar log
+                this.updateMealyLog();
+                
+                // Limpar input
+                input.value = '';
+                
+                // Atualizar interface
+                if (this.mealy.primeiro) {
+                    this.mealy.primeiro = false;
+                    document.getElementById('mealy-ingredient-label').textContent = 'Símbolo do ingrediente:';
+                    document.getElementById('mealy-finish-btn').style.display = 'inline-block';
+                }
+            } else {
+                // Tocar som de erro (se disponível)
+                if (typeof soundGameOver === 'function') {
+                    soundGameOver();
+                }
             }
-        } else {
-            soundGameOver();
+        } catch (error) {
+            console.error('Erro ao adicionar ingrediente:', error);
+            this.showError('Erro ao processar ingrediente: ' + error.message);
         }
     }
 
@@ -811,6 +838,9 @@ biz: bizarrésima`;
         // Esconder botões
         document.getElementById('new-potion-btn').style.display = 'none';
         document.getElementById('back-menu-btn').style.display = 'none';
+
+        // Mostrar a tela de resultado
+        this.showScreen('result');
     }
 
     // Funções para mostrar informações da Máquina de Mealy
@@ -868,46 +898,116 @@ biz: bizarrésima`;
         document.getElementById('info-modal').style.display = 'block';
     }
 
-    // Resetar interface da máquina de Mealy
+    showMealyRecipes() {
+        if (!this.mealy) {
+            this.showError('Máquina de Mealy não inicializada.');
+            return;
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>📜 Receitas Sugeridas para o Oráculo Místico</h3>
+            <p>Experimente estas combinações estratégicas de ingredientes:</p>
+            
+            <div class="recipe-section">
+                <h4>🌟 Receita da Poção Lendária</h4>
+                <div class="recipe-content">
+                    <p><strong>Objetivo:</strong> Alcançar poder ≥ 400 para que o oráculo absorva a poção</p>
+                    <p><strong>Sequência:</strong> <code>biz → lol → omg → biz</code></p>
+                    <p><strong>Estados:</strong> q0 → q_poderoso → q_poderoso → q_poderoso → q_poderoso</p>
+                    <p><strong>Resultado esperado:</strong> Sabor: 0, Poder: 260 (precisa de mais ingredientes)</p>
+                    <p><strong>Alternativa:</strong> <code>biz → lol → omg → biz → lol</code> (Poder: 360)</p>
+                </div>
+            </div>
+
+            <div class="recipe-section">
+                <h4>🍯 Receita da Poção Saborosa</h4>
+                <div class="recipe-content">
+                    <p><strong>Objetivo:</strong> Maximizar sabor mantendo poder moderado</p>
+                    <p><strong>Sequência:</strong> <code>pip → bur → p → pix</code></p>
+                    <p><strong>Estados:</strong> q0 → q_saboroso → q_saboroso → q_saboroso → q_saboroso</p>
+                    <p><strong>Resultado esperado:</strong> Sabor: 32, Poder: 5</p>
+                    <p><strong>Avaliação:</strong> "Obra Prima Culinária"</p>
+                </div>
+            </div>
+
+            <div class="recipe-section">
+                <h4>⚡ Receita da Poção Equilibrada</h4>
+                <div class="recipe-content">
+                    <p><strong>Objetivo:</strong> Balancear sabor e poder</p>
+                    <p><strong>Sequência:</strong> <code>biz → pip → bur → sos</code></p>
+                    <p><strong>Estados:</strong> q0 → q_poderoso → q_saboroso → q_saboroso → q_mortal</p>
+                    <p><strong>Resultado esperado:</strong> Sabor: 19, Poder: 120</p>
+                    <p><strong>Avaliação:</strong> Boa no sabor, Extremamente Poderosa</p>
+                </div>
+            </div>
+
+            <div class="recipe-section">
+                <h4>🧪 Receita Experimental</h4>
+                <div class="recipe-content">
+                    <p><strong>Objetivo:</strong> Testar diferentes transições de estado</p>
+                    <p><strong>Sequência:</strong> <code>nho → a → o → p</code></p>
+                    <p><strong>Estados:</strong> q0 → q_neutro → q_neutro → q_neutro → q_saboroso</p>
+                    <p><strong>Resultado esperado:</strong> Sabor: 10, Poder: 2</p>
+                    <p><strong>Avaliação:</strong> Poção Sem Graça (mas segura!)</p>
+                </div>
+            </div>
+
+            <div class="recipe-section danger">
+                <h4>💀 Receita Proibida (Não recomendada!)</h4>
+                <div class="recipe-content">
+                    <p><strong>Aviso:</strong> Esta receita resulta em falha!</p>
+                    <p><strong>Sequência:</strong> <code>qualquer ingrediente → pum</code></p>
+                    <p><strong>Estado final:</strong> q_ruim</p>
+                    <p><strong>Resultado:</strong> Sabor: -100 (Falha automática)</p>
+                    <p><strong>Motivo:</strong> Sabor negativo é rejeitado pelo oráculo</p>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>💡 Dicas Estratégicas:</h4>
+                <ul>
+                    <li><strong>Ingredientes Poderosos:</strong> biz (+100 poder), lol (+40 poder), omg (+20 poder)</li>
+                    <li><strong>Ingredientes Saborosos:</strong> pip (+12 sabor), bur (+5 sabor e poder)</li>
+                    <li><strong>Evite pum:</strong> Causa -100 sabor (falha automática)</li>
+                    <li><strong>Máximo 10 ingredientes:</strong> Mais que isso = "muito misturado"</li>
+                    <li><strong>Para poção lendária:</strong> Foque em ingredientes poderosos</li>
+                    <li><strong>Estados importam:</strong> Observe as transições para entender o comportamento</li>
+                </ul>
+            </div>
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
     resetMealyScreen() {
-        // Resetar valores visuais
-        document.getElementById('sabor-value').textContent = '0';
-        document.getElementById('poder-value').textContent = '0';
-        document.getElementById('ingredient-count').textContent = '0';
-        document.getElementById('estado-value').textContent = 'q0';
-        
-        // Resetar input e label
-        document.getElementById('mealy-ingredient-input').value = '';
-        document.getElementById('mealy-ingredient-label').textContent = 'Insira o símbolo do primeiro ingrediente:';
-        
-        // Esconder botão de finalizar
-        document.getElementById('mealy-finish-btn').style.display = 'none';
-        
-        // Limpar log
-        const log = document.getElementById('mealy-log');
-        if (log) {
+        // Limpar campos de entrada da Máquina de Mealy
+        const mealyInput = document.getElementById('mealy-ingredient-input');
+        if (mealyInput) {
+            mealyInput.value = '';
+        }
+
+        // Limpar log da Máquina de Mealy
+        const mealyLog = document.getElementById('mealy-log');
+        if (mealyLog) {
             if (typeof Terminal !== 'undefined') {
-                Terminal.clear(log);
+                Terminal.clear(mealyLog);
             } else {
-                log.innerHTML = '';
+                mealyLog.innerHTML = '';
             }
         }
-        
-        // Resetar oráculo
-        const oraculo = document.getElementById('oraculo');
-        const speechBubble = document.getElementById('speech-bubble');
-        
-        if (oraculo) {
-            oraculo.className = 'oraculo';
+
+        // Limpar painel de estado
+        const statePanel = document.getElementById('mealy-state-panel');
+        if (statePanel) {
+            statePanel.innerHTML = '<h4>Estado Atual: Aguardando inicialização...</h4>';
         }
-        
-        if (speechBubble) {
-            speechBubble.style.display = 'none';
+
+        // Limpar painel de receitas
+        const recipesPanel = document.getElementById('mealy-recipes-panel');
+        if (recipesPanel) {
+            recipesPanel.innerHTML = '<h4>Receitas Sugeridas</h4><p>Inicie a máquina para ver receitas...</p>';
         }
-        
-        // Resetar cores das estatísticas
-        document.getElementById('sabor-value').className = 'color-cyan';
-        document.getElementById('poder-value').className = 'color-cyan';
     }
 
 }

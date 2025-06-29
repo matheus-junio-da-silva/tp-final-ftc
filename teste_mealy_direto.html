@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Direto - Máquina de Mealy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a0033;
+            color: #e6ccff;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .test-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            display: block;
+            width: 100%;
+        }
+        .test-button:hover {
+            background: #5a6fd8;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            font-family: monospace;
+            min-height: 300px;
+            overflow-y: auto;
+        }
+        .success { color: #2ecc71; }
+        .error { color: #e74c3c; }
+        .warning { color: #f1c40f; }
+        .info { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔮 Teste Direto - Máquina de Mealy</h1>
+        
+        <button class="test-button" onclick="testarMealy()">Testar Máquina de Mealy</button>
+        <button class="test-button" onclick="testarTransicoes()">Testar Transições</button>
+        <button class="test-button" onclick="testarReceitas()">Testar Receitas</button>
+        <button class="test-button" onclick="abrirAppCompleto()">Abrir Aplicação Completa</button>
+        
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <!-- Carregar scripts necessários -->
+    <script src="js/terminal.js"></script>
+    <script src="js/alfabeto.js"></script>
+    <script src="js/mealy.js"></script>
+    <script src="js/sound.js"></script>
+
+    <script>
+        function log(message, type = 'info') {
+            const resultado = document.getElementById('resultado');
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : type === 'info' ? 'info' : '';
+            resultado.innerHTML += `<div class="${className}">[${new Date().toLocaleTimeString()}] ${message}</div>`;
+            resultado.scrollTop = resultado.scrollHeight;
+        }
+
+        function testarMealy() {
+            log('🔮 Iniciando teste da Máquina de Mealy...', 'info');
+            
+            try {
+                // Dados dos ingredientes
+                const dadosIngredientes = `biz : biscoito de bruxa malvada
+bab : baba de camelo fedida
+nho : nhonho de gato persa
+pip : pipoca magica explosiva
+pum : pum de dragao fedorento
+bur : buraco negro comestivel
+pix : pixie dust colorido
+zap : zapzap eletrico infinito
+sos : sossega leao instantaneo
+lol : lolzinho magico hilario
+p   : petalas
+a   : agua
+o   : oleo
+omg : oh my god concentrado`;
+
+                const dadosReacoes = `a  : apimentada
+s  : salgada demais
+mor: mortífera`;
+
+                // Criar alfabeto
+                if (typeof Alfabeto === 'undefined') {
+                    log('❌ Classe Alfabeto não foi carregada', 'error');
+                    return;
+                }
+
+                const alfabeto = new Alfabeto(dadosIngredientes, dadosReacoes);
+                log('✅ Alfabeto criado com sucesso', 'success');
+
+                // Criar máquina de Mealy
+                if (typeof Mealy === 'undefined') {
+                    log('❌ Classe Mealy não foi carregada', 'error');
+                    return;
+                }
+
+                const mealy = new Mealy();
+                log('✅ Máquina de Mealy criada', 'success');
+
+                // Testar método run
+                mealy.run(alfabeto);
+                log('✅ Método run executado', 'success');
+
+                // Testar adição de ingredientes
+                const testePip = mealy.adicionarIngrediente('pip', alfabeto);
+                log(`Teste ingrediente 'pip': ${testePip ? 'PASSOU' : 'FALHOU'}`, testePip ? 'success' : 'error');
+
+                const testeBab = mealy.adicionarIngrediente('bab', alfabeto);
+                log(`Teste ingrediente 'bab': ${testeBab ? 'PASSOU' : 'FALHOU'}`, testeBab ? 'success' : 'error');
+
+                // Testar ingrediente inválido
+                const testeInvalido = mealy.adicionarIngrediente('xyz', alfabeto);
+                log(`Teste ingrediente inválido 'xyz': ${!testeInvalido ? 'PASSOU' : 'FALHOU'}`, !testeInvalido ? 'success' : 'error');
+
+                // Testar avaliação final
+                const avaliacao = mealy.avaliarPocao();
+                log(`Avaliação final: ${avaliacao ? 'Sucesso' : 'Erro'}`, avaliacao ? 'success' : 'warning');
+
+                log('🎉 Teste da Máquina de Mealy concluído!', 'success');
+
+            } catch (error) {
+                log(`❌ Erro durante o teste: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        function testarTransicoes() {
+            log('🔄 Testando transições de estado...', 'info');
+            
+            try {
+                const dadosIngredientes = `pip : pipoca magica explosiva
+bab : baba de camelo fedida
+pum : pum de dragao fedorento`;
+
+                const dadosReacoes = `a  : apimentada
+s  : salgada demais
+mor: mortífera`;
+
+                const alfabeto = new Alfabeto(dadosIngredientes, dadosReacoes);
+                const mealy = new Mealy();
+                
+                mealy.run(alfabeto);
+                
+                log(`Estado inicial: ${mealy.estadoAtual}`, 'info');
+                
+                // Sequência de ingredientes para testar transições
+                const ingredientes = ['pip', 'bab', 'pip'];
+                
+                ingredientes.forEach((ing, index) => {
+                    const estadoAntes = mealy.estadoAtual;
+                    const sucesso = mealy.adicionarIngrediente(ing, alfabeto);
+                    const estadoDepois = mealy.estadoAtual;
+                    
+                    log(`${index + 1}. ${ing}: ${estadoAntes} → ${estadoDepois} (${sucesso ? 'OK' : 'ERRO'})`, 
+                        sucesso ? 'success' : 'error');
+                });
+                
+                const avaliacao = mealy.avaliarPocao();
+                log(`Resultado final: ${avaliacao}`, 'info');
+                
+            } catch (error) {
+                log(`❌ Erro no teste de transições: ${error.message}`, 'error');
+            }
+        }
+
+        function testarReceitas() {
+            log('📋 Testando receitas sugeridas...', 'info');
+            
+            try {
+                const mealy = new Mealy();
+                
+                if (typeof mealy.getReceitas === 'function') {
+                    const receitas = mealy.getReceitas();
+                    log(`✅ Método getReceitas existe`, 'success');
+                    log(`📋 Receitas encontradas: ${receitas.length}`, 'info');
+                    
+                    receitas.forEach((receita, index) => {
+                        log(`${index + 1}. ${receita}`, 'info');
+                    });
+                } else {
+                    log('⚠️ Método getReceitas não encontrado', 'warning');
+                }
+                
+                if (typeof mealy.getEstados === 'function') {
+                    const estados = mealy.getEstados();
+                    log(`✅ Método getEstados existe`, 'success');
+                    log(`🎯 Estados: ${Object.keys(estados).join(', ')}`, 'info');
+                } else {
+                    log('⚠️ Método getEstados não encontrado', 'warning');
+                }
+                
+            } catch (error) {
+                log(`❌ Erro no teste de receitas: ${error.message}`, 'error');
+            }
+        }
+
+        function abrirAppCompleto() {
+            log('🚀 Abrindo aplicação completa...', 'info');
+            window.open('index.html', '_blank');
+        }
+
+        // Teste inicial automático ao carregar
+        window.onload = () => {
+            log('🧪 Sistema de Teste Direto da Máquina de Mealy', 'success');
+            log('📋 Clique nos botões para executar os testes', 'info');
+            
+            // Verificar se as dependências foram carregadas
+            setTimeout(() => {
+                log('🔍 Verificando dependências...', 'info');
+                
+                const dependencias = [
+                    { nome: 'Terminal', disponivel: typeof Terminal !== 'undefined' },
+                    { nome: 'Alfabeto', disponivel: typeof Alfabeto !== 'undefined' },
+                    { nome: 'Mealy', disponivel: typeof Mealy !== 'undefined' }
+                ];
+                
+                dependencias.forEach(dep => {
+                    log(`${dep.nome}: ${dep.disponivel ? '✅ Carregado' : '❌ Não carregado'}`, 
+                        dep.disponivel ? 'success' : 'error');
+                });
+                
+                const todasCarregadas = dependencias.every(dep => dep.disponivel);
+                if (todasCarregadas) {
+                    log('🎉 Todas as dependências foram carregadas com sucesso!', 'success');
+                } else {
+                    log('⚠️ Algumas dependências não foram carregadas', 'warning');
+                }
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
