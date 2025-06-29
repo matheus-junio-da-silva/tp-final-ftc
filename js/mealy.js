@@ -1,8 +1,3 @@
-/**
- * Mealy functions - JavaScript equivalent of mealy.py
- * Handles Mealy machine functionality with crow evaluator
- */
-
 // Realização dinâmica de uma máquina de Mealy
 class Mealy {
     constructor() {
