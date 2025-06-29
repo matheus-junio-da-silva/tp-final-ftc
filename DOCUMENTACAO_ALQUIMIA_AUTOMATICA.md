@@ -594,7 +594,6 @@ executar.bat        # Para Command Prompt
 executar.ps1        # Para PowerShell
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura13.png?raw=true)
 **Figura 13:** Execução do arquivo batch - Terminal mostrando o processo de inicialização
 
 Estes scripts automatizam todo o processo:
