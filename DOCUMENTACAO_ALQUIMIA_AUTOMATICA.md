@@ -1,24 +1,24 @@
----
+
 
 ## 📋 Capa
 
-<div align="center">
+
 
 # UNIVERSIDADE FEDERAL DE MINAS GERAIS
 ## INSTITUTO DE CIÊNCIAS EXATAS
 ### DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO
 
-<br><br>
+
 
 # 🧙‍♂️ ALQUIMIA AUTOMÁTICA
 ## Simulador de Poções com Autômatos
 
-<br>
+
 
 **Trabalho Prático Final**  
 **Disciplina:** Fundamentos Teóricos da Computação  
 
-<br><br>
+
 
 ### 👥 INTEGRANTES DO GRUPO:
 
@@ -28,14 +28,14 @@
 **Lucas** - Nome Completo e Matrícula: [A ser preenchidos]  
 **Armindo** - Nome Completo e Matrícula: [A ser preenchidos]  
 
-<br><br>
+
 
 **Florestal**  
 **2º Semestre de 2025**
 
-<br><br>
 
-</div>
+
+
 
 ---
 
@@ -97,8 +97,11 @@ O principal objetivo deste trabalho é implementar um simulador completo que dem
 5. **Implementar uma máquina de Turing** para demonstrar computação mais complexa
 6. **Proporcionar uma experiência de usuário rica** com elementos visuais, sonoros e narrativos que tornam o aprendizado mais engajante
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura1.png?raw=true)
-**Figura 1:** Portal de entrada para o reino da Alquimia Automática - Uma interface mágica que convida o usuário a explorar o mundo dos autômatos através de uma experiência visual envolvente
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/visao_geral/alquimia_automatica_comecar_aventura.png?raw=true)
+**Figura 1:** Portal de entrada para o reino da Alquimia Automática - Tela inicial convidativa com o título majestoso e o botão "Começar Aventura" que transporta o usuário para o mundo mágico dos autômatos
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/visao_geral/tela_inicial_4_opcoes.png?raw=true)
+**Figura 2:** Menu Principal dos Autômatos - Interface principal mostrando as quatro máquinas místicas disponíveis: Autômatos Determinísticos, Oráculo de Mealy, Sequências de Moore e Receitas Ancestrais de Turing
 
 ### Contexto Narrativo
 
@@ -138,7 +141,8 @@ O projeto foi desenvolvido como uma aplicação web completa, utilizando tecnolo
     ├── 📄 ingrediente.mp3
     └── 📄 [outros sons].mp3
 ```
-**Figura 2:** Diagrama da arquitetura do sistema - Mostra como os diferentes módulos interagem entre si
+```
+**Figura 3:** Diagrama da arquitetura do sistema - Mostra como os diferentes módulos interagem entre si para criar a experiência alquímica completa
 
 ### Componentes Principais
 
@@ -165,11 +169,48 @@ Nosso laboratório alquímico abriga quatro tipos distintos de máquinas computa
 
 ### 5.1. ⚙️ Autômatos Determinísticos
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura3.png?raw=true)
-**Figura 3:** Caldeirão dos Autômatos Determinísticos - Interface principal onde as receitas clássicas ganham vida através de transições de estado precisas e determinísticas
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/tela_escolher_receita.png?raw=true)
+**Figura 4:** Portal de Escolha de Receitas - Interface de seleção onde o alquimista pode escolher entre diferentes tipos de poções, cada uma implementando um autômato específico (AFD ou APD)
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura4.jpg?raw=true)
-**Figura 4:** Seleção de Receitas Mágicas - Catálogo completo de poções disponíveis, cada uma representando um autômato diferente com suas próprias regras e sequências específicas
+#### 🧪 Exemplos Práticos de AFD - Poção da Sabedoria
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/tela_inicial.png?raw=true)
+**Figura 5:** Interface AFD Ativa - Caldeirão dos autômatos determinísticos em funcionamento, mostrando o terminal de log e a área de interação para criação de poções
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pocao_sabedoria_escolhida.png?raw=true)
+**Figura 6:** Receita da Sabedoria Selecionada - Visualização da receita AFD carregada, com informações sobre os ingredientes necessários e a sequência de estados
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/parte_dos_ingredientes.png?raw=true)
+**Figura 7:** Catálogo de Ingredientes AFD - Grade visual dos ingredientes disponíveis para a criação da Poção da Sabedoria, cada símbolo representando um elemento mágico específico
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pedaco_da_receita.png?raw=true)
+**Figura 8:** Fragmento da Receita Mágica - Visualização detalhada do pergaminho contendo as instruções específicas da Poção da Sabedoria
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pocao_sabedoria_transicao_final.png?raw=true)
+**Figura 9:** Transições Finais da Poção - Log detalhado mostrando as últimas transições de estado durante a criação bem-sucedida da Poção da Sabedoria
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pocao_sabedoria_criada_tela_sucesso.png?raw=true)
+**Figura 10:** Sucesso Alquímico AFD - Tela de conclusão celebrando a criação bem-sucedida da Poção da Sabedoria através do autômato finito determinístico
+
+#### 🔄 Exemplos Práticos de APD - Receita Complexa
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/tela_inicial.png?raw=true)
+**Figura 11:** Interface APD Ativa - Caldeirão configurado para autômatos de pilha determinísticos, com sistema de empilhamento e controle de contexto avançado
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/receita_apd_escolhida.png?raw=true)
+**Figura 12:** Receita APD Selecionada - Visualização de uma receita complexa que utiliza pilha para controle de estruturas aninhadas e validação de sequências
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/parte_dos_ingredientes.png?raw=true)
+**Figura 13:** Ingredientes para APD - Grade de símbolos específicos para receitas de autômatos de pilha, incluindo marcadores de estrutura e elementos de controle
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/pedaco_da_receita.png?raw=true)
+**Figura 14:** Pergaminho APD - Documento detalhado da receita que utiliza pilha determinística, mostrando a complexidade das transições e empilhamentos
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/pocao_apd_transicoes_finais.png?raw=true)
+**Figura 15:** Log de Transições APD - Histórico detalhado das operações de pilha durante a execução da receita complexa, mostrando empilhamentos e desempilhamentos
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/pocao_apd_criada_tela_sucesso.png?raw=true)
+**Figura 16:** Sucesso Alquímico APD - Celebração da criação bem-sucedida de uma poção complexa utilizando autômato de pilha determinístico
 
 Os Autômatos Determinísticos são o coração das receitas tradicionais em nosso laboratório. Implementamos tanto **AFDs (Autômatos Finitos Determinísticos)** quanto **APDs (Autômatos de Pilha Determinísticos)**, cada um adequado para diferentes níveis de complexidade alquímica.
 
@@ -195,20 +236,22 @@ Os Autômatos Determinísticos são o coração das receitas tradicionais em nos
 | `pocao_ciclica` | AFD | Poção que retorna ao estado inicial |
 | `receitaAPD` | APD | Receita complexa com pilha de contexto |
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura5.png?raw=true)
-**Figura 5:** Processo de Criação de Poção - Caldeirão ativo mostrando a adição de ingredientes em tempo real, com feedback visual e log detalhado das transições de estado
+
 
 ### 5.2. 🔮 Máquina de Mealy - Oráculo Místico
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura28.png?raw=true)
-**Figura 28:** Interface Renovada do Oráculo Místico - A Máquina de Mealy em sua forma mais avançada, com oráculo pensativo pronto para avaliar poções e fornecer feedback baseado em estados formais
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/visaogeral.png?raw=true)
+**Figura 17:** Interface Renovada do Oráculo Místico - A Máquina de Mealy em sua forma mais avançada, com oráculo pensativo pronto para avaliar poções e fornecer feedback baseado em estados formais
 
 Nossa implementação da Máquina de Mealy é representada pelo **Oráculo Místico**, uma entidade mágica que avalia poções através de estados formais e reações específicas. Esta é uma implementação academicamente correta e completa de uma Máquina de Mealy, onde as saídas dependem tanto do estado atual quanto da entrada recebida.
 
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/quatro_botoes_disponiveis_ver_maquina_ver_etc.png?raw=true)
+**Figura 18:** Botões Informativos Completos - Interface com os quatro botões essenciais: Ver Máquina, Ver Efeitos, Ver Alfabeto e Ver Receitas, proporcionando acesso completo à definição formal
+
 #### Interface Informativa Completa:
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura29.png?raw=true)
-**Figura 29:** Botão "Ver Máquina" Ativo - Exibição da definição formal completa da Máquina de Mealy com estados, alfabeto, função de transição e função de saída detalhadas
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/informacao_da_maquina.png?raw=true)
+**Figura 19:** Definição Formal da Máquina de Mealy - Exibição completa da estrutura formal com estados Q, alfabeto Σ, função de transição δ, função de saída λ e estado inicial q₀, destacando o estado atual em tempo real
 
 **Botões Informativos Implementados:**
 
@@ -219,8 +262,8 @@ Nossa implementação da Máquina de Mealy é representada pelo **Oráculo Míst
    - Destaque do estado atual em tempo real
    - Explicação da função de saída
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura30.png?raw=true)
-**Figura 30:** Tabela Completa de Efeitos - Visualização detalhada de todos os 14 ingredientes disponíveis com seus efeitos específicos de sabor e poder, organizados em formato acadêmico
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/efeito_dos_ingredientes.png?raw=true)
+**Figura 20:** Tabela Completa de Efeitos - Visualização detalhada de todos os 14 ingredientes disponíveis com seus efeitos específicos de sabor e poder, organizados em formato acadêmico e interativo
 
 2. **⚗️ Ver Efeitos:**
    - Tabela completa com todos os 14 ingredientes
@@ -228,17 +271,52 @@ Nossa implementação da Máquina de Mealy é representada pelo **Oráculo Míst
    - Valores precisos de sabor e poder
    - Formatação visual clara com sinais +/-
 
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/alfabeto.png?raw=true)
+**Figura 21:** Alfabeto Mágico Interativo - Grid organizado dos 14 símbolos aceitos pela máquina, com correspondência visual clara entre símbolos e ingredientes alquímicos
+
 3. **🔤 Ver Alfabeto:**
    - Grid interativo dos símbolos aceitos
    - Correspondência com ingredientes reais
    - Visual organizado e responsivo
    - Hover effects para melhor experiência
 
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/receitas.png?raw=true)
+**Figura 22:** Catálogo de Receitas Sugeridas - Exemplos estratégicos de combinações recomendadas para diferentes tipos de resultado, guiando o alquimista na exploração dos estados
+
 4. **📜 Ver Receitas:**
    - Exemplos de combinações recomendadas
    - Estratégias para diferentes tipos de resultado
    - Guia de como explorar os estados
 
+#### 🧪 Exemplo Prático de Execução - Poção Lendária
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/receita_pocao_lendaria.png?raw=true)
+**Figura 23:** Receita da Poção Lendária - Demonstração de uma sequência específica de ingredientes que resulta em uma poção de poder extraordinário (≥400 pontos)
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/visao_geral_de_onde_fica_as_transicoes.png?raw=true)
+**Figura 24:** Área de Transições do Oráculo - Visualização da região onde aparecem as descrições narrativas e mudanças de estado durante a avaliação da poção
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/todas_transicoes_pocao_lendaria.png?raw=true)
+**Figura 25:** Log Completo de Transições - Histórico detalhado mostrando cada ingrediente adicionado, estado visitado e efeito gerado durante a criação da poção lendária
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/oraculo_dizendo_interessante_escolha.png?raw=true)
+**Figura 26:** Reação do Oráculo - Feedback narrativo específico do oráculo comentando sobre a escolha interessante de ingredientes durante o processo alquímico
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/oraculo_avaliando_pocao.png?raw=true)
+**Figura 27:** Processo de Avaliação - Oráculo místico analisando a poção criada, preparando-se para dar o veredito final baseado nas estatísticas acumuladas
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/sucesso_pocao_avaliada_aprovada.png?raw=true)
+**Figura 28:** Veredito Final de Sucesso - Resultado positivo da avaliação, mostrando uma poção aprovada pelo oráculo com todas as estatísticas finais exibidas
+
+#### Estados Formais da Máquina:
+
+```
+Q = {q0, q_poderoso, q_saboroso, q_ruim, q_mortal, q_neutro}
+
+q0 - Estado Inicial: Poção vazia, primeiro ingrediente define direção
+q_poderoso - Ingredientes mágicos (biz, lol, omg) aumentam poder drasticamente  
+q_saboroso - Ingredientes gastronômicos (pip, bur, pix) melhoram sabor
+q_ruim - Ingredientes prejudiciais (pum) degradam a qualidade
 #### Estados Formais da Máquina:
 
 ```
@@ -251,9 +329,6 @@ q_ruim - Ingredientes prejudiciais (pum) degradam a qualidade
 q_mortal - Ingredientes perigosos (sos) criam poções mortais
 q_neutro - Ingredientes básicos (a, o) mantêm equilíbrio
 ```
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura31.png?raw=true)
-**Figura 31:** Oráculo Avaliando Poção - Processo final de avaliação mostrando o histórico completo de transições, estados visitados e o veredito final baseado nas estatísticas acumuladas
 
 #### Características Únicas da Implementação:
 
@@ -270,15 +345,15 @@ q_neutro - Ingredientes básicos (a, o) mantêm equilíbrio
 🌟 Lendária: Poder ≥ 400 (oráculo absorve a poção!)
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura27.png?raw=true)
-**Figura 27:** Avaliação Final do Oráculo - Diferentes tipos de resultado baseados nas estatísticas finais, demonstrando a versatilidade da máquina de Mealy na geração de saídas contextuais
-
 ### 5.3. 🌊 Máquina de Moore - Sequências Mágicas
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura7.png?raw=true)
-**Figura 7:** Interface da Máquina de Moore - Demonstração do processamento baseado exclusivamente em estados, onde cada estado possui uma saída específica independente da entrada
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/visaogeral.png?raw=true)
+**Figura 29:** Interface da Máquina de Moore - Demonstração do processamento baseado exclusivamente em estados, onde cada estado possui uma saída específica independente da entrada
 
 A Máquina de Moore em nosso laboratório é especializada em **sequências mágicas específicas**. Diferentemente da Máquina de Mealy, aqui as saídas dependem apenas do estado atual, não da entrada que causou a transição.
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/quatro_botoes_disponiveis_ver_maquina_ver_etc.png?raw=true)
+**Figura 30:** Botões Informativos da Moore - Interface completa com acesso às informações técnicas: Ver Máquina, Ver Efeitos, Ver Alfabeto e Ver Receitas
 
 #### Implementação Específica:
 
@@ -296,8 +371,31 @@ biz → bab → nho → pip → pum → bur → pix → zap → sos → lol → 
 - **...**
 - **S14:** ✨ POÇÃO MÁGICA COMPLETADA! Luz dourada irradia!
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura32.png?raw=true)
-**Figura 32:** Máquina de Moore em Ação - Visualização dos estados sequenciais e suas saídas correspondentes, demonstrando como cada estado produz uma reação visual específica no caldeirão
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/informacao_da_maquina.png?raw=true)
+**Figura 31:** Definição Formal da Moore - Visualização da estrutura formal da máquina mostrando estados, alfabeto e função de saída baseada exclusivamente em estados
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/alfabeto.png?raw=true)
+**Figura 32:** Alfabeto da Máquina de Moore - Grid dos 14 símbolos aceitos na sequência específica para completar a poção mágica sequencial
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/efeito_dos_ingredientes.png?raw=true)
+**Figura 33:** Efeitos dos Ingredientes Moore - Tabela detalhada mostrando os efeitos específicos de cada ingrediente na sequência mágica determinística
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/receitas.png?raw=true)
+**Figura 34:** Receitas da Moore - Guia estratégico para criar a sequência correta e completar com sucesso a poção sequencial mágica
+
+#### 🧪 Exemplo Prático de Execução
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/receita_utilizada_maquina_moore.png?raw=true)
+**Figura 35:** Receita Específica da Moore - Visualização da receita carregada mostrando a sequência exata de 14 ingredientes necessária para completar a poção
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/visao_geral_de_onde_fica_as_transicoes.png?raw=true)
+**Figura 36:** Área de Transições Moore - Localização onde aparecem as saídas específicas de cada estado durante o progresso da sequência mágica
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/transicoes.png?raw=true)
+**Figura 37:** Log de Estados Moore - Histórico das transições mostrando como cada ingrediente leva a um estado específico com sua saída correspondente
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/moore/pocao_completada.png?raw=true)
+**Figura 38:** Poção Moore Completada - Tela de sucesso celebrando a conclusão da sequência mágica de 14 ingredientes com a criação da poção sequencial
 
 #### Características da Moore:
 
@@ -315,8 +413,8 @@ biz → bab → nho → pip → pum → bur → pix → zap → sos → lol → 
 
 ### 5.4. 📜 Máquina de Turing - Receitas Ancestrais
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura8.png?raw=true)
-**Figura 8:** Máquina de Turing Ancestral - Visualização da fita infinita e do cabeçote de leitura/escrita para receitas especiais, demonstrando o poder computacional completo
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/tela_inicial_turing.png?raw=true)
+**Figura 39:** Máquina de Turing Ancestral - Interface inicial da máquina mais poderosa do laboratório, mostrando a fita infinita e o cabeçote de leitura/escrita para receitas especiais
 
 Nossa implementação da Máquina de Turing é dedicada a uma receita especial e ancestral: **a criação de bolo mágico!** Esta máquina demonstra o poder computacional completo através de uma fita infinita e operações de leitura/escrita.
 
@@ -328,14 +426,17 @@ Nossa implementação da Máquina de Turing é dedicada a uma receita especial e
 - Movimentação visualizada com animações suaves
 - Células expandem conforme a entrada
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura9.png?raw=true)
-**Figura 9:** Execução da Máquina de Turing - Fita sendo processada passo a passo, mostrando a adição de ingredientes e o movimento do cabeçote através dos estados da receita de bolo
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/alfabeto.png?raw=true)
+**Figura 40:** Alfabeto da Máquina de Turing - Símbolos específicos aceitos para a receita ancestral de bolo: f (farinha), o (ovo), a (açúcar), l (leite), c, e
 
 **Alfabeto Específico para Bolo:**
 ```
 Ingredientes aceitos: f, o, a, l, c, e
 Receita válida exemplo: "foal" (farinha, ovo, açúcar, leite)
 ```
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/maquina.png?raw=true)
+**Figura 41:** Estrutura da Máquina de Turing - Visualização da definição formal completa mostrando estados, transições, movimentos do cabeçote e operações de leitura/escrita
 
 **Estados e Transições:**
 ```
@@ -346,150 +447,17 @@ ing3 → ing4 | l, _ / _     # Aceita leite
 ing4 → F    | a, _ / _     # Estado final (opcional: açúcar extra)
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura23.png?raw=true)
-**Figura 23:** Interface Completa da Máquina de Turing - Controles de entrada, fita visual dinâmica e área de logging para acompanhar o processamento da receita ancestral de bolo
+#### 🧪 Exemplo Prático de Execução
 
-🔮 **Conjunto de Estados (Q):** O oráculo possui 6 estados místicos distintos:
-- **q0:** Estado Inicial - A poção está vazia, o oráculo aguarda o primeiro ingrediente
-- **q_poderoso:** Estado dos Artefatos Mágicos - Ingredientes de grande poder foram adicionados
-- **q_saboroso:** Estado da Harmonia Gastronômica - A poção está desenvolvendo sabores agradáveis
-- **q_ruim:** Estado da Degradação - Ingredientes prejudiciais corromperam a mistura
-- **q_mortal:** Estado do Perigo - Elementos perigosos ameaçam a estabilidade da poção
-- **q_neutro:** Estado da Neutralidade - Ingredientes básicos mantêm o equilíbrio
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/palavra_correta_antes_de_finalizar.png?raw=true)
+**Figura 42:** Entrada Correta Processada - Visualização da fita com uma sequência válida ("foal") sendo processada, mostrando o cabeçote posicionado antes da finalização
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura22.png?raw=true)
-**Figura 22:** Botões informativos da Máquina de Mealy - Interface aprimorada com acesso às informações técnicas
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/transicoes_da_pocao_depois_de_finalizada.png?raw=true)
+**Figura 43:** Log de Transições Turing - Histórico detalhado das transições de estado, movimentos do cabeçote e operações realizadas durante o processamento da receita
 
-🔤 **Alfabeto Místico (Σ):** O oráculo reconhece 14 símbolos mágicos:
-```
-biz, bab, nho, pip, pum, bur, pix, zap, sos, lol, p, a, o, omg
-```
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/finalizada_pocao.png?raw=true)
+**Figura 44:** Bolo Mágico Finalizado - Tela de sucesso celebrando a criação bem-sucedida do bolo através da máquina de Turing, demonstrando o poder computacional completo
 
-Cada símbolo representa um ingrediente único com propriedades alquímicas específicas, desde artefatos lendários como `biz` até elementos básicos como `a` (água).
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura23.png?raw=true)
-**Figura 23:** Visualização do alfabeto mágico - Grid interativo mostrando todos os símbolos aceitos
-
-#### Características da Implementação Aprimorada:
-
-**Sistema de Estados Inteligente:**
-A função de transição (Δ) do oráculo categoriza ingredientes por suas propriedades:
-- **Ingredientes Poderosos:** `biz`, `lol`, `omg` → levam ao estado `q_poderoso`
-- **Ingredientes Saborosos:** `pip`, `bur`, `pix`, `zap`, `p` → levam ao estado `q_saboroso`
-- **Ingredientes Prejudiciais:** `pum` → leva ao estado `q_ruim`
-- **Ingredientes Mortais:** `sos` → leva ao estado `q_mortal`
-- **Ingredientes Neutros:** `nho`, `bab`, `a`, `o` → levam ao estado `q_neutro`
-
-**Sistema de Pontuação Dual:**
-- **Sabor:** Representa o quão saborosa a poção está (-100 a +40)
-- **Poder:** Indica a potência mágica da poção (0 a +400)
-- **Estado Atual:** Visualização em tempo real do estado da máquina
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura24.png?raw=true)
-**Figura 24:** Interface de estatísticas expandida - Mostra sabor, poder, ingredientes e estado atual
-
-**Função de Saída Mágica (λ):**
-Cada combinação de estado + entrada produz uma saída única contendo:
-1. **Descrição Narrativa:** Texto imersivo descrevendo o efeito do ingrediente
-2. **Modificação de Sabor:** Valor numérico (-100 a +12)
-3. **Modificação de Poder:** Valor numérico (0 a +100)
-4. **Transição de Estado:** Mudança visual do estado da máquina
-
-**Exemplo de Reação Alquímica:**
-```
-Entrada: biz (no estado q0)
-Saída: "um dos artefatos mais poderosos do seu inventario foi colocado na pocao. 
-        O nivel de poder da pocao cresceu muito!!!" |Sabor: +0|Poder: +100|
-Transição: q0 → q_poderoso
-```
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura25.png?raw=true)
-**Figura 25:** Log detalhado de transições - Histórico completo mostrando estados, ingredientes e efeitos
-
-#### Funcionalidades Especiais Implementadas:
-
-1. **Visualização da Definição Formal:** Botão "Ver Máquina" exibe a estrutura completa da máquina de Mealy
-2. **Tabela de Efeitos Completa:** Botão "Ver Efeitos" mostra todos os ingredientes e seus efeitos
-3. **Alfabeto Interativo:** Botão "Ver Alfabeto" apresenta todos os símbolos aceitos
-4. **Feedback Narrativo:** Cada ingrediente gera uma descrição única e divertida
-5. **Efeitos Sonoros:** O oráculo emite sons diferentes para ingredientes bons e ruins
-6. **Animações Visuais:** Bolhas de fala aparecem com as avaliações
-7. **Histórico de Transições:** Log completo com todas as mudanças de estado
-8. **Sistema de Ranking:** Pontuação final determina a qualidade da poção
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura26.png?raw=true)
-**Figura 26:** Definição formal visualizada - Tela mostrando estados, alfabeto e função de saída
-
-#### Conceito de Aceitação na Máquina de Mealy:
-
-**❓ Questão Importante:** *"Qualquer estado é um estado final? A máquina sempre aceita?"*
-
-**🔮 Resposta do Oráculo:** Em uma Máquina de Mealy tradicional, **NÃO existe o conceito de estados finais ou de aceitação/rejeição**. Isso é uma diferença fundamental entre Máquinas de Mealy e Autômatos Finitos:
-
-- **Autômatos Finitos (AFD/AFN):** Têm estados finais e decidem se uma palavra é aceita ou rejeitada
-- **Máquinas de Mealy:** São **transdutores** - transformam sequências de entrada em sequências de saída
-
-**Em nossa implementação alquímica:**
-- O oráculo **sempre produz uma saída** para cada ingrediente válido
-- **Não há rejeição** - apenas diferentes tipos de reações mágicas
-- A "qualidade" da poção é determinada pela **avaliação final** do oráculo, não por aceitação/rejeição
-- Todos os estados são "válidos" - representam diferentes aspectos da criação alquímica
-
-**Critérios de Avaliação Final:**
-```
-✅ Sucesso: Sabor ≥ 0 AND Ingredientes ≤ 10 AND (Poder < 400 OR Poder ≥ 400)
-❌ Falha: Sabor < 0 OR Ingredientes > 10
-🌟 Lendária: Poder ≥ 400 (o oráculo absorve a poção!)
-```
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura27.png?raw=true)
-**Figura 27:** Avaliação final do oráculo - Diferentes tipos de resultado baseados nas estatísticas finais
-
-### 4.3. Máquina de Moore
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura7.png?raw=true)
-**Figura 7:** Interface da Máquina de Moore - Demonstra o processamento baseado em estados
-
-A Máquina de Moore complementa nosso arsenal de autômatos, fornecendo saídas baseadas exclusivamente no estado atual, independentemente da entrada que causou a transição.
-
-#### Implementação Específica:
-
-**Processamento por Estados:**
-- Cada estado possui uma saída específica
-- Transições alteram o estado, mas a saída depende apenas do estado resultante
-- Ideal para processos onde a saída representa o "estado atual" do sistema
-
-### 4.4. Máquina de Turing
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura8.png?raw=true)
-**Figura 8:** Máquina de Turing - Visualização da fita e do cabeçote de leitura/escrita
-
-Nossa implementação da Máquina de Turing é dedicada a uma receita especial: a criação de bolo! Esta máquina demonstra o poder computacional completo através de uma fita infinita e operações de leitura/escrita.
-
-#### Características da Implementação:
-
-**Fita Visual:**
-- Representação gráfica da fita com células individuais
-- Cabeçote de leitura/escrita destacado
-- Movimentação visualizada em tempo real
-
-**Alfabeto Específico:**
-```
-Ingredientes aceitos: f, o, a, l, c, e
-Sequência válida exemplo: "foal" (farinha, ovo, açúcar, leite)
-```
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura9.png?raw=true)
-**Figura 9:** Execução da Máquina de Turing - Mostra a fita sendo processada passo a passo
-
-**Estados e Transições:**
-```
-I -> ing1    | f, _ / _     # Aceita farinha
-ing1 -> ing2 | o, _ / _     # Aceita ovo
-ing2 -> ing3 | a, _ / _     # Aceita açúcar
-ing3 -> ing4 | l, _ / _     # Aceita leite
-ing4 -> F    | a, _ / _     # Estado final
-```
 
 ---
 
@@ -502,7 +470,7 @@ ing4 -> F    | a, _ / _     # Estado final
 Nosso laboratório possui um alfabeto rico e encantador de ingredientes, cada um com propriedades únicas e descrições cativantes que tornam a experiência verdadeiramente imersiva:
 
 ![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura10.png?raw=true)
-**Figura 10:** Grimório de Ingredientes - Catálogo visual completo dos ingredientes disponíveis, cada um com sua descrição mágica e propriedades alquímicas específicas
+**Figura 45:** Grimório de Ingredientes - Catálogo visual completo dos ingredientes disponíveis, cada um com sua descrição mágica e propriedades alquímicas específicas
 
 #### 🌟 Ingredientes Primordiais:
 
@@ -526,7 +494,7 @@ Nosso laboratório possui um alfabeto rico e encantador de ingredientes, cada um
 #### 🎨 Sistema de Categorias Mágicas
 
 ![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura11.png?raw=true)
-**Figura 11:** Mapa de Efeitos Alquímicos - Visualização das diferentes categorias de ingredientes e como cada uma influencia o comportamento dos autômatos de forma única
+**Figura 46:** Mapa de Efeitos Alquímicos - Visualização das diferentes categorias de ingredientes e como cada uma influencia o comportamento dos autômatos de forma única
 
 Nossos ingredientes são classificados em categorias que afetam diretamente os estados das máquinas:
 
@@ -559,8 +527,8 @@ Nossos ingredientes são classificados em categorias que afetam diretamente os e
 
 O sistema de ingredientes não é meramente decorativo - implementa uma lógica sofisticada que governa todo o comportamento dos autômatos:
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura33.png?raw=true)
-**Figura 33:** Diagrama de Interações - Como ingredientes influenciam transições de estado e geram saídas específicas em cada tipo de máquina
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura12.png?raw=true)
+**Figura 47:** Diagrama de Interações - Como ingredientes influenciam transições de estado e geram saídas específicas em cada tipo de máquina, demonstrando a lógica alquímica avançada
 
 #### 🎯 Mecânicas Fundamentais:
 
@@ -692,7 +660,7 @@ php -S localhost:8000
 
 ### 🎭 Fluxo Principal de Navegação
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura16.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/visao_geral/alquimia_automatica_comecar_aventura.png?raw=true)
 **Figura 16:** Portal de Entrada - A majestosa tela de título que recebe o alquimista com logo cintilante e efeitos de partículas mágicas em movimento
 
 #### 1. 🏰 Tela Inicial - O Portal Mágico
@@ -706,7 +674,7 @@ Ao acessar nosso laboratório virtual, você é recebido pela grandiosa tela de 
 
 #### 2. 🗺️ Menu Principal - Escolha Sua Magia
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura17.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/visao_geral/tela_inicial_4_opcoes.png?raw=true)
 **Figura 17:** Torre de Seleção - Menu principal oferecendo quatro caminhos mágicos diferentes, cada um levando a um tipo específico de autômato
 
 O menu central oferece cinco caminhos distintos de exploração:
@@ -719,7 +687,7 @@ O menu central oferece cinco caminhos distintos de exploração:
 
 ### 🧪 Criando Poções com Autômatos Determinísticos
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura18.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/tela_escolher_receita.png?raw=true)
 **Figura 18:** Biblioteca de Receitas - Interface elegante para escolha de receitas, mostrando tanto entrada manual quanto seleção visual de poções pré-configuradas
 
 #### Passo 1: 📚 Escolha da Receita Mágica
@@ -728,37 +696,50 @@ O menu central oferece cinco caminhos distintos de exploração:
 - **🎭 Seleção Visual:** Clique em uma das receitas pré-configuradas no grid
 - **✅ Validação Automática:** O sistema verifica se a receita existe e pode ser carregada
 
-#### Passo 2: ⚗️ Processo de Criação Alquímica
+#### 🔮 Exemplo Completo: Poção da Sabedoria (AFD)
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura19.png?raw=true)
-**Figura 19:** Caldeirão em Ação - Interface principal de criação mostrando o caldeirão borbulhante, área de entrada de ingredientes e log detalhado de atividades
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/tela_inicial.png?raw=true)
+**Figura 19:** AFD - Tela Inicial da Poção da Sabedoria - Interface de criação mostrando o caldeirão preparado para receber os ingredientes mágicos
 
-**🎨 Interface de Criação:**
-- **🏺 Caldeirão Visual:** Representa o estado atual da poção com animações de bolhas
-- **📜 Campo de Ingredientes:** Para inserir símbolos mágicos (biz, pip, lol, etc.)
-- **🔘 Botões de Ação:** "Adicionar Ingrediente" e "Finalizar Poção"
-- **📊 Log de Atividades:** Histórico detalhado de todas as transições de estado
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pocao_sabedoria_escolhida.png?raw=true)
+**Figura 20:** AFD - Receita Selecionada - A Poção da Sabedoria foi escolhida e o sistema está pronto para começar o processo alquímico
 
-**🔄 Processo de Adição:**
-1. Digite o símbolo do ingrediente (ex: "biz", "pip", "lol")
-2. Clique em "Adicionar Ingrediente" 
-3. Observe o feedback mágico no log de atividades
-4. Continue até completar a receita ou clicar em "Finalizar Poção"
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pedaco_da_receita.png?raw=true)
+**Figura 21:** AFD - Fragmento da Receita - Visualização das regras e transições específicas da Poção da Sabedoria em formato de autômato
 
-#### Passo 3: 🏆 Resultado da Criação
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/parte_dos_ingredientes.png?raw=true)
+**Figura 22:** AFD - Catálogo de Ingredientes - Lista completa dos ingredientes disponíveis para a criação da poção com suas descrições mágicas
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura20.png?raw=true)
-**Figura 20:** Tela de Triunfo - Resultado final mostrando sucesso ou falha da criação, com animações celebratórias e opções para continuar a aventura
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pocao_sabedoria_transicao_final.png?raw=true)
+**Figura 23:** AFD - Transições Finais - Log detalhado mostrando todas as transições de estado durante a criação da Poção da Sabedoria
 
-O sistema avalia o resultado baseado no estado final do autômato:
-- **✅ Sucesso:** Poção criada com animações celebratórias e trilha de vitória
-- **❌ Falha:** Mensagem explicativa sobre o erro e como corrigi-lo
-- **🔄 Opções:** Criar nova poção ou voltar ao menu de seleção
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/afd/pocao_sabedoria_criada_tela_sucesso.png?raw=true)
+**Figura 24:** AFD - Poção Criada com Sucesso - Tela de triunfo celebrando a criação bem-sucedida da Poção da Sabedoria
+
+#### 🏗️ Exemplo Completo: Receita APD (Autômato de Pilha)
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/tela_inicial.png?raw=true)
+**Figura 25:** APD - Tela Inicial - Interface preparada para receitas com autômato de pilha determinístico, mostrando controles adicionais para a pilha
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/receita_apd_escolhida.png?raw=true)
+**Figura 26:** APD - Receita Selecionada - A receita APD foi escolhida, mostrando a complexidade adicional das regras com pilha
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/pedaco_da_receita.png?raw=true)
+**Figura 27:** APD - Estrutura da Receita - Visualização das regras complexas do APD com operações de pilha (push/pop)
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/parte_dos_ingredientes.png?raw=true)
+**Figura 28:** APD - Ingredientes Disponíveis - Catálogo específico para receitas com autômato de pilha
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/pocao_apd_transicoes_finais.png?raw=true)
+**Figura 29:** APD - Transições com Pilha - Log detalhado mostrando transições de estado e operações na pilha durante a execução
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/automato_deterministico/apd/pocao_apd_criada_tela_sucesso.png?raw=true)
+**Figura 30:** APD - Sucesso da Receita APD - Tela de vitória após completar com sucesso uma receita complexa com autômato de pilha
 
 ### 🔮 Consultando o Oráculo Místico (Máquina de Mealy)
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura28.png?raw=true)
-**Figura 28:** Oráculo Desperto - Interface renovada da Máquina de Mealy com oráculo pensativo e interface informativa completa, pronta para avaliar poções com sabedoria ancestral
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/visaogeral.png?raw=true)
+**Figura 31:** Oráculo Desperto - Interface renovada da Máquina de Mealy com oráculo pensativo e interface informativa completa, pronta para avaliar poções com sabedoria ancestral
 
 #### 🎭 Interface Aprimorada do Oráculo
 
@@ -769,12 +750,16 @@ O sistema avalia o resultado baseado no estado final do autômato:
 - **🛠️ Barra de Ferramentas:** Botões informativos para explorar a máquina
 - **📜 Log Detalhado:** Histórico completo com transições de estado e efeitos
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura29.png?raw=true)
-**Figura 29:** Sabedoria Revelada - Botão "Ver Máquina" exibindo a definição formal completa com estados, alfabeto e funções de transição explicadas didaticamente
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/quatro_botoes_disponiveis_ver_maquina_ver_etc.png?raw=true)
+**Figura 32:** Painel de Controle do Oráculo - Quatro botões informativos disponíveis para explorar completamente a Máquina de Mealy
 
 #### 🎛️ Funcionalidades Informativas Exclusivas
 
 **1. 🔮 Ver Máquina:**
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/informacao_da_maquina.png?raw=true)
+**Figura 33:** Sabedoria Revelada - Botão "Ver Máquina" exibindo a definição formal completa com estados, alfabeto e funções de transição explicadas didaticamente
+
 - Definição formal completa da Máquina de Mealy: Q, Σ, Δ, λ, q₀
 - Lista todos os 6 estados com suas descrições mágicas
 - Mostra o alfabeto de 14 símbolos aceitos
@@ -782,33 +767,53 @@ O sistema avalia o resultado baseado no estado final do autômato:
 - Explica a função de saída (descrição + sabor + poder)
 
 **2. ⚗️ Ver Efeitos:**
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/efeito_dos_ingredientes.png?raw=true)
+**Figura 34:** Grimório de Efeitos - Tabela completa e organizada mostrando todos os ingredientes, suas descrições narrativas e valores numéricos de impacto na poção
+
 - Tabela completa com todos os 14 ingredientes
 - Efeitos detalhados de cada símbolo mágico
 - Valores precisos de sabor e poder
 - Formatação visual clara com sinais (+/-) para fácil interpretação
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura30.png?raw=true)
-**Figura 30:** Grimório de Efeitos - Tabela completa e organizada mostrando todos os ingredientes, suas descrições narrativas e valores numéricos de impacto na poção
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura34.png?raw=true)
-**Figura 34:** Alfabeto Mágico Interativo - Botão "Ver Alfabeto" revelando grid visual dos símbolos aceitos com layout responsivo e efeitos hover
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura35.png?raw=true)
-**Figura 35:** Grimório de Receitas - Botão "Ver Receitas" exibindo sugestões estratégicas e exemplos de combinações para diferentes tipos de resultado
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura36.png?raw=true)
-**Figura 36:** Oráculo Pensando - Estado contemplativo do oráculo durante a adição de ingredientes, mostrando bolhas de fala com reações contextuais
-
 **3. 🔤 Ver Alfabeto:**
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/alfabeto.png?raw=true)
+**Figura 35:** Alfabeto Mágico Interativo - Botão "Ver Alfabeto" revelando grid visual dos símbolos aceitos com layout responsivo e efeitos hover
+
 - Grid interativo dos símbolos aceitos
 - Correspondência visual com ingredientes reais do laboratório
 - Layout responsivo e organizado
 - Efeitos hover para melhor experiência de usuário
 
 **4. 📜 Ver Receitas:**
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/receitas.png?raw=true)
+**Figura 36:** Grimório de Receitas - Botão "Ver Receitas" exibindo sugestões estratégicas e exemplos de combinações para diferentes tipos de resultado
+
 - Sugestões de combinações estratégicas
 - Exemplos de poções bem-sucedidas
 - Dicas para alcançar diferentes tipos de resultado
+
+#### 🧪 Exemplo Completo: Criando uma Poção Lendária
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/receita_pocao_lendaria.png?raw=true)
+**Figura 37:** Receita da Poção Lendária - Estratégia específica para criar uma poção com poder supremo que será absorvida pelo oráculo
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/oraculo_dizendo_interessante_escolha.png?raw=true)
+**Figura 38:** Oráculo Pensando - Estado contemplativo do oráculo durante a adição de ingredientes, mostrando bolhas de fala com reações contextuais
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/visao_geral_de_onde_fica_as_transicoes.png?raw=true)
+**Figura 39:** Painel de Transições - Localização do log de atividades onde todas as transições de estado são registradas em tempo real
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/todas_transicoes_pocao_lendaria.png?raw=true)
+**Figura 40:** Processo de Transições Completo - Log detalhado em tempo real mostrando cada mudança de estado, ingrediente adicionado e efeito gerado pela máquina de Mealy
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/oraculo_avaliando_pocao.png?raw=true)
+**Figura 41:** Oráculo em Avaliação - Momento crítico onde o oráculo analisa a poção finalizada e prepara seu veredito baseado nas estatísticas acumuladas
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/mealy/sucesso_pocao_avaliada_aprovada.png?raw=true)
+**Figura 42:** Veredito Final - Tela de avaliação completa mostrando toda a jornada alquímica, transições de estado e o resultado final proclamado pelo oráculo
 
 #### 🎯 Processo de Avaliação Estratégica
 
@@ -836,42 +841,7 @@ O sistema avalia o resultado baseado no estado final do autômato:
 - Sistema considera: sabor (≥0), quantidade (≤10), poder (especial ≥400)
 - Resultados possíveis: Sucesso, Falha ou **Lendária** (absorvida pelo oráculo!)
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura31.png?raw=true)
-**Figura 31:** Veredito Final - Tela de avaliação completa mostrando toda a jornada alquímica, transições de estado e o resultado final proclamado pelo oráculo
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura37.png?raw=true)
-**Figura 37:** Processo de Transições - Log detalhado em tempo real mostrando cada mudança de estado, ingrediente adicionado e efeito gerado pela máquina de Mealy
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura38.png?raw=true)
-**Figura 38:** Adição de Ingrediente em Ação - Captura do momento exato da adição de um ingrediente, com bolha de fala do oráculo e atualização das estatísticas
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura39.png?raw=true)
-**Figura 39:** Visão Geral da Máquina de Mealy - Interface completa mostrando todos os elementos: oráculo, estatísticas, botões informativos e log de atividades
-
-### 🌊 Máquina de Moore - Sequências Mágicas
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura32.png?raw=true)  
-**Figura 32:** Caldeirão Sequencial - Interface da Máquina de Moore mostrando o progresso através dos 14 estados sequenciais, cada um com sua saída visual única
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura40.png?raw=true)
-**Figura 40:** Moore - Ver Máquina - Botão informativo da Máquina de Moore exibindo estrutura formal, estados sequenciais e função de saída baseada apenas em estados
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura41.png?raw=true)
-**Figura 41:** Moore - Ver Efeitos - Tabela de efeitos específica da Máquina de Moore, mostrando como cada ingrediente afeta a sequência mágica
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura42.png?raw=true)
-**Figura 42:** Moore - Ver Alfabeto - Grid visual dos símbolos aceitos pela Máquina de Moore na sequência correta exigida
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura43.png?raw=true)
-**Figura 43:** Moore - Ver Receitas - Exibição da sequência completa de 14 ingredientes necessária para completar a poção mágica
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura44.png?raw=true)
-**Figura 44:** Moore - Adicionando Ingrediente - Processo de adição sequencial mostrando progresso, próximo ingrediente esperado e reação do caldeirão
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura45.png?raw=true)
-**Figura 45:** Moore - Visão Geral - Interface completa da Máquina de Moore com todos os painéis, estatísticas de progresso e controles ativos
-
-#### 🎭 Elementos Únicos da Moore
+---
 
 **🎯 Sequência Específica (14 Ingredientes):**
 ```
@@ -884,10 +854,39 @@ biz → bab → nho → pip → pum → bur → pix → zap → sos → lol → 
 - Progresso visual claro (X/14)
 - Reset automático para S0 em caso de erro
 
+**Interface de Acompanhamento:**
+- Progresso visual da sequência (X/14)
+- Indicação do próximo ingrediente esperado
+- Painel de estado atual com descrição
+- Reset automático para S0 em caso de erro
+
 ### 📜 Máquina de Turing - Receitas Ancestrais
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura23.png?raw=true)
-**Figura 23:** Pergaminho Ancestral - Interface da Máquina de Turing com fita visual dinâmica e controles para a criação da receita de bolo mágico
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/tela_inicial_turing.png?raw=true)
+**Figura 53:** Pergaminho Ancestral - Interface da Máquina de Turing com fita visual dinâmica e controles para a criação da receita de bolo mágico
+
+#### 🎛️ Funcionalidades Informativas da Turing
+
+**1. 🔮 Ver Máquina:**
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/maquina.png?raw=true)
+**Figura 54:** Turing - Estrutura da Máquina - Definição formal da Máquina de Turing mostrando estados, alfabeto, função de transição e como o cabeçote opera na fita
+
+**2. 🔤 Ver Alfabeto:**
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/alfabeto.png?raw=true)
+**Figura 55:** Turing - Alfabeto para Bolo - Símbolos específicos aceitos pela máquina para a receita ancestral de bolo (f, o, a, l, c, e)
+
+#### 🧪 Exemplo Completo: Criando um Bolo Mágico
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/palavra_correta_antes_de_finalizar.png?raw=true)
+**Figura 56:** Turing - Palavra Correta Formada - Fita mostrando a sequência correta de ingredientes antes de finalizar a receita do bolo
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/finalizada_pocao.png?raw=true)
+**Figura 57:** Turing - Bolo Finalizado - Tela de sucesso após a máquina aceitar a sequência e completar a receita ancestral
+
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/turing/transicoes_da_pocao_depois_de_finalizada.png?raw=true)
+**Figura 58:** Turing - Transições Completas - Log detalhado mostrando todas as transições de estado e movimentos do cabeçote durante o processamento
 
 #### 🎮 Elementos Únicos da Turing
 
@@ -902,191 +901,88 @@ biz → bab → nho → pip → pum → bur → pix → zap → sos → lol → 
 3. Acompanhe as transições de estado em tempo real
 4. Aguarde o resultado final da computação ancestral
 
-### Fluxo Principal de Navegação
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura16.png?raw=true)
-**Figura 16:** Tela de título - Interface principal que recebe o usuário
-
-#### 1. Tela Inicial
-
-Ao acessar o sistema, você é recebido pela majestosa tela de título com o logo "Alquimia Automática". Esta tela estabelece o tom mágico da experiência e oferece:
-
-- **Botão "Começar Aventura":** Inicia a jornada alquímica
-- **Controle de Som:** Ícone no canto superior para ativar/desativar áudio
-- **Efeitos Visuais:** Partículas mágicas animadas em segundo plano
-
-#### 2. Menu Principal
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura17.png?raw=true)
-**Figura 17:** Menu principal - Seleção do tipo de autômato desejado
-
-O menu oferece cinco opções claramente delineadas:
-
-1. **Autômato Determinístico:** Para receitas com AFD e APD
-2. **Máquina de Mealy:** Avaliação avançada pelo Oráculo Místico com estados formais e interface informativa
-3. **Máquina de Moore:** Processamento baseado em estados
-4. **Máquina de Turing:** Receitas especiais de bolo
-5. **Sair:** Retorna à tela inicial
-
-### Criando Poções com Autômatos Determinísticos
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura18.png?raw=true)
-**Figura 18:** Seleção de receita - Interface para escolher receitas disponíveis
-
-#### Passo 1: Escolha da Receita
-
-- **Input Manual:** Digite o nome da receita desejada
-- **Seleção Visual:** Clique em uma das receitas pré-conFiguradas
-- **Validação:** O sistema verifica se a receita existe
-
-#### Passo 2: Processo de Criação
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura19.png?raw=true)
-**Figura 19:** Criação em andamento - Caldeirão ativo com ingredientes sendo adicionados
-
-**Interface de Criação:**
-- **Caldeirão Visual:** Representa o estado atual da poção
-- **Campo de Ingredientes:** Para inserir símbolos mágicos
-- **Botões de Ação:** "Adicionar Ingrediente" e "Finalizar Poção"
-- **Log de Atividades:** Histórico detalhado de todas as ações
-
-**Processo de Adição:**
-1. Digite o símbolo do ingrediente (ex: "biz", "pip", "lol")
-2. Clique em "Adicionar Ingrediente"
-3. Observe o feedback no log de atividades
-4. Continue até completar a receita ou clicar em "Finalizar Poção"
-
-#### Passo 3: Resultado
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura20.png?raw=true)
-**Figura 20:** Resultado da poção - Tela mostrando sucesso ou falha da criação
-
-O sistema avalia o resultado baseado no estado final do autômato:
-- **Sucesso:** Poção criada com animações celebratórias
-- **Falha:** Mensagem de erro com explicação
-- **Opções:** Criar nova poção ou voltar ao menu
-
-### Usando a Máquina de Mealy
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura28.png?raw=true)
-**Figura 28:** Oráculo Místico ativo - Interface renovada da Máquina de Mealy pronta para avaliação
-
-#### Interface Aprimorada do Oráculo
-
-**Elementos Visuais Modernizados:**
-- **Oráculo Animado:** Personagem central (🔮) que reage aos ingredientes com diferentes estados visuais
-- **Bolha de Fala Inteligente:** Aparece com comentários contextuais sobre cada ingrediente
-- **Painel de Estatísticas Expandido:** Sabor, Poder, Ingredientes e **Estado Atual** atualizados em tempo real
-- **Barra de Ferramentas:** Três botões informativos para explorar a máquina
-- **Log Detalhado:** Histórico completo com transições de estado e efeitos
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura29.png?raw=true)
-**Figura 29:** Botões informativos em ação - "Ver Máquina" exibindo a definição formal completa
-
-#### Funcionalidades Informativas Novas
-
-**1. Ver Máquina (🔮):**
-- Exibe a definição formal completa: Q, Σ, Δ, λ, q₀
-- Lista todos os 6 estados com suas descrições
-- Mostra o alfabeto de 14 símbolos aceitos
-- Destaca o estado atual da máquina
-- Explica a função de saída (descrição + sabor + poder)
-
-**2. Ver Efeitos (⚗️):**
-- Tabela completa com todos os 14 ingredientes
-- Efeitos detalhados de cada símbolo mágico
-- Valores precisos de sabor e poder
-- Formatação visual clara (+/- valores)
-
-**3. Ver Alfabeto (🔤):**
-- Grid interativo dos símbolos aceitos
-- Correspondência com ingredientes reais do laboratório
-- Visual organizado e responsivo
-- Hover effects para melhor experiência
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura30.png?raw=true)
-**Figura 30:** Tabela de efeitos completa - Todos os ingredientes e suas propriedades alquímicas
-
-#### Processo de Avaliação Melhorado
-
-**1. Exploração Inicial:**
-- Use os botões informativos para entender a máquina
-- Estude o alfabeto disponível e os efeitos dos ingredientes
-- Observe como os estados influenciam o comportamento
-
-**2. Adição Estratégica de Ingredientes:**
-- Digite símbolos baseados na estratégia desejada
-- Observe as **transições de estado** em tempo real
-- Acompanhe como estado + entrada = saída específica
-- Veja o histórico detalhado no log
-
-**3. Monitoramento de Estados:**
-- **q0 (Inicial):** Poção vazia, primeiro ingrediente define direção
-- **q_poderoso:** Ingredientes mágicos (`biz`, `lol`, `omg`) aumentam poder drasticamente
-- **q_saboroso:** Ingredientes gastronômicos (`pip`, `bur`, `pix`) melhoram sabor
-- **q_ruim:** Ingredientes prejudiciais (`pum`) degradam a qualidade
-- **q_mortal:** Ingredientes perigosos (`sos`) criam poções mortais
-- **q_neutro:** Ingredientes básicos (`a`, `o`) mantêm equilíbrio
-
-**4. Avaliação Final Inteligente:**
-- Clique em "Avaliar Poção" para o veredito do oráculo
-- Sistema considera: sabor (≥0), quantidade (≤10), poder (especial ≥400)
-- Resultados: Sucesso, Falha ou **Lendária** (absorvida pelo oráculo!)
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura31.png?raw=true)
-**Figura 31:** Resultado da avaliação com transições - Log mostrando toda a jornada alquímica
-
-#### Exemplos Práticos de Uso
-
-**Exemplo 1 - Poção Poderosa:**
+**Alfabeto Específico para Bolo:**
 ```
-Ingredientes: biz → lol → omg
-Estados: q0 → q_poderoso → q_poderoso → q_poderoso
-Resultado: Sabor: 0, Poder: 160, Status: Lendária (se ≥400 poder)
+Ingredientes aceitos: f, o, a, l, c, e
+Receita válida exemplo: "foal" (farinha, ovo, açúcar, leite)
 ```
 
-**Exemplo 2 - Poção Saborosa:**
+**Estados e Transições:**
 ```
-Ingredientes: pip → bur → p
-Estados: q0 → q_saboroso → q_saboroso → q_saboroso
-Resultado: Sabor: 27, Poder: 5, Status: Deliciosa
+I → ing1    | f, _ / _     # Aceita farinha
+ing1 → ing2 | o, _ / _     # Aceita ovo  
+ing2 → ing3 | a, _ / _     # Aceita açúcar
+ing3 → ing4 | l, _ / _     # Aceita leite
+ing4 → F    | a, _ / _     # Estado final (opcional: açúcar extra)
 ```
-
-**Exemplo 3 - Poção Corrompida:**
-```
-Ingredientes: biz → pum
-Estados: q0 → q_poderoso → q_ruim
-Resultado: Sabor: -100, Poder: 100, Status: Falha (sabor negativo)
-```
-
-### Máquina de Turing - Receita de Bolo
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura23.png?raw=true)
-**Figura 23:** Interface da Máquina de Turing - Fita visual e controles
-
-#### Elementos Únicos
-
-**Fita de Turing:**
-- **Células Visuais:** Cada posição da fita é representada graficamente
-- **Cabeçote Ativo:** Posição atual destacada em cor diferente
-- **Movimentação:** Animação mostra o movimento do cabeçote
-
-**Processo de Uso:**
-1. Digite símbolos individuais (f, o, a, l, c, e)
-2. Observe a fita sendo preenchida
-3. Veja as transições de estado em tempo real
-4. Aguarde o resultado final da computação
 
 ---
+
+## 📱 Guia do Alquimista
+
+Este guia prático ajudará você a navegar pelo laboratório alquímico e dominar todas as máquinas místicas implementadas.
+
+### 🎯 Navegação Principal
+
+**Acesso Direto:** https://tp-ftc-final.netlify.app/
+
+Ao acessar o sistema, você encontrará uma tela inicial majestosa com o botão "Começar Aventura". Clique para acessar o menu principal com quatro opções:
+
+1. **⚙️ Autômatos Determinísticos:** Receitas clássicas (AFD/APD)
+2. **🔮 Máquina de Mealy:** Oráculo Místico com avaliação inteligente
+3. **🌊 Máquina de Moore:** Sequências mágicas determinísticas
+4. **📜 Máquina de Turing:** Receitas ancestrais de bolo
+
+### 🧪 Usando os Autômatos Determinísticos
+
+**Processo Simplificado:**
+1. Escolha uma receita (ex: "pocao_da_sabedoria", "receitaAPD")
+2. Digite ingredientes um por vez (ex: "biz", "pip", "lol")
+3. Clique em "Adicionar Ingrediente" para cada um
+4. Finalize quando completar a sequência
+5. Observe o resultado: sucesso ou falha baseado no estado final
+
+### 🔮 Dominando o Oráculo de Mealy
+
+**Estratégia Recomendada:**
+1. **Explore primeiro:** Use os botões "Ver Máquina", "Ver Efeitos", "Ver Alfabeto"
+2. **Planeje:** Escolha ingredientes baseado na categoria desejada
+3. **Execute:** Adicione ingredientes observando as transições de estado
+4. **Avalie:** Clique em "Avaliar Poção" para o veredito final
+
+**Dicas Avançadas:**
+- Ingredientes poderosos (biz, lol, omg) → Estado q_poderoso → +100 poder
+- Ingredientes saborosos (pip, bur, pix) → Estado q_saboroso → +5-12 sabor
+- Evite "pum" (estado q_ruim) e "sos" (estado q_mortal)
+- Para poção lendária: alcance 400+ poder
+
+### 🌊 Completando a Sequência de Moore
+
+**Sequência Obrigatória (14 ingredientes):**
+```
+biz → bab → nho → pip → pum → bur → pix → zap → sos → lol → p → a → o → omg
+```
+
+**Processo:**
+1. Siga a sequência exata (qualquer erro reseta para S0)
+2. Observe as saídas específicas de cada estado
+3. Complete todos os 14 ingredientes para sucesso
+
+### 📜 Criando Bolos com Turing
+
+**Alfabeto Específico:** f, o, a, l, c, e
+
+**Receita Válida Exemplo:** "foal"
+- f (farinha) → ing1
+- o (ovo) → ing2  
+- a (açúcar) → ing3
+- l (leite) → ing4 (estado final)
 
 ## ✨ Magias Extras Implementadas
 
 Nosso projeto vai muito além dos requisitos básicos, implementando diversos recursos extras que enriquecem significativamente a experiência:
 
 ### 1. Sistema de Áudio Completo
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura24.png?raw=true)
-**Figura 24:** Controles de áudio - Sistema completo de som ambiente e efeitos
 
 **Trilha Sonora Ambiente:**
 - Música de fundo contínua que estabelece atmosfera mística
@@ -1113,9 +1009,6 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 - Oráculo com expressões dinâmicas
 - Fita de Turing com movimentação visual
 - Modais informativos elegantes
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura25.png?raw=true)
-**Figura 25:** Efeitos visuais - Partículas mágicas e animações do caldeirão
 
 ### 3. Sistema de Logging Avançado
 
@@ -1157,9 +1050,6 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 - Contrastes adequados
 - Navegação intuitiva
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura26.png?raw=true)
-**Figura 26:** Interface responsiva - Como o layout se adapta a diferentes tamanhos de tela
-
 ### 6. Carregamento Dinâmico de Receitas
 
 **Sistema de Arquivos:**
@@ -1177,10 +1067,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 
 ## 🎭 Exemplos de Criações
 
-### Exemplo 1: Criando a Poção da Sabedoria
-
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura27.png?raw=true)
-**Figura 27:** Exemplo completo - Sequência de criação da Poção da Sabedoria
+### Exemplo 1: Criando a Poção da Sabedoria (AFD)
 
 **Passo a Passo Detalhado:**
 
@@ -1215,17 +1102,14 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
    - 🎵 **Som:** Trilha de vitória é reproduzida
    - ✨ **Visual:** Animação celebratória no caldeirão
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura28.png?raw=true)
-**Figura 28:** Resultado bem-sucedido - Tela de sucesso com animações
-
-### Exemplo 2: Avaliação Avançada com o Oráculo Místico
+### Exemplo 2: Avaliação Avançada com o Oráculo Místico (Mealy)
 
 **Cenário:** Explorando a máquina de Mealy com interface informativa
 
 1. **Preparação:**
    - Selecione "Máquina de Mealy"
    - O oráculo aparece com estatísticas iniciais (Sabor: 0, Poder: 0, Estado: q0)
-   - **NOVO:** Explore os botões informativos antes de começar
+   - Explore os botões informativos antes de começar
 
 2. **Exploração da Interface:**
    ```
@@ -1268,9 +1152,6 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
    - **Avaliação:** "Poção rejeitada devido ao sabor terrível"
    - **Log Completo:** Histórico detalhado com todas as transições
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura32.png?raw=true)
-**Figura 32:** Avaliação completa do oráculo - Interface renovada com estado e histórico de transições
-
 ### Exemplo 3: Receita de Bolo com Máquina de Turing
 
 **Objetivo:** Criar um bolo seguindo a sequência correta
@@ -1294,15 +1175,6 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
    - Estados são atualizados em tempo real
 
 ---
-
-## ⚗️ Aspectos Técnicos
-
-### Arquitetura de Software
-
-**Padrões Utilizados:**
-
-1. **Module Pattern:** Cada tipo de autômato é encapsulado em seu próprio módulo
-2. **Observer Pattern:** Sistema de eventos para comunicação entre componentes
 3. **Factory Pattern:** Criação dinâmica de autômatos baseada em receitas
 4. **State Pattern:** Gerenciamento de estados da interface do usuário
 
