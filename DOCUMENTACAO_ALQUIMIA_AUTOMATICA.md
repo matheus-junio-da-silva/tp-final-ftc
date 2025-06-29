@@ -1434,19 +1434,3 @@ Não perca tempo com configurações - sua jornada alquímica está a um clique 
 
 ---
 
-### Anexos
-
-#### Anexo A: Guia de Solução de Problemas
-[Espaço reservado para lista de problemas comuns e suas soluções]
-
-#### Anexo B: Receitas Completas
-[Espaço reservado para listagem detalhada de todas as receitas disponíveis]
-
-#### Anexo C: Código-fonte Destacado
-[Espaço reservado para trechos de código mais importantes com explicações]
-
-#### Anexo D: Testes de Validação
-[Espaço reservado para documentação dos testes realizados]
-
----
-
