@@ -107,6 +107,15 @@ mor: mortífera`;
             this.showScreen('mealy-machine');
         });
 
+        document.getElementById('moore-btn')?.addEventListener('click', () => {
+            this.moore = new Moore();
+            this.moore.run(this.alfabeto); // Inicializar a máquina
+            this.resetMooreScreen();
+            this.updateMooreLog(); // Atualizar log com histórico inicial
+            this.updateMooreStats(); // Atualizar estatísticas iniciais
+            this.showScreen('moore-machine');
+        });
+
         document.getElementById('turing-btn')?.addEventListener('click', () => {
         this.showScreen('turing-machine');
         });
@@ -173,6 +182,32 @@ mor: mortífera`;
             this.showMealyRecipes();
         });
 
+        // Máquina de Moore
+        document.getElementById('moore-add-btn')?.addEventListener('click', () => {
+            this.addMooreIngredient();
+        });
+
+        document.getElementById('moore-finish-btn')?.addEventListener('click', () => {
+            this.finishMooreSequence();
+        });
+
+        // Botões de informação da Máquina de Moore
+        document.getElementById('view-moore-machine-btn')?.addEventListener('click', () => {
+            this.showMooreMachineInfo();
+        });
+
+        document.getElementById('view-moore-effects-btn')?.addEventListener('click', () => {
+            this.showMooreEffects();
+        });
+
+        document.getElementById('view-moore-alphabet-btn')?.addEventListener('click', () => {
+            this.showMooreAlphabet();
+        });
+
+        document.getElementById('view-moore-recipes-btn')?.addEventListener('click', () => {
+            this.showMooreRecipes();
+        });
+
         // Modal
         document.querySelector('.close')?.addEventListener('click', () => {
             this.closeModal();
@@ -208,6 +243,12 @@ mor: mortífera`;
         document.getElementById('mealy-ingredient-input')?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 this.addMealyIngredient();
+            }
+        });
+
+        document.getElementById('moore-ingredient-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.addMooreIngredient();
             }
         });
 
@@ -978,6 +1019,423 @@ mor: mortífera`;
         `;
         
         document.getElementById('info-modal').style.display = 'block';
+    }
+
+    // Funções para a Máquina de Moore
+    addMooreIngredient() {
+        const input = document.getElementById('moore-ingredient-input');
+        const ingredient = input.value.trim().toLowerCase();
+
+        if (!ingredient) {
+            this.showError('Por favor, insira um ingrediente.');
+            return;
+        }
+
+        if (!this.moore) {
+            this.showError('Máquina de Moore não inicializada.');
+            return;
+        }
+
+        if (!this.alfabeto) {
+            this.showError('Alfabeto não carregado.');
+            return;
+        }
+
+        try {
+            const sucesso = this.moore.adicionarIngrediente(ingredient, this.alfabeto);
+            
+            if (sucesso) {
+                // Tocar som de ingrediente (se disponível)
+                if (typeof soundAddIngrediente === 'function') {
+                    soundAddIngrediente();
+                }
+                
+                // Atualizar visual do caldeirão
+                this.updateMooreCauldronVisual();
+                
+                // Atualizar estatísticas
+                this.updateMooreStats();
+                
+                // Animar stats que mudaram
+                this.animateUpdatedStats();
+                
+                // Atualizar log
+                this.updateMooreLog();
+                
+                // Limpar input
+                input.value = '';
+                
+                // Atualizar interface
+                if (this.moore.primeiro) {
+                    this.moore.primeiro = false;
+                    document.getElementById('moore-ingredient-label').textContent = 'Símbolo do ingrediente:';
+                    document.getElementById('moore-finish-btn').style.display = 'inline-block';
+                }
+
+            } else {
+                soundGameOver();
+            }
+
+        } catch (error) {
+            console.error('Erro ao adicionar ingrediente na Moore:', error);
+            this.showError('Erro ao processar ingrediente. Verifique o console.');
+        }
+    }
+
+    async finishMooreSequence() {
+        const resultado = this.moore.avaliarSequencia();
+        
+        // Atualizar log final
+        this.updateMooreLog();
+        
+        // Mostrar animação do caldeirão
+        await this.showMooreCauldronAnimation(resultado);
+        
+        // Mostrar resultado
+        setTimeout(() => {
+            this.showMooreResult(resultado);
+        }, 2000);
+    }
+
+    async showMooreCauldronAnimation(resultado) {
+        const cauldron = document.getElementById('moore-cauldron');
+        const output = document.getElementById('moore-output');
+
+        if (!cauldron || !output) return;
+
+        // Animação de avaliação
+        for (let i = 0; i < 4; i++) {
+            output.textContent = `Analisando sequência${'...'.substring(0, i + 1)}`;
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+
+        // Som baseado no resultado
+        if (resultado.includes('Completa')) {
+            soundOraculoWin();
+        } else {
+            soundOraculo();
+        }
+
+        // Resultado da avaliação
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const estado = this.moore.obterEstado();
+        output.textContent = this.moore.obterSaidaEstado(this.moore.estadoAtual);
+        
+        // Animação de conclusão
+        cauldron.classList.add('moore-ingredient-added');
+        setTimeout(() => {
+            cauldron.classList.remove('moore-ingredient-added');
+        }, 2000);
+    }
+
+    showMooreResult(resultado) {
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+        const resultArt = document.getElementById('result-art');
+
+        if (resultado.includes('Completa')) {
+            resultTitle.textContent = '🏆 Sequência Perfeita!';
+            resultTitle.className = 'success';
+            resultMessage.textContent = 'Você completou a sequência da Máquina de Moore com perfeição!';
+            resultArt.textContent = Terminal.getSucessoArt();
+            soundPotionCreated();
+        } else {
+            resultTitle.textContent = '⚠️ Sequência Incompleta';
+            resultTitle.className = 'warning';
+            resultMessage.textContent = `${resultado}. Continue adicionando ingredientes para completar a sequência.`;
+            resultArt.textContent = Terminal.getProcessandoArt();
+            // Não mostrar tela de resultado, permitir continuar
+            return;
+        }
+
+        // Mostrar botões apropriados
+        document.getElementById('new-potion-btn').style.display = 'inline-block';
+        document.getElementById('back-menu-btn').style.display = 'inline-block';
+
+        this.showScreen('result');
+    }
+
+    updateMooreCauldronVisual() {
+        const cauldron = document.getElementById('moore-cauldron');
+        const cauldronContent = document.getElementById('moore-cauldron-content');
+        const bubbles = document.getElementById('moore-bubbles');
+        const output = document.getElementById('moore-output');
+
+        if (!cauldron || !cauldronContent || !bubbles || !output) return;
+
+        // Atualizar saída baseada no estado atual
+        const saida = this.moore.obterSaidaEstado(this.moore.estadoAtual);
+        output.textContent = saida;
+
+        // Adicionar efeito visual
+        cauldron.classList.add('moore-ingredient-added');
+        bubbles.classList.add('active');
+
+        // Definir cor baseada no progresso
+        const progresso = this.moore.progresso;
+        const cores = [
+            '#8e44ad', '#9b59b6', '#af7ac5', '#bb8fce', '#c39bd3',
+            '#d7bde2', '#e8daef', '#f4ecf7', '#fdeaa7', '#f9e79f',
+            '#f7dc6f', '#f4d03f', '#f1c40f', '#f39c12', '#e67e22'
+        ];
+        
+        if (progresso < cores.length) {
+            cauldronContent.style.background = `linear-gradient(135deg, ${cores[progresso]}, ${cores[Math.min(progresso + 1, cores.length - 1)]})`;
+        }
+
+        // Remover classe de animação após completar
+        setTimeout(() => {
+            cauldron.classList.remove('moore-ingredient-added');
+            bubbles.classList.remove('active');
+        }, 2000);
+    }
+
+    updateMooreLog() {
+        const log = document.getElementById('moore-log');
+        if (!log) return;
+
+        Terminal.clear(log);
+        
+        // Mostrar histórico da máquina de Moore
+        const historico = this.moore.obterHistorico();
+        historico.forEach(entrada => {
+            Terminal.log(log, entrada.mensagem, entrada.tipo);
+        });
+    }
+
+    updateMooreStats() {
+        const estado = this.moore.obterEstado();
+        
+        // Atualizar valores nas estatísticas
+        const stateValue = document.getElementById('moore-state-value');
+        const expectedValue = document.getElementById('moore-expected-value');
+        const ingredientCount = document.getElementById('moore-ingredient-count');
+        const progressValue = document.getElementById('moore-progress');
+
+        if (stateValue) stateValue.textContent = estado.estado;
+        if (expectedValue) expectedValue.textContent = estado.ingredienteEsperado;
+        if (ingredientCount) ingredientCount.textContent = estado.ingredientesUsados;
+        if (progressValue) progressValue.textContent = `${estado.progresso}/${estado.total}`;
+
+        // Atualizar painel de estado
+        const statePanel = document.getElementById('moore-state-panel');
+        if (statePanel) {
+            const saida = this.moore.obterSaidaEstado(estado.estado);
+            statePanel.innerHTML = `
+                <h4>Estado da Máquina de Moore</h4>
+                <p><strong>Estado Atual:</strong> ${estado.estado}</p>
+                <p><strong>Saída:</strong> ${saida}</p>
+                <p><strong>Progresso:</strong> ${estado.progresso}/${estado.total}</p>
+            `;
+        }
+
+        // Atualizar painel de receitas
+        const recipesPanel = document.getElementById('moore-recipes-panel');
+        if (recipesPanel) {
+            const sequencia = this.moore.getSequencia();
+            let html = '<h4>Sequência da Receita</h4><ul>';
+            
+            sequencia.forEach((ingrediente, index) => {
+                const status = index < estado.progresso ? '✅' : 
+                              index === estado.progresso ? '👉' : '⏳';
+                const className = index < estado.progresso ? 'completed' : 
+                                 index === estado.progresso ? 'current-step' : '';
+                html += `<li class="${className}">${status} ${index + 1}. ${ingrediente}</li>`;
+            });
+            
+            html += '</ul>';
+            recipesPanel.innerHTML = html;
+        }
+    }
+
+    // Funções para mostrar informações da Máquina de Moore
+    showMooreMachineInfo() {
+        if (!this.moore) {
+            this.showError('Máquina de Moore não inicializada.');
+            return;
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>🔮 Informações da Máquina de Moore</h3>
+            ${this.moore.criarTabelaMaquina()}
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    showMooreEffects() {
+        if (!this.moore) {
+            this.showError('Máquina de Moore não inicializada.');
+            return;
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>✨ Efeitos dos Estados da Máquina de Moore</h3>
+            <p>Na Máquina de Moore, cada estado produz uma saída específica:</p>
+            
+            <div class="effects-grid">
+                <div class="effect-item">
+                    <h4>S0 - Estado Inicial</h4>
+                    <p>⚗️ Caldeirão vazio - Aguardando primeiro ingrediente</p>
+                </div>
+                
+                <div class="effect-item">
+                    <h4>S1-S5 - Estados Iniciais</h4>
+                    <p>🌫️ Efeitos básicos: fumaça, brilho, bolhas, chamas, vapor</p>
+                </div>
+                
+                <div class="effect-item">
+                    <h4>S6-S10 - Estados Intermediários</h4>
+                    <p>🌈 Efeitos mágicos: arco-íris, faíscas, vapor, páginas místicas, forma ovóide</p>
+                </div>
+                
+                <div class="effect-item">
+                    <h4>S11-S13 - Estados Avançados</h4>
+                    <p>🌹 Efeitos refinados: pétalas, água cristalina, lágrima cintilante</p>
+                </div>
+                
+                <div class="effect-item">
+                    <h4>S14 - Estado Final</h4>
+                    <p>✨ POÇÃO MÁGICA COMPLETADA! Luz dourada irradia!</p>
+                </div>
+            </div>
+            
+            <div class="machine-difference">
+                <h4>🔄 Diferença da Máquina de Mealy:</h4>
+                <p><strong>Moore:</strong> A saída depende apenas do estado atual</p>
+                <p><strong>Mealy:</strong> A saída depende do estado atual E da entrada</p>
+                <p>Isso significa que na Moore você sempre saberá o que esperar de cada estado!</p>
+            </div>
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    showMooreAlphabet() {
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>📚 Alfabeto da Máquina de Moore</h3>
+            <p>A sequência específica que deve ser seguida:</p>
+            
+            <div class="alphabet-list">
+                <div class="alphabet-section">
+                    <h4>🎯 Sequência Obrigatória (14 passos):</h4>
+                    <ol>
+                        <li><strong>biz</strong> - biscoito de bruxa malvada</li>
+                        <li><strong>bab</strong> - baba de camelo fedida</li>
+                        <li><strong>nho</strong> - nhonho de gato persa</li>
+                        <li><strong>pip</strong> - pipoca mágica explosiva</li>
+                        <li><strong>pum</strong> - pum de dragão fedorento</li>
+                        <li><strong>bur</strong> - buraco negro comestível</li>
+                        <li><strong>pix</strong> - pixie dust colorido</li>
+                        <li><strong>zap</strong> - zapzap elétrico infinito</li>
+                        <li><strong>sos</strong> - sossega leão instantâneo</li>
+                        <li><strong>lol</strong> - lolzinho mágico hilário</li>
+                        <li><strong>p</strong> - pétalas</li>
+                        <li><strong>a</strong> - água</li>
+                        <li><strong>o</strong> - óleo</li>
+                        <li><strong>omg</strong> - oh my god concentrado</li>
+                    </ol>
+                </div>
+                
+                <div class="alphabet-rules">
+                    <h4>📋 Regras Importantes:</h4>
+                    <ul>
+                        <li>A sequência deve ser seguida <strong>exatamente</strong> nesta ordem</li>
+                        <li>Qualquer ingrediente fora de ordem reinicia a sequência</li>
+                        <li>Todos os 14 ingredientes devem ser adicionados para completar</li>
+                        <li>A máquina de Moore é <strong>determinística</strong> e <strong>sequencial</strong></li>
+                    </ul>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    showMooreRecipes() {
+        if (!this.moore) {
+            this.showError('Máquina de Moore não inicializada.');
+            return;
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>📜 Receita da Máquina de Moore</h3>
+            <p>Diferente da Máquina de Mealy, a Moore tem apenas UMA receita válida:</p>
+            
+            <div class="recipe-section">
+                <h4>🔮 A Única Receita Válida</h4>
+                <div class="recipe-content">
+                    <p><strong>Sequência Completa:</strong></p>
+                    <p><code>biz → bab → nho → pip → pum → bur → pix → zap → sos → lol → p → a → o → omg</code></p>
+                    <p><strong>Estados percorridos:</strong> S0 → S1 → S2 → ... → S14</p>
+                    <p><strong>Resultado:</strong> Poção Mágica Completa ✨</p>
+                </div>
+            </div>
+
+            <div class="recipe-section warning">
+                <h4>⚠️ Tentativas Alternativas</h4>
+                <div class="recipe-content">
+                    <p><strong>Qualquer desvio da sequência:</strong></p>
+                    <p>Estado atual → S0 (Reset completo)</p>
+                    <p><strong>Exemplo de erro:</strong> biz → pip (deveria ser bab)</p>
+                    <p><strong>Resultado:</strong> Explosão! Reinicio da sequência</p>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>💡 Estratégia Recomendada:</h4>
+                <ul>
+                    <li><strong>Memorize a sequência:</strong> Anote os 14 passos</li>
+                    <li><strong>Vá devagar:</strong> Cada erro requer recomeçar</li>
+                    <li><strong>Use o painel de receitas:</strong> Mostra o próximo ingrediente</li>
+                    <li><strong>Observe as transições:</strong> Cada estado tem uma saída única</li>
+                    <li><strong>Seja paciente:</strong> A Moore recompensa a precisão!</li>
+                </ul>
+            </div>
+        `;
+        
+        document.getElementById('info-modal').style.display = 'block';
+    }
+
+    resetMooreScreen() {
+        // Limpar campos de entrada da Máquina de Moore
+        const mooreInput = document.getElementById('moore-ingredient-input');
+        if (mooreInput) {
+            mooreInput.value = '';
+        }
+
+        // Limpar log da Máquina de Moore
+        const mooreLog = document.getElementById('moore-log');
+        if (mooreLog) {
+            if (typeof Terminal !== 'undefined') {
+                Terminal.clear(mooreLog);
+            } else {
+                mooreLog.innerHTML = '';
+            }
+        }
+
+        // Resetar visual do caldeirão
+        const cauldronContent = document.getElementById('moore-cauldron-content');
+        if (cauldronContent) {
+            cauldronContent.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+        }
+
+        // Limpar painel de estado
+        const statePanel = document.getElementById('moore-state-panel');
+        if (statePanel) {
+            statePanel.innerHTML = '<h4>Estado da Máquina de Moore</h4><p>Aguardando inicialização...</p>';
+        }
+
+        // Limpar painel de receitas
+        const recipesPanel = document.getElementById('moore-recipes-panel');
+        if (recipesPanel) {
+            recipesPanel.innerHTML = '<h4>Sequência da Receita</h4><p>Inicie a máquina para ver a sequência...</p>';
+        }
     }
 
     resetMealyScreen() {

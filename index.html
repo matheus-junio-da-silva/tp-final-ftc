@@ -140,6 +140,67 @@
             </div>
         </div>
 
+        <!-- Tela de Máquina de Moore -->
+        <div id="moore-machine" class="screen">
+            <div class="mealy-container">
+                <h2>Máquina de Moore - Sequência de Poção Mágica</h2>
+                
+                <div class="options-bar">
+                    <button id="view-moore-machine-btn" class="info-button">Ver Máquina</button>
+                    <button id="view-moore-effects-btn" class="info-button">Ver Efeitos</button>
+                    <button id="view-moore-alphabet-btn" class="info-button">Ver Alfabeto</button>
+                    <button id="view-moore-recipes-btn" class="info-button">Ver Receitas</button>
+                </div>
+                
+                <div class="moore-cauldron-area">
+                    <div class="moore-cauldron" id="moore-cauldron">
+                        <div class="cauldron-content" id="moore-cauldron-content">
+                            <div class="bubbles" id="moore-bubbles"></div>
+                        </div>
+                    </div>
+                    <div class="moore-output" id="moore-output">⚗️ Caldeirão vazio</div>
+                </div>
+
+                <div class="ingredient-input">
+                    <label for="moore-ingredient-input" id="moore-ingredient-label">Insira o símbolo do primeiro ingrediente:</label>
+                    <input type="text" id="moore-ingredient-input" maxlength="3" placeholder="Ex: biz">
+                    <button id="moore-add-btn" class="magic-button">Adicionar Ingrediente</button>
+                    <button id="moore-finish-btn" class="magic-button secondary" style="display: none;">Finalizar Sequência</button>
+                </div>
+
+                <div class="moore-stats">
+                    <div class="stat">
+                        <span>Estado Atual:</span>
+                        <span id="moore-state-value">S0</span>
+                    </div>
+                    <div class="stat">
+                        <span>Próximo Esperado:</span>
+                        <span id="moore-expected-value">biz</span>
+                    </div>
+                    <div class="stat">
+                        <span>Ingredientes:</span>
+                        <span id="moore-ingredient-count">0</span>
+                    </div>
+                    <div class="stat">
+                        <span>Progresso:</span>
+                        <span id="moore-progress">0/14</span>
+                    </div>
+                </div>
+
+                <div class="moore-state-panel" id="moore-state-panel">
+                    <h4>Estado da Máquina de Moore</h4>
+                    <p>Aguardando inicialização...</p>
+                </div>
+
+                <div class="moore-recipes-panel" id="moore-recipes-panel">
+                    <h4>Sequência da Receita</h4>
+                    <p>Inicie a máquina para ver a sequência...</p>
+                </div>
+
+                <div id="moore-log" class="potion-log"></div>
+            </div>
+        </div>
+
         <!-- Tela de Máquina de Turing -->
     <div id="turing-machine" class="screen">
         <div class="mealy-container">
