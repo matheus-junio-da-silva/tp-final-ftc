@@ -1240,18 +1240,6 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 - ✅ Validação de entrada e tratamento de erros
 - ✅ Conformidade com definição formal de Máquina de Mealy
 
-### Limitações e Melhorias Futuras
-
-**Limitações Atuais:**
-- Receitas devem seguir formato específico
-- Não há editor visual de autômatos
-- Sistema de som requer interação do usuário para iniciar
-
-**Melhorias Propostas:**
-- Editor gráfico de receitas
-- Sistema de usuários e pontuação persistente
-- Multiplayer para competições de alquimia
-- Integração com APIs externas para ingredientes
 
 ---
 
