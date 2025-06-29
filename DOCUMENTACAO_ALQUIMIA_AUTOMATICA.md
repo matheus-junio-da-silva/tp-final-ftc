@@ -162,7 +162,7 @@ ing4 -> ing5 | zap     # "zapzap eletrico infinito"
 ing5 -> F    | omg     # "oh my god concentrado"
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura4.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura4.jpg?raw=true)
 **Figura 4:** Processo de criação de poção - Mostra o caldeirão em ação com logs de transições
 
 Esta receita demonstra um AFD simples onde cada ingrediente deve ser adicionado em uma sequência específica. Qualquer desvio desta sequência leva ao estado de erro, resultando numa poção falhada.
@@ -314,7 +314,7 @@ O sistema de ingredientes não é apenas cosmético - ele implementa uma lógica
 
 Desenvolvemos múltiplas formas de executar o programa para garantir máxima compatibilidade e facilidade de uso:
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura12.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura12.png?raw=true)
 **Figura 12:** Scripts de execução - Mostra os arquivos executar.bat e executar.ps1
 
 #### Método 1: Execução Automática (Recomendado)
@@ -326,7 +326,7 @@ executar.bat        # Para Command Prompt
 executar.ps1        # Para PowerShell
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura13.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura13.png?raw=true)
 **Figura 13:** Execução do arquivo batch - Terminal mostrando o processo de inicialização
 
 Estes scripts automatizam todo o processo:
@@ -353,7 +353,7 @@ python -m http.server 8000
 http://localhost:8000
 ```
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura14.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura14.png?raw=true)
 **Figura 14:** Servidor HTTP iniciado - Terminal mostrando confirmação da inicialização
 
 #### Método 3: Servidor Alternativo
@@ -381,7 +381,7 @@ php -S localhost:8000
 - Resolução 1920x1080 ou superior
 - Alto-falantes ou fones de ouvido para efeitos sonoros
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura15.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura15.png?raw=true)
 **Figura 15:** Verificação de compatibilidade - Tela mostrando requisitos atendidos
 
 ---
@@ -390,7 +390,7 @@ php -S localhost:8000
 
 ### Fluxo Principal de Navegação
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura16.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura16.png?raw=true)
 **Figura 16:** Tela de título - Interface principal que recebe o usuário
 
 #### 1. Tela Inicial
@@ -403,7 +403,7 @@ Ao acessar o sistema, você é recebido pela majestosa tela de título com o log
 
 #### 2. Menu Principal
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura17.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura17.png?raw=true)
 **Figura 17:** Menu principal - Seleção do tipo de autômato desejado
 
 O menu oferece cinco opções claramente delineadas:
@@ -416,18 +416,18 @@ O menu oferece cinco opções claramente delineadas:
 
 ### Criando Poções com Autômatos Determinísticos
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura18.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura18.png?raw=true)
 **Figura 18:** Seleção de receita - Interface para escolher receitas disponíveis
 
 #### Passo 1: Escolha da Receita
 
 - **Input Manual:** Digite o nome da receita desejada
-- **Seleção Visual:** Clique em uma das receitas pré-configuradas
+- **Seleção Visual:** Clique em uma das receitas pré-conFiguradas
 - **Validação:** O sistema verifica se a receita existe
 
 #### Passo 2: Processo de Criação
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura19.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura19.png?raw=true)
 **Figura 19:** Criação em andamento - Caldeirão ativo com ingredientes sendo adicionados
 
 **Interface de Criação:**
@@ -444,7 +444,7 @@ O menu oferece cinco opções claramente delineadas:
 
 #### Passo 3: Resultado
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura20.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura20.png?raw=true)
 **Figura 20:** Resultado da poção - Tela mostrando sucesso ou falha da criação
 
 O sistema avalia o resultado baseado no estado final do autômato:
@@ -454,7 +454,7 @@ O sistema avalia o resultado baseado no estado final do autômato:
 
 ### Usando a Máquina de Mealy
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura21.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura21.png?raw=true)
 **Figura 21:** Oráculo Místico ativo - Máquina de Mealy pronta para avaliação
 
 #### Interface do Oráculo
@@ -472,12 +472,12 @@ O sistema avalia o resultado baseado no estado final do autômato:
 3. **Atualização de Estatísticas:** Sabor e poder mudam conforme a fórmula
 4. **Avaliação Final:** Clique em "Avaliar Poção" para obter o resultado final
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura22.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura22.png?raw=true)
 **Figura 22:** Resultado da avaliação - Oráculo fornecendo o veredito final
 
 ### Máquina de Turing - Receita de Bolo
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura23.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura23.png?raw=true)
 **Figura 23:** Interface da Máquina de Turing - Fita visual e controles
 
 #### Elementos Únicos
@@ -501,7 +501,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 
 ### 1. Sistema de Áudio Completo
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura24.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura24.png?raw=true)
 **Figura 24:** Controles de áudio - Sistema completo de som ambiente e efeitos
 
 **Trilha Sonora Ambiente:**
@@ -530,7 +530,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 - Fita de Turing com movimentação visual
 - Modais informativos elegantes
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura25.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura25.png?raw=true)
 **Figura 25:** Efeitos visuais - Partículas mágicas e animações do caldeirão
 
 ### 3. Sistema de Logging Avançado
@@ -573,7 +573,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 - Contrastes adequados
 - Navegação intuitiva
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura26.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura26.png?raw=true)
 **Figura 26:** Interface responsiva - Como o layout se adapta a diferentes tamanhos de tela
 
 ### 6. Carregamento Dinâmico de Receitas
@@ -595,7 +595,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
 
 ### Exemplo 1: Criando a Poção da Sabedoria
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura27.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura27.png?raw=true)
 **Figura 27:** Exemplo completo - Sequência de criação da Poção da Sabedoria
 
 **Passo a Passo Detalhado:**
@@ -631,7 +631,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
    - 🎵 **Som:** Trilha de vitória é reproduzida
    - ✨ **Visual:** Animação celebratória no caldeirão
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura28.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura28.png?raw=true)
 **Figura 28:** Resultado bem-sucedido - Tela de sucesso com animações
 
 ### Exemplo 2: Avaliação com o Oráculo Místico
@@ -662,7 +662,7 @@ Nosso projeto vai muito além dos requisitos básicos, implementando diversos re
    - **Poder Total:** 100 (Muito Poderoso!)
    - **Avaliação:** "Poção poderosa mas intragável"
 
-![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/figura29.png?raw=true)
+![imagem](https://github.com/matheus-junio-da-silva/tp-final-ftc/blob/master/img/Figura29.png?raw=true)
 **Figura 29:** Avaliação do oráculo - Resultado final com estatísticas
 
 ### Exemplo 3: Receita de Bolo com Máquina de Turing
