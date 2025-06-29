@@ -1,8 +1,3 @@
-/**
- * Leitura functions - JavaScript equivalent of leitura.py
- * Handles reading and parsing automaton recipes from text content
- */
-
 // Imprime formato de uma regra de transição
 function imprimeFormato() {
     const formato = "Formato: {estado} -> {estado_destino} | {ingrediente} [, {topo-pilha} / {empilha}]";
